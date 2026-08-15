@@ -1,0 +1,355 @@
+---
+title: "GRANT 2026: SW QA/QC Tables"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = F, eval=T)
+library(dplyr)
+library(kableExtra)
+QAQC_tabs <- readRDS("QAQC_tabs.rds")
+unfilt_tab_ls <- readRDS("unfilt_tab_ls.rds")
+CT_tab_ls <- readRDS("CT_tab_ls.rds")
+QAQC_tab_3 <- readRDS("QAQC_tab_3.rds")
+QAQC_tab_raw_3 <- readRDS("QAQC_tab_raw_3.rds")
+# saveRDS(DH_tag_code_summ,"QAQC_tab_raw_3.rds")
+
+```
+------------------------------------------------------------------------
+
+# Unfiltered summary tables
+
+## Status summary
+
+### Live/Dead Status vs. survival_use
+
+```{r usable_CT_tab,echo=F,eval=T,warning=FALSE}
+
+
+kbl(unfilt_tab_ls$usable_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Live/Dead Status vs. Tagger
+
+```{r fish_status_tagger_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# unfilt_tab_ls$fish_status_tagger_CT_tab
+
+kbl(unfilt_tab_ls$fish_status_tagger_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Tarmac Fish
+
+Fish that were dropped on the tarmac and should be excluded
+
+```{r tarmac_tags,echo=F,eval=T,warning=FALSE}
+
+# install.packages("kableExtra")
+tarmac_tag_evt_tab <- readRDS("tarmac_tag_evt_tab.rds")
+# saveRDS(tarmac_subb_tab,"tarmac_tag_evt_tab.rds")
+# QAQC_tab_3 |> left_join(QAQC_tab2 |> select(repID,spp,RI_rel))
+# left_join(QAQC_tab_3 |> select(repID,spp)) |> left_join(QAQC_tab2 |> select(repID,spp,RI_rel))
+
+kbl(tarmac_tag_evt_tab )|> 
+      # filter(spp=="STH" & fish_status!="Alive" & release_location=="Priest Rapids Tailrace") |>
+      # select(-fish_status) |>
+      # left_join(QAQC_tab2 |>
+      #     select(repID,spp,PR_rel),by=c("spp", "repID")) |>
+      # select(-Crescent.Bar,-Sunland,-Wanapum.BRZ,-Wanapum,-Wanapum.Tailrace,-Mattawa,-Priest.BRZ,-Priest) |>
+      # relocate(spp,repID,PR_rel) 
+                # )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+
+```
+
+
+
+------------------------------------------------------------------------
+
+# Filtered summary tables
+
+Focuses on 3284 fish in the `survival_use=TRUE` group. Fish in the `survival_use=FALSE` group are discussed in the final section. 
+
+## Contingency Tables
+
+
+### Release location vs. tagger
+
+```{r RL_tagger_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$RL_tagger_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Release location vs. helicopter
+
+```{r RL_helicopter_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$RL_helicopter_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Tag lot vs. Tagger
+
+```{r lot_tagger_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$lot_tagger_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Tag lot vs. Release location
+
+```{r lot_RL_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$lot_RL_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Replicate vs. Tagger
+
+```{r repID_tagger_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$repID_tagger_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Replicate vs. Release location
+
+```{r repID_RL_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# names(CT_tab_ls)
+kbl(CT_tab_ls$repID_RL_CT_tab) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+## Fish released by location, status, and tagger
+
+### live fish
+
+```{r QAQC_tab1a,echo=F,eval=T,warning=FALSE}
+
+# install.packages("kableExtra")
+
+QAQC_tab1 <- QAQC_tabs$"QAQC_tab1"
+
+kbl(QAQC_tab1|> filter(tag_group=="live_release")) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+### Dead Fish
+
+```{r QAQC_tab1b,echo=F,eval=T,warning=FALSE}
+kbl(QAQC_tab1|> filter(tag_group=="dead_release")) |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+## Fish released by location, status, and replicate
+
+### Chinook
+
+```{r QAQC_tab2_CHN,echo=F,eval=T,warning=FALSE}
+
+# install.packages("kableExtra")
+
+QAQC_tab2 <- QAQC_tabs$"QAQC_tab2"
+
+kbl(QAQC_tab2|> filter(spp=="CHN")) |>
+    # kable_styling() |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+  
+```
+
+### Steelhead
+
+```{r QAQC_tab2_STH,echo=F,eval=T}
+
+kbl(QAQC_tab2|> filter(spp=="STH")) |>
+    # kable_styling() |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+```
+
+## `survival_use=FALSE` Fish detected by location and replicate
+
+Includes fish-status categories: Euthanized, Mortality, and Tarmac
+
+### Chinook
+
+#### Rock Island
+
+```{r QAQC_tab3_CHN_aRI,echo=F,eval=T,warning=FALSE}
+
+kbl(QAQC_tab_3 |> 
+      filter(spp=="CHN" & fish_status=="Alive" & release_location=="Rock Island Tailrace") |>
+      select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,RI_rel),by=c("spp", "repID")) |>
+      relocate(spp,repID,RI_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+```
+
+#### Priest Rapids
+
+```{r QAQC_tab3_CHN_aPR,echo=F,eval=T,warning=FALSE}
+
+
+
+kbl(QAQC_tab_3 |> 
+      filter(spp=="CHN" & fish_status=="Alive" & release_location=="Priest Rapids Tailrace") |>
+      select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,PR_rel),by=c("spp", "repID")) |>
+      select(-Crescent.Bar,-Sunland,-Wanapum.BRZ,-Wanapum,-Wanapum.Tailrace,-Mattawa,-Priest.BRZ,-Priest) |>
+      relocate(spp,repID,PR_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+
+```
+
+### Steelhead
+
+#### Rock Island
+
+```{r QAQC_tab3_STH_aRI,echo=F,eval=T,warning=FALSE}
+
+kbl(QAQC_tab_3 |> 
+      filter(spp=="STH" & fish_status=="Alive" & release_location=="Rock Island Tailrace") |>
+      select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,RI_rel),by=c("spp", "repID")) |>
+      relocate(spp,repID,RI_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+```
+
+
+#### Priest Rapids
+
+```{r QAQC_tab3_STH_aPR,echo=F,eval=T,warning=FALSE}
+
+
+kbl(QAQC_tab_3 |> 
+      filter(spp=="STH" & fish_status=="Alive" & release_location=="Priest Rapids Tailrace") |>
+      select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,PR_rel),by=c("spp", "repID")) |>
+      select(-Crescent.Bar,-Sunland,-Wanapum.BRZ,-Wanapum,-Wanapum.Tailrace,-Mattawa,-Priest.BRZ,-Priest) |>
+      relocate(spp,repID,PR_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+
+```
+
+
+## Fish in the `survival_use==FALSE` group detected site and replicate
+
+### Chinook
+
+#### Rock Island
+
+```{r QAQC_tab3_CHN_dRI,echo=F,eval=T,warning=FALSE}
+
+kbl(QAQC_tab_raw_3 |> 
+      filter(spp=="CHN" & fish_status!="Alive" & release_location=="Rock Island Tailrace") |>
+      # select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,RI_rel),by=c("spp", "repID")) |>
+      relocate(spp,repID,RI_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+```
+
+#### Priest Rapids
+
+```{r QAQC_tab3_CHN_dPR,echo=F,eval=T,warning=FALSE}
+
+
+kbl(QAQC_tab_raw_3 |> 
+      filter(spp=="CHN" & fish_status!="Alive" & release_location=="Priest Rapids Tailrace") |>
+      # select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,PR_rel),by=c("spp", "repID")) |>
+      select(-Crescent.Bar,-Sunland,-Wanapum.BRZ,-Wanapum,-Wanapum.Tailrace,-Mattawa,-Priest.BRZ,-Priest) |>
+      relocate(spp,repID,PR_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+
+```
+
+### Steelhead
+
+#### Rock Island
+
+```{r QAQC_tab3_STH_dRI,echo=F,eval=T,warning=FALSE}
+
+
+kbl(QAQC_tab_raw_3 |> 
+      filter(spp=="STH" & fish_status!="Alive" & release_location=="Rock Island Tailrace") |>
+      # select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,RI_rel),by=c("spp", "repID")) |>
+      relocate(spp,repID,RI_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+```
+
+#### Priest Rapids
+
+```{r QAQC_tab3_STH_dPR,echo=F,eval=T,warning=FALSE}
+
+
+kbl(QAQC_tab_raw_3 |> 
+      filter(spp=="STH" & fish_status!="Alive" & release_location=="Priest Rapids Tailrace") |>
+      # select(-fish_status) |>
+      left_join(QAQC_tab2 |>
+          select(repID,spp,PR_rel),by=c("spp", "repID")) |>
+      select(-Crescent.Bar,-Sunland,-Wanapum.BRZ,-Wanapum,-Wanapum.Tailrace,-Mattawa,-Priest.BRZ,-Priest) |>
+      relocate(spp,repID,PR_rel) 
+                )    |>
+  kable_classic(full_width = F, html_font = "Times New Roman")
+
+
+
+```
+
+
+
+
+
+
