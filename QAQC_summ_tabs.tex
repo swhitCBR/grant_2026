@@ -1,0 +1,247 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Untitled},
+  pdfauthor={SW},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Untitled}
+\author{SW}
+\date{2026-08-14}
+
+\begin{document}
+\maketitle
+
+\section{QA/QC Tables}\label{qaqc-tables}
+
+\subsection{Fish released by location, status, and
+tagger}\label{fish-released-by-location-status-and-tagger}
+
+\subsubsection{live fish}\label{live-fish}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|l|l|r|r|r}
+\hline
+spp & tag\_group & release\_location & A & B & C\\
+\hline
+CHN & live\_release & Rock Island Tailrace & 330 & 335 & 332\\
+\hline
+STH & live\_release & Rock Island Tailrace & 332 & 334 & 238\\
+\hline
+CHN & live\_release & Priest Rapids Tailrace & 266 & 274 & 259\\
+\hline
+STH & live\_release & Priest Rapids Tailrace & 260 & 277 & 176\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Dead Fish}\label{dead-fish}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|l|l|r|r|r}
+\hline
+spp & tag\_group & release\_location & A & B & C\\
+\hline
+STH & dead\_release & Rock Island Tailrace & NA & 1 & NA\\
+\hline
+CHN & dead\_release & Priest Rapids Tailrace & 14 & 18 & 17\\
+\hline
+STH & dead\_release & Priest Rapids Tailrace & 11 & 14 & 8\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Fish released by location, status, and
+replicate}\label{fish-released-by-location-status-and-replicate}
+
+\subsubsection{Chinook}\label{chinook}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r|l|l}
+\hline
+spp & repID & RI & RI\_d & PRT & PRT\_d & RI\_rel & PR\_rel\\
+\hline
+CHN & 1 & 33 & NA & 2 & 41 & 04-22 & 04-25\\
+\hline
+CHN & 2 & 33 & NA & 2 & 41 & 04-23 & 04-26\\
+\hline
+CHN & 3 & 33 & NA & 2 & 41 & 04-24 & 04-27\\
+\hline
+CHN & 4 & 34 & NA & 2 & 41 & 04-25 & 04-28\\
+\hline
+CHN & 5 & 33 & NA & 2 & 42 & 04-26 & 04-29\\
+\hline
+CHN & 6 & 33 & NA & 1 & 42 & 04-27 & 04-30\\
+\hline
+CHN & 7 & 34 & NA & 3 & 40 & 04-28 & 05-01\\
+\hline
+CHN & 8 & 33 & NA & 2 & 42 & 04-29 & 05-02\\
+\hline
+CHN & 9 & 34 & NA & 2 & 42 & 04-30 & 05-03\\
+\hline
+CHN & 10 & 34 & NA & 2 & 41 & 05-01 & 05-04\\
+\hline
+CHN & 11 & 34 & NA & 2 & 42 & 05-02 & 05-05\\
+\hline
+CHN & 12 & 35 & NA & 2 & 42 & 05-03 & 05-06\\
+\hline
+CHN & 13 & 35 & NA & 2 & 42 & 05-04 & 05-07\\
+\hline
+CHN & 14 & 68 & NA & 3 & 42 & 05-05 & 05-09\\
+\hline
+CHN & 15 & 34 & NA & 3 & 42 & 05-06 & 05-10\\
+\hline
+CHN & 16 & 33 & NA & 2 & 42 & 05-07 & 05-11\\
+\hline
+CHN & 17 & 33 & NA & 2 & 84 & 05-09 & 05-12\\
+\hline
+CHN & 18 & 33 & NA & 2 & 42 & 05-10 & 05-14\\
+\hline
+CHN & 19 & 33 & NA & 2 & 42 & 05-11 & 05-15\\
+\hline
+CHN & 20 & 32 & NA & 3 & 41 & 05-12 & 05-16\\
+\hline
+CHN & 21 & 33 & NA & 2 & 41 & 05-14 & 05-17\\
+\hline
+CHN & 22 & 33 & NA & 2 & 41 & 05-15 & 05-18\\
+\hline
+CHN & 23 & 29 & NA & 2 & 41 & 05-16 & 05-19\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Steelhead}\label{steelhead}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{l|r|r|r|r|r|l|l}
+\hline
+spp & repID & RI & RI\_d & PRT & PRT\_d & RI\_rel & PR\_rel\\
+\hline
+STH & 1 & 33 & 1 & 2 & 83 & 05-09 & 05-01\\
+\hline
+STH & 2 & 33 & NA & 2 & 41 & 04-27 & 05-02\\
+\hline
+STH & 3 & 33 & NA & 2 & 41 & 04-28 & 05-04\\
+\hline
+STH & 4 & 33 & NA & 2 & 41 & 04-29 & 05-05\\
+\hline
+STH & 5 & 33 & NA & 1 & 41 & 04-30 & 05-06\\
+\hline
+STH & 6 & 34 & NA & 3 & 42 & 05-01 & 05-07\\
+\hline
+STH & 7 & 68 & NA & 3 & 42 & 05-02 & 05-09\\
+\hline
+STH & 8 & 35 & NA & 2 & 42 & 05-03 & 05-10\\
+\hline
+STH & 9 & 35 & NA & 2 & 42 & 05-04 & 05-11\\
+\hline
+STH & 10 & 35 & NA & 2 & 42 & 05-05 & 05-12\\
+\hline
+STH & 11 & 36 & NA & 2 & 42 & 05-06 & 05-14\\
+\hline
+STH & 12 & 34 & NA & 2 & 41 & 05-07 & 05-15\\
+\hline
+STH & 13 & 34 & NA & 2 & 42 & 05-10 & 05-16\\
+\hline
+STH & 14 & 33 & NA & 2 & 42 & 05-11 & 05-17\\
+\hline
+STH & 15 & 33 & NA & 2 & 42 & 05-12 & 05-22\\
+\hline
+STH & 16 & 30 & NA & 1 & 40 & 05-14 & 05-23\\
+\hline
+STH & 17 & 24 & NA & 1 & 42 & 05-15 & 05-24\\
+\hline
+STH & 18 & 35 & NA & NA & 42 & 05-16 & 04-30\\
+\hline
+STH & 19 & 26 & NA & NA & 42 & 05-17 & 05-03\\
+\hline
+STH & 20 & 23 & NA & NA & 27 & 05-18 & 05-18\\
+\hline
+STH & 21 & 14 & NA & NA & 19 & 05-19 & 05-19\\
+\hline
+STH & 22 & 10 & NA & NA & 13 & 05-20 & 05-20\\
+\hline
+STH & 23 & 9 & NA & NA & 13 & 05-21 & 05-21\\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}

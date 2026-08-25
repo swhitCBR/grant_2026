@@ -1,7 +1,9 @@
 ---
-title: "GRANT 2026: SW QA/QC Tables"
+title: 'GRANT 2026: SW QA/QC Tables'
 output:
+  word_document: default
   html_document: default
+  always_allow_html: true
 ---
 
 ```{r setup, include=FALSE,warning=FALSE}

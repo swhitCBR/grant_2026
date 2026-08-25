@@ -1,0 +1,249 @@
+---
+title: "GRANT 2026; SW QA/QC Tables (1/2)"
+format:
+  docx:
+    toc: true
+    reference-doc: ref_doc.docx
+editor: visual
+---
+
+```{r setup, include=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = F, eval=T)
+library(dplyr)
+
+options(knitr.kable.NA = '--')
+
+# old code
+# library(kableExtra)
+# QAQC_tabs <- readRDS("QAQC_tabs.rds")
+# unfilt_tab_ls <- readRDS("unfilt_tab_ls.rds")
+# CT_tab_ls <- readRDS("CT_tab_ls.rds")
+# QAQC_tab_3 <- readRDS("QAQC_tab_3.rds")
+# QAQC_tab_raw_3 <- readRDS("QAQC_tab_raw_3.rds")
+# saveRDS(DH_tag_code_summ,"QAQC_tab_raw_3.rds")
+
+# list2env(readRDS("CT_ALIVE_EUTH_ls.rds"),envir = globalVariables())
+
+CT_ALIVE_EUTH_ls <- readRDS("tmp_data/CT_ALIVE_EUTH_ls.rds")
+CT_raw_ls <- readRDS("tmp_data/CT_raw_ls.rds")
+
+rel_tagger_sum_tb_ls <- readRDS("tmp_data/rel_tagger_sum_tb_ls.rds")
+
+rel_loc_by_repID_tabs <- readRDS("tmp_data/rel_loc_by_repID_tabs.rds")
+
+
+```
+
+{{< pagebreak >}}
+
+# Summaries for all tags
+
+Includes "Tarmac" and "Mortality" groups (i.e., fish dropped on the ground and that died during handing, respectively)
+
+## Contingency Tables
+
+### Live/Dead Status vs. survival_use
+
+```{r ,echo=F,eval=T,warning=FALSE}
+
+# summary of usability and status
+knitr::kable(CT_raw_ls$"usable_CT_tab")#$$usable_CT_tab)
+```
+
+### Live/Dead Status vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$"fish_status_tagger_CT_tab")
+```
+
+### Release location vs. tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+
+knitr::kable(CT_raw_ls$RL_tagger_CT_tab)
+
+```
+
+### Release Location vs. Release Type
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$RL_helicopter_CT_tab)
+```
+
+### Tag lot vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$lot_tagger_CT_tab)
+```
+
+### Tag lot vs. Release location
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$lot_RL_CT_tab)
+
+```
+
+### Replicate vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$repID_tagger_CT_tab)
+```
+
+### Replicate vs. Release location
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$repID_RL_CT_tab)
+```
+
+## Fish released by location, status, and tagger
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$all$tags_dat_raw_tagger_summ)
+```
+
+### Chinook
+
+#### Live fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$all$tags_dat_raw_tagger_relID_summ_ls$CHN_live)
+```
+
+#### Dead fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$all$tags_dat_raw_tagger_relID_summ_ls$CHN_dead)
+```
+
+### Steelhead
+
+#### Live fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$all$tags_dat_raw_tagger_relID_summ_ls$STH_live)
+```
+
+#### Dead fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$all$tags_dat_raw_tagger_relID_summ_ls$STH_dead)
+```
+
+------------------------------------------------------------------------
+
+{{< pagebreak >}}
+
+# Summaries based on `fish_status= "Alive" | fish_status= "Euthanized"`
+
+Includes on 3284 live fish in the `survival_use=TRUE` group plus an additional 76 euthanized fish.
+
+## Contingency Tables
+
+### Live/Dead Status vs. survival_use
+
+```{r usable_CT_tab,echo=F,eval=T,warning=FALSE}
+
+# summary of usability and status
+knitr::kable(CT_ALIVE_EUTH_ls$"usable_CT_tab")#$$usable_CT_tab)
+```
+
+### Live/Dead Status vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$"fish_status_tagger_CT_tab")
+```
+
+### Release location vs. tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+
+knitr::kable(CT_ALIVE_EUTH_ls$RL_tagger_CT_tab)
+
+```
+
+### Release Location vs. Release Type
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$RL_helicopter_CT_tab)
+```
+
+### Tag lot vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$lot_tagger_CT_tab)
+```
+
+### Tag lot vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$lot_tagger_CT_tab)
+```
+
+### Tag lot vs. Release location
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$lot_RL_CT_tab)
+
+```
+
+### Replicate vs. Tagger
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$repID_tagger_CT_tab)
+```
+
+### Replicate vs. Release location
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_ALIVE_EUTH_ls$repID_RL_CT_tab)
+```
+
+## Fish released by location, replicate, and Status
+
+Rock Island and Priest Rapids are abbreviated and the "\_d" refers to release of "Euthanized" fish
+
+### Chinook
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(rel_loc_by_repID_tabs$CHN)
+```
+
+### Steelhead
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(rel_loc_by_repID_tabs$STH)
+```
+
+## Fish released by location, status, and tagger
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$ALIVE_EUTH$tags_dat_ALIVE_EUTH_tagger_summ)
+```
+
+### Chinook
+
+#### Live fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$ALIVE_EUTH$tags_dat_ALIVE_EUTH_tagger_relID_summ_ls$CHN_live)
+```
+
+#### Dead fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$ALIVE_EUTH$tags_dat_ALIVE_EUTH_tagger_relID_summ_ls$CHN_dead)
+```
+
+### Steelhead
+
+#### Live fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$ALIVE_EUTH$tags_dat_ALIVE_EUTH_tagger_relID_summ_ls$STH_live)
+```
+
+#### Dead fish
+
+```{r,echo=F}
+knitr::kable(rel_tagger_sum_tb_ls$ALIVE_EUTH$tags_dat_ALIVE_EUTH_tagger_relID_summ_ls$STH_dead |> arrange(repID))
+```

@@ -30,11 +30,11 @@ saveRDS(unfilt_tab_ls,"unfilt_tab_ls.rds")
 # no NAs all unique
 table(is.na(tags_dat_raw$tag_code))
 
-table(tags_dat_raw$release_location)
-table(tags_dat_raw$tag_group)
-table(tags_dat_raw$tagger)
-table(tags_dat_raw$species)
-table(tags_dat_raw$survival_use,tags_dat_raw$fish_status)
+# table(tags_dat_raw$release_location)
+# table(tags_dat_raw$tag_group)
+# table(tags_dat_raw$tagger)
+# table(tags_dat_raw$species)
+# table(tags_dat_raw$survival_use,tags_dat_raw$fish_status)
 
 
 usable_CT_tab <- tags_dat_raw |>  #survival_use 
@@ -54,12 +54,10 @@ tags_dat_raw$rel_date=as.Date(substr(tags_dat_raw$tag_release_date,start = 1,sto
 
 tags_dat_raw$release_location <- factor(tags_dat_raw$release_location,c("Rock Island Tailrace","Priest Rapids Tailrace"))
 
-table(tags_dat_raw$survival_use,tags_dat_raw$fish_status)
-
-
-unique(tags_dat_raw$tag_AssignedRelease)
-table(tags_dat_raw$tag_AssignedRelease)
-table(tags_dat_raw$tag_AssignedRelease,tags_dat_raw$release_location)
+# table(tags_dat_raw$survival_use,tags_dat_raw$fish_status)
+# unique(tags_dat_raw$tag_AssignedRelease)
+# table(tags_dat_raw$tag_AssignedRelease)
+# table(tags_dat_raw$tag_AssignedRelease,tags_dat_raw$release_location)
 
 tags_dat_raw_summ <- tags_dat_raw |>  
   group_by(spp,project_code,tag_group,release_location,rel_date) |>
@@ -78,15 +76,15 @@ tags_dat_raw_tagger_summ <- tags_dat_raw |>
 # 
 # library(tidyr)
 CHN_tags_dat_summ <-  tags_dat_raw_summ |> pivot_wider(values_from = n_tags,names_from=tag_group) |> filter(spp=="CHN")
-CHN_RI_tags_dat_summ <- CHN_tags_dat_summ |> filter(release_location=="Rock Island Tailrace") |> 
+CHN_RI_tags_dat_summ <- CHN_tags_dat_summ |> filter(release_location=="Rock Island Tailrace") |>  arrange(rel_date)  |> 
   mutate(repID=1:n(),code=paste(spp,project_code,release_location,rel_date,sep="_"))
-CHN_PR_tags_dat_summ <- CHN_tags_dat_summ |> filter(release_location=="Priest Rapids Tailrace")|> 
+CHN_PR_tags_dat_summ <- CHN_tags_dat_summ |> filter(release_location=="Priest Rapids Tailrace")|>  arrange(rel_date)  |> 
   mutate(repID=1:n(),code=paste(spp,project_code,release_location,rel_date,sep="_"))
 
 STH_tags_dat_summ <-  tags_dat_raw_summ |> pivot_wider(values_from = n_tags,names_from=tag_group) |> filter(spp=="STH")
-STH_RI_tags_dat_summ <- STH_tags_dat_summ |> filter(release_location=="Rock Island Tailrace") |> 
+STH_RI_tags_dat_summ <- STH_tags_dat_summ |> filter(release_location=="Rock Island Tailrace") |> arrange(rel_date)  |> 
   mutate(repID=1:n(),code=paste(spp,project_code,release_location,rel_date,sep="_"))
-STH_PR_tags_dat_summ <- STH_tags_dat_summ |> filter(release_location=="Priest Rapids Tailrace")|> 
+STH_PR_tags_dat_summ <- STH_tags_dat_summ |> filter(release_location=="Priest Rapids Tailrace")|>  arrange(rel_date)  |> 
   mutate(repID=1:n(),code=paste(spp,project_code,release_location,rel_date,sep="_"))
 # 
 rep_id_tab <- bind_rows(
@@ -112,6 +110,10 @@ saveRDS(tags_dat_wrepID,"tags_dat_wrepID.rds")
 ##################### #
 # filtering out 
 ##################### #
+
+table(tags_dat_raw$release_type,tags_dat_raw$release_location)
+
+
 
 tags_dat <- tags_dat_wrepID
 
@@ -195,7 +197,7 @@ tags_dat_summ3 <- tags_dat_summ2 |> left_join(
   rep_id_tab |> filter(release_location=="Priest Rapids Tailrace") |> rename(PR_rel_date=rel_date) |> select(PR_rel_date,code2)) |> left_join(
     rep_id_tab |> filter(release_location=="Rock Island Tailrace") |> rename(RI_rel_date=rel_date) |> select(RI_rel_date,code2))
 
-names(tags_dat_summ3)[3:6] <- c("PRT_d","PRT","RI","RI_d")
+names(tags_dat_summ3)[3:6] <- c("PRT_d","PRT","RI_d","RI")
 
 tags_dat_summ4 <- tags_dat_summ3 |> 
   relocate(spp,repID,RI,RI_d,PRT,PRT_d) |>

@@ -1,0 +1,97 @@
+---
+title: "GRANT 2026; SW QA/QC Tables (2/2)"
+format:
+  docx:
+    toc: false
+    reference-doc: ref_doc_w.docx
+editor: visual
+---
+
+```{r setup, include=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = F, eval=T)
+library(dplyr)
+
+options(knitr.kable.NA = '--')
+
+tag_DH_ls  <- readRDS("tmp_data/tag_DH_ls.rds")
+
+
+```
+
+# Detection Histories for All Tags
+
+Includes "Tarmac" and "Mortality" groups (i.e., fish dropped on the ground and that died during handing, respectively)
+
+## Live Fish
+
+### Chinook
+
+#### Rock Island Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_RI_summ" |> filter(spp=="CHN" & status=="Alive"))
+
+```
+
+#### Priest Rapids Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_PR_summ" |> filter(spp=="CHN" & status=="Alive"))
+
+```
+
+{{< pagebreak >}}
+
+### Steelhead
+
+#### Rock Island Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_RI_summ" |> filter(spp=="STH" & status=="Alive"))
+
+```
+
+#### Priest Rapids Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_PR_summ" |> filter(spp=="STH" & status=="Alive"))
+
+```
+
+{{< pagebreak >}}
+
+## Dead Fish
+
+### Chinook
+
+#### Rock Island Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_RI_summ" |> filter(spp=="CHN" & status!="Alive"))
+
+```
+
+#### Priest Rapids Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_PR_summ" |> filter(spp=="CHN" & status!="Alive"))
+
+```
+
+{{< pagebreak >}}
+
+### Steelhead
+
+#### Rock Island Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_RI_summ" |> filter(spp=="STH" & status!="Alive"))
+
+```
+
+#### Priest Rapids Release
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(tag_DH_ls$"raw_PR_summ" |> filter(spp=="STH" & status!="Alive"))
+
+```
