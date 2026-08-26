@@ -10,28 +10,12 @@ editor: visual
 ```{r setup, include=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = F, eval=T)
 library(dplyr)
-
 options(knitr.kable.NA = '--')
-
-# old code
-# library(kableExtra)
-# QAQC_tabs <- readRDS("QAQC_tabs.rds")
-# unfilt_tab_ls <- readRDS("unfilt_tab_ls.rds")
-# CT_tab_ls <- readRDS("CT_tab_ls.rds")
-# QAQC_tab_3 <- readRDS("QAQC_tab_3.rds")
-# QAQC_tab_raw_3 <- readRDS("QAQC_tab_raw_3.rds")
-# saveRDS(DH_tag_code_summ,"QAQC_tab_raw_3.rds")
-
-# list2env(readRDS("CT_ALIVE_EUTH_ls.rds"),envir = globalVariables())
 
 CT_ALIVE_EUTH_ls <- readRDS("tmp_data/CT_ALIVE_EUTH_ls.rds")
 CT_raw_ls <- readRDS("tmp_data/CT_raw_ls.rds")
-
 rel_tagger_sum_tb_ls <- readRDS("tmp_data/rel_tagger_sum_tb_ls.rds")
-
 rel_loc_by_repID_tabs <- readRDS("tmp_data/rel_loc_by_repID_tabs.rds")
-
-
 ```
 
 {{< pagebreak >}}
@@ -47,7 +31,7 @@ Includes "Tarmac" and "Mortality" groups (i.e., fish dropped on the ground and t
 ```{r ,echo=F,eval=T,warning=FALSE}
 
 # summary of usability and status
-knitr::kable(CT_raw_ls$"usable_CT_tab")#$$usable_CT_tab)
+knitr::kable(CT_raw_ls$"usable_CT_tab")
 ```
 
 ### Live/Dead Status vs. Tagger
@@ -81,6 +65,38 @@ knitr::kable(CT_raw_ls$lot_tagger_CT_tab)
 ```{r ,echo=F,eval=T,warning=FALSE}
 knitr::kable(CT_raw_ls$lot_RL_CT_tab)
 
+```
+
+### Tag lot vs. Tagger by Release location
+
+#### Rock Island
+
+##### CHN 
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$lot_tagger_RL_CT_tab_ls$"CHN.Rock Island Tailrace")
+```
+
+##### STH 
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$lot_tagger_RL_CT_tab_ls$"STH.Rock Island Tailrace")
+```
+
+
+#### Priest Rapids
+
+##### CHN 
+
+```{r ,echo=F,eval=T,warning=FALSE}
+knitr::kable(CT_raw_ls$lot_tagger_RL_CT_tab_ls$"CHN.Priest Rapids Tailrace")
+```
+
+##### STH 
+
+```{r ,echo=F,eval=T,warning=FALSE}
+
+knitr::kable(CT_raw_ls$lot_tagger_RL_CT_tab_ls$"STH.Priest Rapids Tailrace")
 ```
 
 ### Replicate vs. Tagger

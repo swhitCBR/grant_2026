@@ -1,5 +1,4 @@
 
-
 tags_dat_raw_wrepID <- readRDS("tmp_data/tags_dat_raw_wrepID.rds")
 
 tags_dat_ALIVE_EUTH_wrepID <- readRDS("tmp_data/tags_dat_ALIVE_EUTH_wrepID.rds")
@@ -7,9 +6,27 @@ tags_dat_ALIVE_EUTH_wrepID <- readRDS("tmp_data/tags_dat_ALIVE_EUTH_wrepID.rds")
 
 source("R/get_conting_tabs.R")
 
+# tmp <- get_conting_tabs(tags_dat_in = tags_dat_raw_wrepID)
+# names(tmp$lot_tagger_RL_CT_tab_ls)
+
+
+# lot_tagger_RL_CT_tab_ls$"CHN.Rock Island Tailrace"
+# lot_tagger_RL_CT_tab_ls$"STH.Rock Island Tailrace"
+# lot_tagger_RL_CT_tab_ls$"CHN.Priest Rapids Tailrace"
+# lot_tagger_RL_CT_tab_ls$"STH.Priest Rapids Tailrace"
+
+# split(tmp,tmp$spp)
+
+
+
+
+
 CT_raw_ls <- get_conting_tabs(tags_dat_in = tags_dat_raw_wrepID)
 
 CT_ALIVE_EUTH_ls <- get_conting_tabs(tags_dat_in = tags_dat_ALIVE_EUTH_wrepID)
+
+
+
 
 
 saveRDS(CT_raw_ls,"tmp_data/CT_raw_ls.rds")
