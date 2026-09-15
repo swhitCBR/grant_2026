@@ -29,7 +29,7 @@ add_qsec3_elwise <- function(header_in="Live/Dead Status vs. survival_use",tag_s
   "```"
   )}
 
-get_conting_tabs_by_name
+# get_conting_tabs_by_name
 # filter_strs <- c(
 #   "tags_ALIVE_or_EUTH" = "fish_status %in% c('Alive','Euthanized')",
 #   "tags_SURVUSE_AND_ALIVE_or_EUTH" = "survival_use & fish_status %in% c('Alive','Euthanized')",

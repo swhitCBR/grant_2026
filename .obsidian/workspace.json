@@ -1,0 +1,250 @@
+{
+  "main": {
+    "id": "a378aecc7979bdf5",
+    "type": "split",
+    "children": [
+      {
+        "id": "e37bae32771dda4c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0fabd3a3528ac23d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "assumption_checking/tagger_effects/TAGGER C/PR_STH/CJS_report.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CJS_report"
+            }
+          },
+          {
+            "id": "fff311417468928f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Test of Tagger Effects_exerpt"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "181333955e9a9f6b",
+    "type": "split",
+    "children": [
+      {
+        "id": "2b3a02e0543c898f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bfcd686b69d86087",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "2ab8de1b94a09c62",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c2998364a6e03060",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f0f253f3ff9da9d5",
+    "type": "split",
+    "children": [
+      {
+        "id": "168d33a6312ef4f0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2c4ebe11196b2f9b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "bfaa0a27bf37e048",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "89222c421bdf6c83",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "308d5f60c25cc38c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "93941dd8a3e969d0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "fff311417468928f",
+  "lastOpenFiles": [
+    "grant17/~$17 Steelhead Survival Study through Priest Rapids (9-28).docx",
+    "grant17/~$AFT REPORT 2017 Steelhead Survival Study through Priest Rapids.docx",
+    "~$PORT TEMPLATE Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids.docx",
+    "assumption_checking/tagger_table_report_bold.docx",
+    "assumption_checking/tagger_table_report_files/mediabag",
+    "assumption_checking/tagger_table_report_files",
+    "assumption_checking/~$gger_table_report.docx",
+    "assumption_checking/~$gger_table_report_temp.docx",
+    "assumption_checking/tagger_table_report_updated.docx",
+    "assumption_checking/tagger_table_report_temp.docx",
+    "data_cleaning/10_update_tagger_table_with_ftest_pvalues.R",
+    "assumption_checking/tagger_effects/POOLED/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+    "assumption_checking/tagger_effects/POOLED/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER C/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER C/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER C/PR_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER C/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER C/RI_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER C/RI_STH/Capture History Report.md",
+    "assumption_checking/tagger_survival_comparison.svg",
+    "assumption_checking/tagger_table_with_pvalues.md",
+    "assumption_checking/tagger_survival_comparison.png",
+    "assumption_checking/tagger_effects/TAGGER B/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER B/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER B/PR_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER B/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER A/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER A/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/TAGGER A/PR_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER A/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/POOLED/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/POOLED/PR_CHN/CJS_report.md",
+    "assumption_checking/redone_PR_tagpro.png",
+    "assumption_checking/tagger_effects/TAGGER B/RI_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER B/RI_CHN/Capture History Report.md",
+    "assumption_checking/tagger_effects/TAGGER B/RI_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/TAGGER B/RI_STH/Capture History Report.md",
+    "assumption_checking/tagger_table_template.md",
+    "assumption_checking/tagger_effects/TAGGER A/2nd_round_site_opts_Screenshot.png",
+    "assumption_checking/tagger_effects/TAGGER A/2nd_round_releases_opts_Screenshot.png"
+  ]
+}
