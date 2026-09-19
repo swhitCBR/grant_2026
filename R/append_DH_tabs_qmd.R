@@ -11,6 +11,9 @@
 #' @param template_path Path to the template directory (default: "QAQC/qmd_templates")
 #' @param overwrite Logical, whether to overwrite existing file (default: FALSE).
 #'   If TRUE, the file is replaced. If FALSE and file exists, content is appended.
+#'
+#' @keywords QAQC quarto
+#' @export
 append_DH_tabs_qmd <- function(tag_subset_nm = "RAW", 
                                tag_DH_ls_nm_RI = "raw_RI_summ", 
                                tag_DH_ls_nm_PR = "raw_PR_summ",
@@ -38,7 +41,7 @@ append_DH_tabs_qmd <- function(tag_subset_nm = "RAW",
   append_to_qmd(qmd_file, "\n### Chinook\n")
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Rock Island Release", spp_in = "CHN", status_in = "Alive", header_level = "####", tag_DH_ls_nm_in = tag_DH_ls_nm_RI))
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Priest Rapids Release", spp_in = "CHN", status_in = "Alive", header_level = "####", tag_DH_ls_nm_in = tag_DH_ls_nm_PR))
-  append_to_qmd(qmd_file, "{{< pagebreak >}}")
+  # append_to_qmd(qmd_file, "{{< pagebreak >}}")
   append_to_qmd(qmd_file, "\n### Steelhead\n")
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Rock Island Release", spp_in = "STH", status_in = "Alive", header_level = "####", tag_DH_ls_nm_in = tag_DH_ls_nm_RI))
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Priest Rapids Release", spp_in = "STH", status_in = "Alive", header_level = "####", tag_DH_ls_nm_in = tag_DH_ls_nm_PR))
@@ -48,7 +51,7 @@ append_DH_tabs_qmd <- function(tag_subset_nm = "RAW",
   append_to_qmd(qmd_file, "\n### Chinook\n")
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Rock Island Release", spp_in = "CHN", status_in = "Alive", header_level = "####", status_is = FALSE, tag_DH_ls_nm_in = tag_DH_ls_nm_RI))
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Priest Rapids Release", spp_in = "CHN", status_in = "Alive", header_level = "####", status_is = FALSE, tag_DH_ls_nm_in = tag_DH_ls_nm_PR))
-  append_to_qmd(qmd_file, "{{< pagebreak >}}")
+  # append_to_qmd(qmd_file, "{{< pagebreak >}}")
   append_to_qmd(qmd_file, "\n### Steelhead\n")
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Rock Island Release", spp_in = "STH", status_in = "Alive", header_level = "####", status_is = FALSE, tag_DH_ls_nm_in = tag_DH_ls_nm_RI))
   append_to_qmd(qmd_file, add_DH_qsec3_elwise(header_in = "Priest Rapids Release", spp_in = "STH", status_in = "Alive", header_level = "####", status_is = FALSE, tag_DH_ls_nm_in = tag_DH_ls_nm_PR))

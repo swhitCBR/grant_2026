@@ -1,12 +1,4 @@
 #' Generate QAQC contingency tables and detection histories
-#'
-#' Comprehensive script that generates all QAQC contingency tables and detection
-#' history summaries, then renders Quarto reports.
-#'
-#' This script combines:
-#' - 02_batched_comp_and_qmd_creation.R: Contingency table generation and part 1 Quarto report
-#' - 05_DH_repID_summ_tbs_and_qmd_comp.R: Detection history summaries and part 2 Quarto report
-#'
 #' Prerequisites: Run data_cleaning/01_create_tag_subsets.R first to generate tag_subsets_ls.rds
 
 library(dplyr)
@@ -17,6 +9,17 @@ library(quarto)
 # Set working directory to top-level repo directory
 if(getwd() != "c:/repos/grant_2026"){
   setwd("c:/repos/grant_2026")}
+
+# ============================================================================
+# Set output directory for generated Word documents
+# ============================================================================
+output_dir_docx <- "media/docx/QAQC word docs"
+
+# Create output directory if it doesn't exist
+if (!dir.exists(output_dir_docx)) {
+  dir.create(output_dir_docx, recursive = TRUE, showWarnings = FALSE)
+  cat(paste("✓ Created output directory:", output_dir_docx, "\n"))
+}
 
 # ============================================================================
 # Load required helper functions and data
@@ -68,7 +71,7 @@ rel_loc_by_repID_tabs <- get_rel_loc_by_repID_tabs(tags_dat_raw_wrepID)
 # Create Quarto templates for report generation
 # ============================================================================
 
-create_qmd_templates_dir(output_dir = "QAQC/qmd_templates", overwrite = TRUE)
+create_qmd_templates_dir(output_dir = "QAQC/qmd_templates", output_dir_docx = output_dir_docx, overwrite = TRUE)
 
 # Generate contingency table summaries
 get_conting_tbs_qmd_els(tab_subset_nm = "RAW", overwrite = TRUE)
@@ -77,6 +80,12 @@ get_conting_tbs_qmd_els(tab_subset_nm = "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_
 
 # Render part 1 Quarto report
 quarto_render("QAQC/SW_QAQC_tabs_1_2.qmd")
+
+# Move output file to designated output directory
+file.rename(
+  "QAQC/SW_QAQC_tabs_1_2.docx",
+  file.path(output_dir_docx, "SW_QAQC_tabs_1_2.docx")
+)
 
 cat("✓ Part 1 Quarto report (SW_QAQC_tabs_1_2.qmd) generated\n")
 
@@ -104,6 +113,12 @@ append_DH_tabs_qmd(tag_subset_nm = "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER
 # Render part 2 Quarto report
 quarto_render("QAQC/SW_QAQC_tabs_2_2.qmd")
 
+# Move output file to designated output directory
+file.rename(
+  "QAQC/SW_QAQC_tabs_2_2.docx",
+  file.path(output_dir_docx, "SW_QAQC_tabs_2_2.docx")
+)
+
 cat("✓ Part 2 Quarto report (SW_QAQC_tabs_2_2.qmd) generated\n")
 
 # ============================================================================
@@ -114,6 +129,6 @@ cat("\n")
 cat("════════════════════════════════════════════════════════════\n")
 cat("QAQC Table Generation Complete\n")
 cat("════════════════════════════════════════════════════════════\n")
-cat("✓ Part 1 (Contingency Tables): SW_QAQC_tabs_1_2.docx\n")
-cat("✓ Part 2 (Detection Histories): SW_QAQC_tabs_2_2.docx\n")
+cat("✓ Part 1 (Contingency Tables):", file.path(output_dir_docx, "SW_QAQC_tabs_1_2.docx"), "\n")
+cat("✓ Part 2 (Detection Histories):", file.path(output_dir_docx, "SW_QAQC_tabs_2_2.docx"), "\n")
 cat("════════════════════════════════════════════════════════════\n")

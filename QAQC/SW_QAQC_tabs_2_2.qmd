@@ -98,7 +98,6 @@ knitr::kable(tag_DH_ls$'raw_RI_summ' |> filter(spp=='CHN' & status=='Alive'))
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'raw_PR_summ' |> filter(spp=='CHN' & status=='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 
@@ -125,7 +124,6 @@ knitr::kable(tag_DH_ls$'raw_RI_summ' |> filter(spp=='CHN' & status!='Alive'))
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'raw_PR_summ' |> filter(spp=='CHN' & status!='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 
@@ -155,7 +153,6 @@ knitr::kable(tag_DH_ls$'SU_E_ACT_RI_summ' |> filter(spp=='CHN' & status=='Alive'
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'SU_E_ACT_PR_summ' |> filter(spp=='CHN' & status=='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 
@@ -182,7 +179,6 @@ knitr::kable(tag_DH_ls$'SU_E_ACT_RI_summ' |> filter(spp=='CHN' & status!='Alive'
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'SU_E_ACT_PR_summ' |> filter(spp=='CHN' & status!='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 
@@ -212,7 +208,6 @@ knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='CHN' & status=='Alive'))
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='CHN' & status=='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 
@@ -239,7 +234,6 @@ knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='CHN' & status!='Alive'))
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='CHN' & status!='Alive'))
 ```
-{{< pagebreak >}}
 
 ### Steelhead
 

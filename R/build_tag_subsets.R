@@ -9,6 +9,8 @@
 #'
 #' @return A named list of data frames, one per entry in filter_strs, each
 #'   filtered from tags_dat_raw_wrepID using the corresponding condition.
+#'
+#' @keywords QAQC
 build_tag_subsets <- function(tags_dat_raw_wrepID, filter_strs) {
   purrr::map(
     filter_strs,

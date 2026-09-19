@@ -9,6 +9,9 @@
 #' @param template_path Path to the template directory (default: "QAQC/qmd_templates")
 #' @param overwrite Logical, whether to overwrite existing file (default: FALSE).
 #'   If TRUE, the file is replaced. If FALSE and file exists, content is appended.
+#'
+#' @keywords QAQC quarto
+#' @export
 get_conting_tbs_qmd_els <- function(tab_subset_nm="RAW", qmd_file="QAQC/SW_QAQC_tabs_1_2.qmd", template_path="QAQC/qmd_templates", overwrite=FALSE){
   
   # If overwrite is TRUE or file doesn't exist, create fresh from template

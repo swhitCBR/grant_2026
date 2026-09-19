@@ -10,6 +10,8 @@
 #'   release_location holding the corresponding count of tags.
 #' @param split_var Column used to further split the count columns by
 #'   release_location. Defaults to tag_group.
+#'
+#' @keywords QAQC tabulate
 get_rel_loc_by_repID_tabs <- function(tags_dat_raw_wrepID, split_var = tag_group) {
   split_var <- rlang::ensym(split_var)
   split_name <- rlang::as_string(split_var)

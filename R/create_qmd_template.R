@@ -7,17 +7,23 @@
 #'   - "SW_QAQC_tabs_1_2" (default): Creates SW_QAQC_tabs_1_2_template.qmd
 #'   - "SW_QAQC_tabs_2_2": Creates SW_QAQC_tabs_2_2_template.qmd
 #' @param output_dir Directory where the template should be written (default: "qmd_templates")
+#' @param output_dir_docx Directory where rendered .docx files should be saved. If NULL, files are saved alongside the .qmd file (default: NULL)
 #' @param overwrite Logical, whether to overwrite existing file (default: TRUE)
 #'
 #' @return NULL (invisibly). Creates a file in the output directory.
 #'
+#' @keywords QAQC quarto
+#' @export
+#'
 #' @examples
 #' create_qmd_template(output_dir = "output/qmd")
 #' create_qmd_template(template_name = "SW_QAQC_tabs_2_2", output_dir = "my_report")
+#' create_qmd_template(output_dir = "output/qmd", output_dir_docx = "media/docx/reports")
 
 create_qmd_template <- function(
   template_name = "SW_QAQC_tabs_1_2",
   output_dir,
+  output_dir_docx = NULL,
   overwrite = TRUE
 ) {
   
@@ -26,19 +32,27 @@ create_qmd_template <- function(
     stop("output_dir argument is required")
   }
   
-  # Template content for SW_QAQC_tabs_1_2_template.qmd
-  template_1_2_content <- c(
+  # Build template content for SW_QAQC_tabs_1_2_template.qmd
+  yaml_1_2 <- c(
     "---",
     'title: "GRANT 2026; SW QA/QC Tables v3 (1/3)"',
     "format:",
     "  docx:",
     "    toc: true",
-    "    reference-doc: ../media/docx/ref_doc_QAQC.docx",
+    "    reference-doc: ../media/docx/ref_doc_QAQC.docx"
+  )
+  
+  yaml_1_2 <- c(
+    yaml_1_2,
     "    execute:",
     "warning: false",
     "message: false  # Highly recommended to also hide package startup messages",
     "editor: source",
-    "---",
+    "---"
+  )
+  
+  template_1_2_content <- c(
+    yaml_1_2,
     "",
     "```{r setup, include=FALSE,warning=FALSE}",
     "knitr::opts_chunk$set(echo = F, eval=T)",
@@ -61,19 +75,27 @@ create_qmd_template <- function(
     "```"
   )
   
-  # Template content for SW_QAQC_tabs_2_2_template.qmd
-  template_2_2_content <- c(
+  # Build template content for SW_QAQC_tabs_2_2_template.qmd
+  yaml_2_2 <- c(
     "---",
     'title: "GRANT 2026; SW QA/QC Tables v3 (2/2)"',
     "format:",
     "  docx:",
     "    toc: true",
-    "    reference-doc: ../media/docx/ref_doc_w_QAQC.docx",
+    "    reference-doc: ../media/docx/ref_doc_w_QAQC.docx"
+  )
+  
+  yaml_2_2 <- c(
+    yaml_2_2,
     "    execute:",
     "warning: false",
     "message: false  # Highly recommended to also hide package startup messages",
     "editor: source",
-    "---",
+    "---"
+  )
+  
+  template_2_2_content <- c(
+    yaml_2_2,
     "",
     "```{r setup, include=FALSE,warning=FALSE}",
     "knitr::opts_chunk$set(echo = F, eval=T)",

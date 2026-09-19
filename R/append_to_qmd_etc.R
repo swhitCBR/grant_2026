@@ -1,13 +1,19 @@
-
-#' Title
+#' Append text to a Quarto markdown file
 #'
-#' @param file_path
-#' @param text_lines
+#' Appends text lines to a Quarto (.qmd) file in append mode.
 #'
-#' @returns
+#' @param file_path Path to the Quarto file to append to.
+#' @param text_lines Character vector of text lines to append to the file.
 #'
+#' @return NULL (invisibly). Modifies file at file_path.
+#'
+#' @keywords QAQC quarto
 #' @export
+#'
 #' @examples
+#' \dontrun{
+#' append_to_qmd("report.qmd", "# New Section")
+#' }
 append_to_qmd <- function(file_path, text_lines) {
   cat(text_lines, sep = "\n", file = file_path, append = TRUE)}
 

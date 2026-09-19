@@ -1,5 +1,36 @@
-
-
+#' Generate detection history summaries
+#'
+#' Creates detection history summaries by aggregating detection events across
+#' nodes/locations for each tag, joined with tag metadata. Removes duplicate
+#' nodes and summarizes detections by species, release location, fish status,
+#' and replicate.
+#'
+#' @param node_dat_in Data frame with node information containing columns:
+#'   node_code, location, and river_kilometer.
+#' @param events_dat_in Data frame with event detections containing columns:
+#'   tag_code, node_code, first_computed_datetime, last_computed_datetime,
+#'   and hits.
+#' @param tags_dat_wrepID_in Data frame with tag metadata containing columns:
+#'   tag_code, repID, fish_status, spp, and release_location.
+#'
+#' @return A data frame with one row per combination of species, release
+#'   location, replicate, and fish status. Columns represent detection nodes
+#'   (Crescent.Bar, Sunland, Wanapum.BRZ, Wanapum, Wanapum.Tailrace, Mattawa,
+#'   Priest.BRZ, Priest, Priest.Tailrace, Vernita.Bridge, Lower.Ringold,
+#'   White.Bluffs, Hanford) with values representing the count of tags
+#'   detected at each node.
+#'
+#' @keywords QAQC tabulate
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' dh_summ <- get_DH_tag_code_summ(
+#'   node_dat_in = node_dat,
+#'   events_dat_in = events_dat,
+#'   tags_dat_wrepID_in = tag_subsets_ls[["RAW"]]
+#' )
+#' }
 get_DH_tag_code_summ <- function (node_dat_in,events_dat_in,tags_dat_wrepID_in){
   
 
