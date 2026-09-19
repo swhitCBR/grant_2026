@@ -1,9 +1,21 @@
+# Media files - exclude all media types and subdirectories
+media/
+
+# R-specific
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# Project archives
 grant17
 grant17.zip
-*.docx
+
+# HTML and video output
 *.html
 TagPro 2026-09-13 17-36-56.mp4
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini

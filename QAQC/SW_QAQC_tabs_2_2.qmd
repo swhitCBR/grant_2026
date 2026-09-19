@@ -1,11 +1,13 @@
 ---
-title: "GRANT 2026; SW QA/QC Tables v3 (2/3)"
-# title: "GRANT 2026; SW QA/QC Tables (2/2)"
+title: "GRANT 2026; SW QA/QC Tables v3 (2/2)"
 format:
   docx:
     toc: true
-    reference-doc: templates/docx/ref_doc_w.docx
-editor: visual
+    reference-doc: ../media/docx/ref_doc_w_QAQC.docx
+    execute:
+warning: false
+message: false  # Highly recommended to also hide package startup messages
+editor: source
 ---
 
 ```{r setup, include=FALSE,warning=FALSE}
@@ -15,75 +17,73 @@ library(tidyr)
 
 options(knitr.kable.NA = '--')
 
-# CT_ALIVE_EUTH_ls <- readRDS("tmp_data/CT_ALIVE_EUTH_ls.rds")
-# CT_raw_ls <- readRDS("tmp_data/CT_raw_ls.rds")
-# rel_tagger_sum_tb_ls <- readRDS("tmp_data/rel_tagger_sum_tb_ls.rds")
-# rel_loc_by_repID_tabs <- readRDS("tmp_data/rel_loc_by_repID_tabs.rds")
-# source("R/get_tagger_rel_loc_status_tb_ls.R")
-# source("R/get_rel_loc_by_repID_tabs.R")
-# source("R/get_conting_tabs.R")
+# # CT_ALIVE_EUTH_ls <- readRDS("tmp_data/CT_ALIVE_EUTH_ls.rds")
+# # CT_raw_ls <- readRDS("tmp_data/CT_raw_ls.rds")
+# # rel_tagger_sum_tb_ls <- readRDS("tmp_data/rel_tagger_sum_tb_ls.rds")
+# # rel_loc_by_repID_tabs <- readRDS("tmp_data/rel_loc_by_repID_tabs.rds")
+# # source("R/get_tagger_rel_loc_status_tb_ls.R")
+# # source("R/get_rel_loc_by_repID_tabs.R")
+# # source("R/get_conting_tabs.R")
 
-tag_subsets_ls <- readRDS("tmp_data/tag_subsets_ls.rds")
+# tag_subsets_ls <- readRDS("../data/clean/tag_subsets_ls.rds")
 
-# setwd("C:/repos/grant_2026/QAQC")
-csv_fl_ls <- readRDS("tmp_data/csv_fl_ls.rds")
-events_dat <- csv_fl_ls$GPUD2026_events_17Aug2026
-node_dat <- csv_fl_ls$GPUD2026_nodes_12Aug2026
+# # setwd("C:/repos/grant_2026/QAQC")
+# csv_fl_ls <- readRDS("tmp_data/csv_fl_ls.rds")
+# events_dat <- csv_fl_ls$GPUD2026_events_17Aug2026
+# node_dat <- csv_fl_ls$GPUD2026_nodes_12Aug2026
 
-# tags_dat_ALIVE_EUTH_wrepID <- readRDS("tmp_data/tags_dat_ALIVE_EUTH_wrepID.rds")
-# tags_dat_raw_wrepID <- readRDS("tmp_data/tags_dat_raw_wrepID.rds")
+# # tags_dat_ALIVE_EUTH_wrepID <- readRDS("tmp_data/tags_dat_ALIVE_EUTH_wrepID.rds")
+# # tags_dat_raw_wrepID <- readRDS("tmp_data/tags_dat_raw_wrepID.rds")
 
-tag_subsets_ls <- readRDS("tmp_data/tag_subsets_ls.rds")
+# tag_subsets_ls <- readRDS("tmp_data/tag_subsets_ls.rds")
 
-source("R/get_DH_tag_code_summ.R")
+# source("R/get_DH_tag_code_summ.R")
 
+# # tag_ALIVE_EUTH_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tags_dat_ALIVE_EUTH_wrepID)
+# # tag_raw_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tags_dat_raw_wrepID)
 
-# tag_ALIVE_EUTH_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tags_dat_ALIVE_EUTH_wrepID)
-# tag_raw_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tags_dat_raw_wrepID)
+# tag_ALIVE_EUTH_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tag_subsets_ls[["tags_ALIVE_or_EUTH"]])
+# tag_raw_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tag_subsets_ls[["RAW"]])
 
+# tag_raw_DH_summ <- tag_raw_DH_summ |>
+#   rename(rel_loc=release_location,
+#          status=fish_status,CBAR=Crescent.Bar,WAN=Wanapum,WAN.BRZ=Wanapum.BRZ,WAN.TR=Wanapum.Tailrace,WB=White.Bluffs,HAN=Hanford,VRBR=Vernita.Bridge,PR.TR=Priest.Tailrace,PR.BRZ=Priest.BRZ,MATT=Mattawa,SUN=Sunland,LRNG=Lower.Ringold,PR=Priest) |>
+#   mutate(rel_loc=ifelse(rel_loc=="Rock Island Tailrace","RI","PR"))
+# tag_ALIVE_EUTH_DH_summ <- tag_ALIVE_EUTH_DH_summ |>
+#   rename(rel_loc=release_location,status=fish_status,CBAR=Crescent.Bar,WAN=Wanapum,WAN.BRZ=Wanapum.BRZ,WB=White.Bluffs,HAN=Hanford,VRBR=Vernita.Bridge,PR.TR=Priest.Tailrace,PR.BRZ=Priest.BRZ,MATT=Mattawa,SUN=Sunland,LRNG=Lower.Ringold,PR=Priest) |>
+#   mutate(rel_loc=ifelse(rel_loc=="Rock Island Tailrace","RI","PR"))
 
-tag_ALIVE_EUTH_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tag_subsets_ls[["tags_ALIVE_or_EUTH"]])
-tag_raw_DH_summ <- get_DH_tag_code_summ(node_dat_in = node_dat,events_dat_in = events_dat,tags_dat_wrepID_in = tag_subsets_ls[["RAW"]])
+# names(tag_ALIVE_EUTH_DH_summ)
 
+# # AE_RI_summ <- tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="Rock Island Tailrace")
+# # AE_PR_summ <-  tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="Priest Rapids Tailrace")
+# #
+# # raw_RI_summ <- tag_raw_DH_summ |> filter(rel_loc=="Rock Island Tailrace")
+# # raw_PR_summ <-  tag_raw_DH_summ |> filter(rel_loc=="Priest Rapids Tailrace")
 
-tag_raw_DH_summ <- tag_raw_DH_summ |> 
-  rename(rel_loc=release_location,
-         status=fish_status,CBAR=Crescent.Bar,WAN=Wanapum,WAN.BRZ=Wanapum.BRZ,WAN.TR=Wanapum.Tailrace,WB=White.Bluffs,HAN=Hanford,VRBR=Vernita.Bridge,PR.TR=Priest.Tailrace,PR.BRZ=Priest.BRZ,MATT=Mattawa,SUN=Sunland,LRNG=Lower.Ringold,PR=Priest) |>
-  mutate(rel_loc=ifelse(rel_loc=="Rock Island Tailrace","RI","PR"))
-tag_ALIVE_EUTH_DH_summ <- tag_ALIVE_EUTH_DH_summ |> 
-  rename(rel_loc=release_location,status=fish_status,CBAR=Crescent.Bar,WAN=Wanapum,WAN.BRZ=Wanapum.BRZ,WB=White.Bluffs,HAN=Hanford,VRBR=Vernita.Bridge,PR.TR=Priest.Tailrace,PR.BRZ=Priest.BRZ,MATT=Mattawa,SUN=Sunland,LRNG=Lower.Ringold,PR=Priest) |>
-  mutate(rel_loc=ifelse(rel_loc=="Rock Island Tailrace","RI","PR"))
+# AE_RI_summ <- tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="RI")
+# AE_PR_summ <-  tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="PR")
 
-names(tag_ALIVE_EUTH_DH_summ)
+# raw_RI_summ <- tag_raw_DH_summ |> filter(rel_loc=="RI")
+# raw_PR_summ <-  tag_raw_DH_summ |> filter(rel_loc=="PR")
 
-# AE_RI_summ <- tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="Rock Island Tailrace")
-# AE_PR_summ <-  tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="Priest Rapids Tailrace")
-# 
-# raw_RI_summ <- tag_raw_DH_summ |> filter(rel_loc=="Rock Island Tailrace")
-# raw_PR_summ <-  tag_raw_DH_summ |> filter(rel_loc=="Priest Rapids Tailrace")
+# tag_DH_ls <- list(
+#    "AE_RI_summ"=AE_RI_summ,
+#    "AE_PR_summ"=AE_PR_summ,
+#    "raw_RI_summ"=raw_RI_summ,
+#    "raw_PR_summ"=raw_PR_summ
+#    )
 
+# # tag_DH_ls <- readRDS("tmp_data/tag_DH_ls.rds")
 
-AE_RI_summ <- tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="RI")
-AE_PR_summ <-  tag_ALIVE_EUTH_DH_summ |> filter(rel_loc=="PR")
-
-raw_RI_summ <- tag_raw_DH_summ |> filter(rel_loc=="RI")
-raw_PR_summ <-  tag_raw_DH_summ |> filter(rel_loc=="PR")
-
-
-tag_DH_ls <- list(
-   "AE_RI_summ"=AE_RI_summ,
-   "AE_PR_summ"=AE_PR_summ,
-   "raw_RI_summ"=raw_RI_summ,
-   "raw_PR_summ"=raw_PR_summ
-   )
-
-tag_DH_ls <- readRDS("tmp_data/tag_DH_ls.rds")
+# Load detection history list generated by QAQC_tables.R
+tag_DH_ls <- readRDS("../data/clean/tag_DH_ls.rds")
 
 ```
 
 {{< pagebreak >}}
 
-# Detection Histories for All Tags
+# Detection Histories for All Tags in the Full Data Set (Unfiltered)
 
 ## Live Fish
 
@@ -137,9 +137,10 @@ knitr::kable(tag_DH_ls$'raw_RI_summ' |> filter(spp=='STH' & status!='Alive'))
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'raw_PR_summ' |> filter(spp=='STH' & status!='Alive'))
 ```
+
 {{< pagebreak >}}
 
-# Detection Histories for `tags_SURVUSE_OR_EUTH_&_ACTIVE`
+# Detection Histories for `tags_SURVUSE_OR_EUTH_&_ACTIVE` Subset
 
 ## Live Fish
 
@@ -192,4 +193,61 @@ knitr::kable(tag_DH_ls$'SU_E_ACT_RI_summ' |> filter(spp=='STH' & status!='Alive'
 #### Priest Rapids Release
 ```{r,echo=F,eval=T}
 knitr::kable(tag_DH_ls$'SU_E_ACT_PR_summ' |> filter(spp=='STH' & status!='Alive'))
+```
+
+{{< pagebreak >}}
+
+# Detection Histories for `tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER` Subset
+
+## Live Fish
+
+
+### Chinook
+
+#### Rock Island Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='CHN' & status=='Alive'))
+```
+#### Priest Rapids Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='CHN' & status=='Alive'))
+```
+{{< pagebreak >}}
+
+### Steelhead
+
+#### Rock Island Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='STH' & status=='Alive'))
+```
+#### Priest Rapids Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='STH' & status=='Alive'))
+```
+{{< pagebreak >}}
+
+## Dead Fish
+
+
+### Chinook
+
+#### Rock Island Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='CHN' & status!='Alive'))
+```
+#### Priest Rapids Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='CHN' & status!='Alive'))
+```
+{{< pagebreak >}}
+
+### Steelhead
+
+#### Rock Island Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_RI_summ' |> filter(spp=='STH' & status!='Alive'))
+```
+#### Priest Rapids Release
+```{r,echo=F,eval=T}
+knitr::kable(tag_DH_ls$'AE_PR_summ' |> filter(spp=='STH' & status!='Alive'))
 ```

@@ -11,8 +11,8 @@ get_DH_tag_code_summ <- function (node_dat_in,events_dat_in,tags_dat_wrepID_in){
   loc_tab_nodups <- node_dat_in[!duplicated(node_dat_in$location),] |> select(river_kilometer,location) |> arrange(-river_kilometer)
   events_dat_wnodes$location <- factor(events_dat_wnodes$location,levels=loc_tab_nodups$location)
   
-  events_dat_wnodes |> pivot_wider(values_from=hits,names_from=location)
-  events_dat_wnodes |> select(tag_code,first_computed_datetime,location) |> pivot_wider(values_from=first_computed_datetime,names_from=location)
+  events_dat_wnodes |> tidyr::pivot_wider(values_from=hits,names_from=location)
+  events_dat_wnodes |> select(tag_code,first_computed_datetime,location) |> tidyr::pivot_wider(values_from=first_computed_datetime,names_from=location)
   events_dat_wnodes2 <- events_dat_wnodes |> select(tag_code,first_computed_datetime,last_computed_datetime,location) |> group_by(tag_code,location) |> 
     summarize(first_dt=min(first_computed_datetime),
               last_dt=max(last_computed_datetime))
@@ -22,7 +22,7 @@ get_DH_tag_code_summ <- function (node_dat_in,events_dat_in,tags_dat_wrepID_in){
   
   
   events_dat_wnodes3 <- events_dat_wnodes2a |>
-    pivot_wider(values_from=first_dt,names_from=location)
+    tidyr::pivot_wider(values_from=first_dt,names_from=location)
   
   DH_tag_code_raw <- data.frame(events_dat_wnodes3[,1],!is.na(events_dat_wnodes3[,-c(1)]))
   

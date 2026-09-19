@@ -33,7 +33,7 @@ build_tag_subsets <- function(tags_dat_raw_wrepID, filter_strs) {
   )
 }
 
-csv_fl_ls <- readRDS("../data/clean/csv_fl_ls.rds")
+csv_fl_ls <- readRDS("/data/clean/csv_fl_ls.rds")
 tags_dat_raw <- csv_fl_ls$GPUD2026_tags_17Aug2026
 
 # additional fields
@@ -87,7 +87,8 @@ tag_subsets_ls <- list(
   # RAB2
   "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER"=tags_dat_raw_wrepID |> filter( 
                                 (fish_status %in% c("Alive") & tag_status=="Active" & release_type=="Other") | 
-                                  (fish_status %in% c("Euthanized") & tag_status=="Active" & release_type=="Other"))
+                                  (fish_status %in% c("Euthanized") & tag_status=="Active" & release_type=="Other")),
+  "tags_SURVUSE"=tags_dat_raw_wrepID |> filter( survival_use)
                               )
 sapply(tag_subsets_ls,nrow)
 nrow(tag_subsets_ls[["tags_SURVUSE_AND_ALIVE_or_EUTH"]])

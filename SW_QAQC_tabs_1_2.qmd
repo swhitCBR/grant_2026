@@ -1,0 +1,105 @@
+
+{{< pagebreak >}}
+
+# Summaries for all tags in the full data set (unfiltered)
+Includes "Tarmac" and "Mortality" groups (i.e., fish dropped on the ground and that died during handing, respectively)
+
+## Contingency Tables
+
+### Live/Dead Status vs. Survival_use
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'usable_CT_tab'))
+```
+### Live/Dead Status vs. Tagger
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'fish_status_tagger_CT_tab'))
+```
+### Release location vs. tagger
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'RL_tagger_CT_tab'))
+```
+### Release Location vs. Release Type
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'RL_helicopter_CT_tab'))
+```
+### Tag lot vs. Tagger
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_tagger_CT_tab'))
+```
+### Tag lot vs. Release location
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_RL_CT_tab'))
+```
+
+#### Rock Island
+
+##### CHN
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_tagger_RL_CT_tab_ls',ele_nm_in = 'CHN.Rock Island Tailrace'))
+```
+##### STH
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_tagger_RL_CT_tab_ls',ele_nm_in = 'STH.Rock Island Tailrace'))
+```
+
+#### Priest Rapids
+
+##### CHN
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_tagger_RL_CT_tab_ls',ele_nm_in = 'CHN.Priest Rapids Tailrace'))
+```
+##### STH
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'lot_tagger_RL_CT_tab_ls',ele_nm_in = 'STH.Priest Rapids Tailrace'))
+```
+### Replicate vs. Tagger
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'repID_tagger_CT_tab'))
+```
+### Replicate vs. Release location
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'repID_RL_CT_tab'))
+```
+## Fish released by location, status, and tagger
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'tags_dat_raw_tagger_summ'))
+```
+
+### Chinook
+
+#### Live fish
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'tags_dat_raw_tagger_relID_summ_ls',ele_nm_in = 'CHN_live'))
+```
+#### Dead fish
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'tags_dat_raw_tagger_relID_summ_ls',ele_nm_in = 'CHN_dead'))
+```
+
+### Steelhead
+
+#### Live fish
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'tags_dat_raw_tagger_relID_summ_ls',ele_nm_in = 'STH_live'))
+```
+#### Dead fish
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'tags_dat_raw_tagger_relID_summ_ls',ele_nm_in = 'STH_dead'))
+```
+
+{{< pagebreak >}}
+
+
+## Fish Released by Location, Replicate, and Status
+
+
+Rock Island and Priest Rapids are abbreviated and the "_d" refers to release of "Euthanized" fish
+
+#### CHN
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'rel_loc_by_repID_tabs',ele_nm_in = 'CHN'))
+```
+#### STH
+```{r,echo=F,eval=T}
+knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']],tb_nm_in = 'rel_loc_by_repID_tabs',ele_nm_in = 'STH'))
+```

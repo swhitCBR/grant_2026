@@ -1,0 +1,168 @@
+---
+title: "Round 3: Tagger Effects - CJS Survival Estimates with Capture History (Chinook Only)"
+author: "GPUD 2026"
+date: today
+format:
+  docx:
+    reference-doc: ../templates/ref_doc_w.docx
+    page-orientation: landscape
+execute:
+  echo: false
+---
+
+## Overview
+
+This report presents CJS (Cormack-Jolly-Seber) survival estimates comparing three taggers (A, B, C) across release locations and reaches. The report includes capture history summary tables showing the distribution of fish by detection pattern. Analysis includes Chinook salmon only. Steelhead analyses are not included in this round due to insufficient data.
+
+## Survival Estimates
+
+### Rock Island Tailrace (_R_1) - Chinook
+
+|Reach|Tagger A: Estimate|Tagger A: SE|Tagger B: Estimate|Tagger B: SE|Tagger C: Estimate|Tagger C: SE|P-value (F-test)|
+|---|---|---|---|---|---|---|---|
+|Release to CB|0.9848|0.0067|0.9881|0.0059|0.991|0.0052|0.764|
+|CB to Sunland|0.9815|0.0075|0.9819|0.0073|0.9939|0.0043|0.355|
+|Sunland to Wanapum|0.9342|0.0139|0.9446|0.0127|0.9361|0.0136|0.842|
+|Wanapum to Mattawa|0.906|0.0169|0.899|0.0172|0.9013|0.0171|0.206|
+|Mattawa to Priest Rapids|0.9777|0.009|0.9714|0.0101|0.9491|0.0133|0.161|
+|Priest Rapids to Lower Ringold|0.9163|0.0171|0.9101|0.0175|0.9004|0.0185|0.947|
+
+### Priest Rapids Tailrace (_R_2) - Chinook
+
+|Reach|Tagger A: Estimate|Tagger A: SE|Tagger B: Estimate|Tagger B: SE|Tagger C: Estimate|Tagger C: SE|P-value (F-test)|
+|---|---|---|---|---|---|---|---|
+|Release to Lower Ringold|0.9025|0.0178|0.8527|0.0207|0.84|0.0221|0.0723|
+
+## Capture History Summary
+
+Capture history patterns show the sequence of detections for each fish at acoustic receiver arrays. A value of "1" indicates the fish was detected at that site, while "0" indicates no detection. These patterns are used in the CJS model to estimate survival probabilities.
+
+### Rock Island Tailrace (RI) - Capture History Summary
+
+#### Tagger POOLED
+
+|Capture Pattern|Count|
+|---|---|
+|1 1 1 1 1 1 1:|683|
+|0 1 1 1 1 1 1:|1|
+|1 1 1 1 0 0 1:|1|
+|1 1 1 1 1 1 0:|5|
+|1 1 1 1 1 0 0:|69|
+|1 1 1 2 0 0 0:|1|
+|1 1 1 1 0 0 0:|26|
+|1 1 0 1 0 0 0:|1|
+|1 1 2 0 0 0 0:|1|
+|1 1 1 0 0 0 0:|86|
+|1 1 0 0 0 0 0:|58|
+|1 0 0 0 0 0 0:|13|
+|0 0 0 0 0 0 0:|8|
+
+_Total: 953 fish with 13 unique capture patterns_
+
+#### Tagger TAGGER A
+
+|Capture Pattern|Count|
+|---|---|
+|1 1 1 1 1 1 1:|240|
+|1 1 1 1 1 1 0:|1|
+|1 1 1 1 1 0 0:|22|
+|1 1 1 2 0 0 0:|1|
+|1 1 1 1 0 0 0:|6|
+|1 1 1 0 0 0 0:|28|
+|1 1 0 0 0 0 0:|21|
+|1 0 0 0 0 0 0:|6|
+|0 0 0 0 0 0 0:|4|
+
+_Total: 329 fish with 9 unique capture patterns_
+
+#### Tagger TAGGER B
+
+|Capture Pattern|Count|
+|---|---|
+|1 1 1 1 1 1 1:|211|
+|1 1 1 1 0 0 1:|1|
+|1 1 1 1 1 1 0:|2|
+|1 1 1 1 1 0 0:|21|
+|1 1 1 1 0 0 0:|7|
+|1 1 1 0 0 0 0:|28|
+|1 1 0 0 0 0 0:|16|
+|1 0 0 0 0 0 0:|5|
+|0 0 0 0 0 0 0:|2|
+
+_Total: 293 fish with 9 unique capture patterns_
+
+#### Tagger TAGGER C
+
+|Capture Pattern|Count|
+|---|---|
+|1 1 1 1 1 1 1:|232|
+|0 1 1 1 1 1 1:|1|
+|1 1 1 1 1 1 0:|2|
+|1 1 1 1 1 0 0:|26|
+|1 1 1 1 0 0 0:|13|
+|1 1 0 1 0 0 0:|1|
+|1 1 2 0 0 0 0:|1|
+|1 1 1 0 0 0 0:|30|
+|1 1 0 0 0 0 0:|21|
+|1 0 0 0 0 0 0:|2|
+|0 0 0 0 0 0 0:|2|
+
+_Total: 331 fish with 11 unique capture patterns_
+
+### Priest Rapids Tailrace (PR) - Capture History Summary
+
+#### Tagger POOLED
+
+|Capture Pattern|Count|
+|---|---|
+|1 1:|716|
+|0 1:|0|
+|2 0:|0|
+|1 0:|14|
+|0 0:|114|
+
+_Total: 844 fish with 5 unique capture patterns_
+
+#### Tagger TAGGER A
+
+|Capture Pattern|Count|
+|---|---|
+|1 1:|247|
+|0 1:|0|
+|2 0:|0|
+|1 0:|3|
+|0 0:|27|
+
+_Total: 277 fish with 5 unique capture patterns_
+
+#### Tagger TAGGER B
+
+|Capture Pattern|Count|
+|---|---|
+|1 1:|255|
+|0 1:|0|
+|2 0:|0|
+|1 0:|4|
+|0 0:|33|
+
+_Total: 292 fish with 5 unique capture patterns_
+
+#### Tagger TAGGER C
+
+|Capture Pattern|Count|
+|---|---|
+|1 1:|250|
+|0 1:|0|
+|2 0:|0|
+|1 0:|7|
+|0 0:|18|
+
+_Total: 275 fish with 5 unique capture patterns_
+
+## Notes
+
+- **Species**: Chinook (CHN)
+- **Statistical Test**: F-test for homogeneity of tagger effects
+- **Confidence Level**: Standard errors provided for each estimate
+- **Significant Results**: P-values < 0.05 indicate significant tagger effects
+- **Capture History Interpretation**: Detection patterns are used by CJS models to estimate survival. Higher numbers of 1s indicate more detections (likely higher survival through those reaches).
