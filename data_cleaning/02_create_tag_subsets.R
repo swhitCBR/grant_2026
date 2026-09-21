@@ -19,11 +19,11 @@ library(tidyr)
 if(getwd() != "c:/repos/grant_2026"){
   setwd("c:/repos/grant_2026")}
 
-source("QAQC/R/get_rel_loc_by_repID_tabs.R")
-source("QAQC/R/build_tag_subsets.R")
-source("QAQC/R/get_conting_tabs.R")
-source("QAQC/R/append_to_qmd_etc.R")
-source("QAQC/R/get_tagger_rel_loc_status_tb_ls.R")
+source("R/get_rel_loc_by_repID_tabs.R")
+source("R/build_tag_subsets.R")
+source("R/get_conting_tabs.R")
+source("R/append_to_qmd_etc.R")
+source("R/get_tagger_rel_loc_status_tb_ls.R")
 
 
 build_tag_subsets <- function(tags_dat_raw_wrepID, filter_strs) {
@@ -33,7 +33,7 @@ build_tag_subsets <- function(tags_dat_raw_wrepID, filter_strs) {
   )
 }
 
-csv_fl_ls <- readRDS("/data/clean/csv_fl_ls.rds")
+csv_fl_ls <- readRDS("data/clean/csv_fl_ls.rds")
 tags_dat_raw <- csv_fl_ls$GPUD2026_tags_17Aug2026
 
 # additional fields
@@ -88,7 +88,7 @@ tag_subsets_ls <- list(
   "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER"=tags_dat_raw_wrepID |> filter( 
                                 (fish_status %in% c("Alive") & tag_status=="Active" & release_type=="Other") | 
                                   (fish_status %in% c("Euthanized") & tag_status=="Active" & release_type=="Other")),
-  "tags_SURVUSE"=tags_dat_raw_wrepID |> filter( survival_use)
+  "tags_SURVUSE_no_EUTH"=tags_dat_raw_wrepID |> filter( survival_use & fish_status != c("Euthanized") )
                               )
 sapply(tag_subsets_ls,nrow)
 nrow(tag_subsets_ls[["tags_SURVUSE_AND_ALIVE_or_EUTH"]])

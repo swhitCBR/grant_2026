@@ -35,9 +35,11 @@ cat(paste(" -", names(tag_subsets_ls), collapse = "/n"), "/n/n")
 
 # DEFAULT: Process this subset
 # subset_name <- "tags_SURVUSE_OR_ALIVE_or_EUTH" #BAD OLD
-subset_name <- "tags_SURVUSE_OR_EUTH_&_ACTIVE"
-# subset_name <- "tags_SURVUSE"
+# subset_name <- "tags_SURVUSE_OR_EUTH_&_ACTIVE" # BAD b/c inclusive of Euthanized
 
+# no euthanized fish
+subset_name <- "tags_SURVUSE_no_EUTH"
+sapply(tag_subsets_ls,nrow)
 
 cat("Processing tag subset:", subset_name, "/n")
 cat("Number of tags:", nrow(tag_subsets_ls[[subset_name]]), "/n")

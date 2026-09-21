@@ -138,27 +138,51 @@ plot_DH_by_repID <- function(summary_results_ls, node_dat_in = NULL) {
       # Sort by repID
       plot_data <- plot_data |> arrange(repID)
       
-      # Create the tile plot
-      p <- ggplot(plot_data, aes(x = node, y = factor(repID), fill = count)) +
-        geom_tile(colour = "white", size = 0.5) +
-        scale_fill_viridis_c(option = "plasma", name = "Tag Count") +
-        facet_wrap(~fish_status, scales = "free_y") +
-        labs(
-          title = paste0(spp, " - ", rel_loc),
-          x = "Detection Node",
-          y = "Replicate ID"
-        ) +
-        theme_minimal() +
-        theme(
-          axis.text.x = element_text(angle = 45, hjust = 1),
-          plot.title = element_text(face = "bold", size = 12),
-          legend.position = "right"
-        )
+      # Separate plots for Alive and Euthanized fish
+      status_values <- unique(plot_data$fish_status)
       
-      # Store plot and create name
-      plot_name <- paste0(spp, "_", gsub(" ", "_", rel_loc))
-      plot_list[[plot_name]] <- p
-      plot_names <- c(plot_names, plot_name)
+      for (status in status_values) {
+        
+        # Filter data for this status
+        status_data <- plot_data |>
+          filter(fish_status == status)
+        
+        # Skip if no data for this status
+        if (nrow(status_data) == 0) {
+          next
+        }
+        
+        # Choose color scale based on status
+        if (status == "Alive") {
+          color_option <- "plasma"  # Bright colors for alive fish
+          color_label <- "Alive Fish - Tag Count"
+        } else {
+          color_option <- "cividis"  # Different scale for euthanized
+          color_label <- "Euthanized Fish - Tag Count"
+        }
+        
+        # Create the tile plot for this status
+        p <- ggplot(status_data, aes(x = node, y = factor(repID), fill = count)) +
+          geom_tile(colour = "white", linewidth = 0.5) +
+          geom_text(aes(label = count), color = "white", size = 2.5, fontface = "bold") +
+          scale_fill_viridis_c(option = color_option, name = color_label) +
+          labs(
+            title = paste0(spp, " - ", rel_loc, " (", status, ")"),
+            x = "Detection Node",
+            y = "Replicate ID"
+          ) +
+          theme_minimal() +
+          theme(
+            axis.text.x = element_text(angle = 45, hjust = 1),
+            plot.title = element_text(face = "bold", size = 12),
+            legend.position = "right"
+          )
+        
+        # Store plot and create name
+        plot_name <- paste0(spp, "_", gsub(" ", "_", rel_loc), "_", status)
+        plot_list[[plot_name]] <- p
+        plot_names <- c(plot_names, plot_name)
+      }
     }
   }
   
