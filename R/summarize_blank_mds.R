@@ -1,28 +1,30 @@
-# Function to summarize blank markdown files by group
+#' Summarize blank markdown files by group
+#'
+#' Recursively scans a folder for .md files and creates a summary table
+#' showing which groups (directories) have blank files and how many.
+#'
+#' @param folder_path Character string specifying the path to the folder to scan.
+#'        Can be absolute or relative to the working directory.
+#' @param recursive Logical. If TRUE (default), searches all subdirectories.
+#'        If FALSE, only searches the top level.
+#' @param all Logical. If FALSE (default), shows only rows where non_blanks
+#'        equals totals (all files are blank). If TRUE, shows the full table.
+#'
+#' @return A data frame with columns:
+#'   - level1: the first-level directory name (e.g., "POOLED", "TAGGER A")
+#'   - level2: the second-level directory name (e.g., "PR_CHN", "RI_STH")
+#'   - blanks: count of blank .md files
+#'   - non_blanks: count of non-blank .md files
+#'   - total: total number of .md files in that group
+#'
+#' @keywords assumption_check
+#' @export
+#' @examples
+#' \dontrun{
+#'   summarize_blank_mds("assumption_checking/round_3/tagger_effects")
+#' }
+
 summarize_blank_mds <- function(folder_path, recursive = TRUE, all = FALSE) {
-  #' Summarize blank markdown files by group
-  #'
-  #' Recursively scans a folder for .md files and creates a summary table
-  #' showing which groups (directories) have blank files and how many.
-  #'
-  #' @param folder_path Character string specifying the path to the folder to scan.
-  #'        Can be absolute or relative to the working directory.
-  #' @param recursive Logical. If TRUE (default), searches all subdirectories.
-  #'        If FALSE, only searches the top level.
-  #' @param all Logical. If FALSE (default), shows only rows where non_blanks
-  #'        equals totals (all files are blank). If TRUE, shows the full table.
-  #'
-  #' @return A data frame with columns:
-  #'   - level1: the first-level directory name (e.g., "POOLED", "TAGGER A")
-  #'   - level2: the second-level directory name (e.g., "PR_CHN", "RI_STH")
-  #'   - blanks: count of blank .md files
-  #'   - non_blanks: count of non-blank .md files
-  #'   - total: total number of .md files in that group
-  #'
-  #' @examples
-  #' \dontrun{
-  #'   summarize_blank_mds("assumption_checking/round_3/tagger_effects")
-  #' }
 
   if (!dir.exists(folder_path)) {
     stop(sprintf("Folder does not exist: %s", folder_path))

@@ -95,22 +95,22 @@ result <- preprocess_for_tagpro(
 # Extract results and make available in environment
 # ################################################## #
 
-tags_tagpro <- result$tags_tagpro
-nodes_tagpro <- result$nodes_tagpro
-events_tagpro <- result$events_tagpro
-tags_required_cols <- result$tags_required_cols
-nodes_required_cols <- result$nodes_required_cols
-events_required_cols <- result$events_required_cols
+# tags_tagpro <- result$tags_tagpro
+# nodes_tagpro <- result$nodes_tagpro
+# events_tagpro <- result$events_tagpro
+# tags_required_cols <- result$tags_required_cols
+# nodes_required_cols <- result$nodes_required_cols
+# events_required_cols <- result$events_required_cols
 
-head(tags_tagpro)
+# head(tags_tagpro)
 
-table(tags_tagpro$tagger,tags_tagpro$fish_status)
-table(tags_tagpro$tagger[tags_tagpro$species_code=="CHN"],tags_tagpro$release_location[tags_tagpro$species_code=="CHN"])
-table(tags_tagpro$tagger[tags_tagpro$species_code=="STH"],tags_tagpro$release_location[tags_tagpro$species_code=="STH"])
+# table(tags_tagpro$tagger,tags_tagpro$fish_status)
+# table(tags_tagpro$tagger[tags_tagpro$species_code=="CHN"],tags_tagpro$release_location[tags_tagpro$species_code=="CHN"])
+# table(tags_tagpro$tagger[tags_tagpro$species_code=="STH"],tags_tagpro$release_location[tags_tagpro$species_code=="STH"])
 
 
-tags_tagpro |> group_by(species_code,tagger,fish_status,release_location) |> summarize(n=length(unique(tag_code))) |> filter(fish_status=="Euthanized")
-tags_tagpro |> group_by(species_code,tagger,fish_status,release_location) |>
-  summarize(n=length(unique(tag_code))) |> filter(fish_status!="Euthanized") |> 
-  tidyr::pivot_wider(names_from=release_location,values_from=n)# |> split(species_code)
+# tags_tagpro |> group_by(species_code,tagger,fish_status,release_location) |> summarize(n=length(unique(tag_code))) |> filter(fish_status=="Euthanized")
+# tags_tagpro |> group_by(species_code,tagger,fish_status,release_location) |>
+#   summarize(n=length(unique(tag_code))) |> filter(fish_status!="Euthanized") |> 
+#   tidyr::pivot_wider(names_from=release_location,values_from=n)# |> split(species_code)
 

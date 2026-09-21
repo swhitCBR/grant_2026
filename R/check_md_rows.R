@@ -1,31 +1,33 @@
-# Function to check for markdown files that only have titles
+#' Check for markdown files with only titles
+#'
+#' Recursively scans a folder for .md files and identifies which ones contain
+#' only markdown headings (titles) with no actual content. Returns a summary
+#' of the directory structure and highlights files with only titles.
+#'
+#' @param folder_path Character string specifying the path to the folder to scan.
+#'        Can be absolute or relative to the working directory.
+#' @param recursive Logical. If TRUE (default), searches all subdirectories.
+#'        If FALSE, only searches the top level.
+#'
+#' @return A list with two elements:
+#'   - directory_tree: Character vector showing the nested folder structure
+#'   - files_summary: Data frame with columns:
+#'       * relative_path: path relative to the start folder
+#'       * file: filename
+#'       * total_lines: total number of lines
+#'       * non_empty_rows: count of non-empty lines
+#'       * has_headings: logical, does file contain markdown headings
+#'       * has_content: logical, does file have non-heading content
+#'       * only_titles: logical, TRUE if file only has headings and no content
+#'
+#' @keywords assumption_check
+#' @export
+#' @examples
+#' \dontrun{
+#'   check_md_rows("assumption_checking/round_3/tagger_effects")
+#' }
+
 check_md_rows <- function(folder_path, recursive = TRUE) {
-  #' Check for markdown files with only titles
-  #'
-  #' Recursively scans a folder for .md files and identifies which ones contain
-  #' only markdown headings (titles) with no actual content. Returns a summary
-  #' of the directory structure and highlights files with only titles.
-  #'
-  #' @param folder_path Character string specifying the path to the folder to scan.
-  #'        Can be absolute or relative to the working directory.
-  #' @param recursive Logical. If TRUE (default), searches all subdirectories.
-  #'        If FALSE, only searches the top level.
-  #'
-  #' @return A list with two elements:
-  #'   - directory_tree: Character vector showing the nested folder structure
-  #'   - files_summary: Data frame with columns:
-  #'       * relative_path: path relative to the start folder
-  #'       * file: filename
-  #'       * total_lines: total number of lines
-  #'       * non_empty_rows: count of non-empty lines
-  #'       * has_headings: logical, does file contain markdown headings
-  #'       * has_content: logical, does file have non-heading content
-  #'       * only_titles: logical, TRUE if file only has headings and no content
-  #'
-  #' @examples
-  #' \dontrun{
-  #'   check_md_rows("assumption_checking/round_3/tagger_effects")
-  #' }
 
   if (!dir.exists(folder_path)) {
     stop(sprintf("Folder does not exist: %s", folder_path))

@@ -76,9 +76,11 @@
 #' @param base_dir Character string. Path to base directory containing tagger subdirectories
 #'   (e.g., "assumption_checking/BRZsel_run" or "assumption_checking/round_3/tagger_effects")
 #'
-#' @return List with three main components:
+#' @return List with main components:
 #'   - capture_history: Nested list by location_tagger, containing capture pattern counts
-#'   - cjs_survival: Data frame with survival estimates and standard errors by reach
+#'   - cjs_survival: Data frame with reach-specific survival estimates and standard errors
+#'   - cjs_survival_long: Long-format version of cjs_survival
+#'   - cumul_cjs_survival: Data frame with cumulative survival estimates and standard errors
 #'   - cjs_capture: Data frame with capture estimates and standard errors by detection site
 #'   - metadata: List with summary counts and processing information
 #'
@@ -104,6 +106,7 @@
 #' str(results)
 #' }
 #'
+#' @keywords assumption_check
 #' @export
 
 scrape_atlas_results <- function(base_dir) {
@@ -119,6 +122,7 @@ scrape_atlas_results <- function(base_dir) {
   capture_history <- list()
   cjs_survival_list <- list()
   cjs_capture_list <- list()
+  cumul_cjs_survival_list <- list()
   
   # Find all tagger directories
   tagger_dirs <- list.dirs(base_dir, recursive = FALSE, full.names = TRUE)
@@ -340,6 +344,79 @@ scrape_atlas_results <- function(base_dir) {
         })
       }
       
+      # ========================================================================
+      # CUMULATIVE SURVIVAL EXTRACTION
+      # ========================================================================
+      
+      cumul_file <- file.path(location_path, "Cumul_surv.md")
+      
+      if (file.exists(cumul_file)) {
+        tryCatch({
+          cumul_content <- readLines(cumul_file, warn = FALSE)
+          
+          # Find the Cumulative Survival Estimates section
+          cumul_section_start <- which(grepl("Cumulative Survival Estimates:", cumul_content))
+          config_section_start <- which(grepl("^Configuration:", cumul_content))
+          
+          if (length(cumul_section_start) > 0) {
+            # Search range is from cumul section to config section
+            search_end <- if (length(config_section_start) > 0) config_section_start[1] - 1 else length(cumul_content)
+            search_range <- cumul_section_start:search_end
+            
+            # Find header rows (those with pipes and text like "Estimate|s.e.")
+            header_rows <- which(grepl("Estimate.*s.e", cumul_content[search_range]))
+            
+            if (length(header_rows) > 0) {
+              # The header with "Estimate" and "s.e." tells us which row has the reach names
+              header_estimate_idx <- cumul_section_start + header_rows[1] - 1
+              reach_names_idx <- header_estimate_idx - 1  # Reach names are one line above
+              
+              # Extract reach names
+              reach_line <- cumul_content[reach_names_idx]
+              reach_parts <- strsplit(reach_line, "\\|")[[1]]
+              reach_parts <- trimws(reach_parts)
+              reach_parts <- reach_parts[reach_parts != ""]
+              
+              # Extract data row (one line after the header with "Estimate|s.e.")
+              data_idx <- header_estimate_idx + 1
+              if (data_idx <= length(cumul_content)) {
+                data_line <- cumul_content[data_idx]
+                data_parts <- strsplit(data_line, "\\|")[[1]]
+                data_parts <- trimws(data_parts[data_parts != ""])
+                
+                if (length(data_parts) >= 2) {
+                  # Remove label (first column)
+                  values <- suppressWarnings(as.numeric(data_parts[-1]))
+                  
+                  # Pair estimates with s.e.
+                  n_reaches <- length(reach_parts)
+                  cumul_df <- data.frame(
+                    tagger = tagger_name,
+                    location = location,
+                    location_code = location_code,
+                    species = species,
+                    stringsAsFactors = FALSE
+                  )
+                  
+                  # Add reach estimates (2 columns per reach: estimate, s.e.)
+                  for (i in 1:n_reaches) {
+                    col_idx <- (i - 1) * 2 + 1
+                    if (col_idx + 1 <= length(values)) {
+                      cumul_df[[paste0(reach_parts[i], "_est")]] <- values[col_idx]
+                      cumul_df[[paste0(reach_parts[i], "_se")]] <- values[col_idx + 1]
+                    }
+                  }
+                  
+                  cumul_cjs_survival_list[[key]] <- cumul_df
+                }
+              }
+            }
+          }
+        }, error = function(e) {
+          warning("Error processing ", cumul_file, ": ", e$message)
+        })
+      }
+      
       total_files_processed <- total_files_processed + 1
     }
   }
@@ -347,6 +424,7 @@ scrape_atlas_results <- function(base_dir) {
   # Combine CJS results into single data frames if available
   cjs_survival <- NULL
   cjs_capture <- NULL
+  cumul_cjs_survival <- NULL
   
   if (length(cjs_survival_list) > 0) {
     cjs_survival <- bind_rows(cjs_survival_list)
@@ -354,6 +432,10 @@ scrape_atlas_results <- function(base_dir) {
   
   if (length(cjs_capture_list) > 0) {
     cjs_capture <- bind_rows(cjs_capture_list)
+  }
+  
+  if (length(cumul_cjs_survival_list) > 0) {
+    cumul_cjs_survival <- bind_rows(cumul_cjs_survival_list)
   }
   
   # Convert CJS survival to long format
@@ -373,6 +455,7 @@ scrape_atlas_results <- function(base_dir) {
   cat(sprintf("Total capture history tables: %d\n", length(capture_history)))
   cat(sprintf("Total CJS survival records (wide): %d\n", nrow(cjs_survival) %||% 0))
   cat(sprintf("Total CJS survival records (long): %d\n", nrow(cjs_survival_long) %||% 0))
+  cat(sprintf("Total cumulative CJS survival records: %d\n", nrow(cumul_cjs_survival) %||% 0))
   cat(sprintf("Total CJS capture records: %d\n", nrow(cjs_capture) %||% 0))
   cat("════════════════════════════════════════════════════════════\n\n")
   
@@ -381,6 +464,7 @@ scrape_atlas_results <- function(base_dir) {
     capture_history = capture_history,
     cjs_survival = cjs_survival,
     cjs_survival_long = cjs_survival_long,
+    cumul_cjs_survival = cumul_cjs_survival,
     cjs_capture = cjs_capture,
     metadata = list(
       base_dir = base_dir,

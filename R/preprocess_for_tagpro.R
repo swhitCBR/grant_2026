@@ -31,6 +31,9 @@
 #' - nodes: node_code, deploy_date, location, river_km
 #' - events: node_code, tag_code, first_datetime, last_datetime
 #'
+#' @keywords assumption_check
+#' @export
+
 preprocess_for_tagpro <- function(
     raw_data_dir,
     output_dir,

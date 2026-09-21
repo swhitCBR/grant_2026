@@ -1,28 +1,30 @@
-# Function to check markdown files and report last modified dates
+#' Check markdown files and report last modified dates
+#'
+#' Recursively scans a folder for .md files and displays the directory tree
+#' diagram with blank file indicators, followed by a summary table showing
+#' file information including last modified date.
+#'
+#' @param folder_path Character string specifying the path to the folder to scan.
+#'        Can be absolute or relative to the working directory.
+#' @param recursive Logical. If TRUE (default), searches all subdirectories.
+#'        If FALSE, only searches the top level.
+#'
+#' @return A data frame with columns:
+#'   - file: filename
+#'   - relative_path: path relative to the start folder
+#'   - file_size: size in bytes
+#'   - is_blank: logical, TRUE if file is empty
+#'   - last_modified: POSIXct datetime of last modification
+#'   - modified_date_str: formatted date string (YYYY-MM-DD HH:MM:SS)
+#'
+#' @keywords assumption_check
+#' @export
+#' @examples
+#' \dontrun{
+#'   check_md_dates("assumption_checking/round_3/tagger_effects")
+#' }
+
 check_md_dates <- function(folder_path, recursive = TRUE) {
-  #' Check markdown files and report last modified dates
-  #'
-  #' Recursively scans a folder for .md files and displays the directory tree
-  #' diagram with blank file indicators, followed by a summary table showing
-  #' file information including last modified date.
-  #'
-  #' @param folder_path Character string specifying the path to the folder to scan.
-  #'        Can be absolute or relative to the working directory.
-  #' @param recursive Logical. If TRUE (default), searches all subdirectories.
-  #'        If FALSE, only searches the top level.
-  #'
-  #' @return A data frame with columns:
-  #'   - file: filename
-  #'   - relative_path: path relative to the start folder
-  #'   - file_size: size in bytes
-  #'   - is_blank: logical, TRUE if file is empty
-  #'   - last_modified: POSIXct datetime of last modification
-  #'   - modified_date_str: formatted date string (YYYY-MM-DD HH:MM:SS)
-  #'
-  #' @examples
-  #' \dontrun{
-  #'   check_md_dates("assumption_checking/round_3/tagger_effects")
-  #' }
 
   if (!dir.exists(folder_path)) {
     stop(sprintf("Folder does not exist: %s", folder_path))

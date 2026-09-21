@@ -6,6 +6,12 @@
 #'
 #' @param raw_data_dir Path to directory containing raw tags.csv, nodes.csv, events.csv
 #' @param output_dir Path to output directory for processed files and final report
+#' @param atlas_results List returned from `scrape_atlas_results()` containing CJS
+#'   survival and capture estimates. Used to populate tagger comparison tables.
+#' @param location Character string. Location to focus on ("RI" or "PR").
+#'   Default: "RI"
+#' @param species Character string. Species to analyze ("Chinook" or "Steelhead").
+#'   Default: "Chinook"
 #' @param fix_river_km_by_location Optional named vector mapping release_location
 #'   to fixed release_river_km values. If NULL (default), uses release_river_km.csv
 #'   from output_dir.
@@ -36,6 +42,9 @@
 run_round_1_workflow <- function(
     raw_data_dir,
     output_dir,
+    atlas_results = NULL,
+    location = "RI",
+    species = "Chinook",
     fix_river_km_by_location = NULL,
     fix_bucket = NULL,
     reference_doc = "templates/ref_doc_w.docx",
@@ -91,11 +100,26 @@ run_round_1_workflow <- function(
   message("  ✓ Data structured for CJS modeling")
 
   # ---- Step 3: Create summary tables ----
-  message("Step 3: Generating summary tables with F-test results...")
+  message("Step 3: Generating summary tables with tagger comparisons...")
 
-  summary_table <- create_tagger_summary_table(survival_results)
-
-  message("  ✓ Summary tables created")
+  # If atlas_results provided, use it to create comparison tables
+  if (!is.null(atlas_results)) {
+    summary_table <- create_tagger_summary_table(
+      atlas_results = atlas_results,
+      location = location,
+      species = species,
+      include_pooled = TRUE
+    )
+    message(sprintf("  ✓ Summary table created for %s %s (%d reaches)",
+                    location, species, nrow(summary_table)))
+  } else {
+    # Fallback: create empty placeholder structure
+    message("  ⚠ No atlas_results provided; creating placeholder table")
+    summary_table <- data.frame(
+      reach = character(),
+      stringsAsFactors = FALSE
+    )
+  }
 
   # ---- Step 4: Render report (optional) ----
   report_path <- NULL
@@ -148,38 +172,46 @@ run_round_1_workflow <- function(
 }
 
 
-#' Create Tagger Summary Table with F-test Results
+#' Create Tagger Summary Table with Atlas Results
 #'
-#' Generates a summary table with survival estimates by tagger and reach,
-#' including standard errors and F-test p-values for tagger effect homogeneity.
+#' Generates a summary table with survival estimates by tagger and reach from
+#' scrape_atlas_results() output. Creates a wide-format table comparing taggers
+#' across all reaches for a specific location/species combination.
 #'
-#' @param survival_results List containing processed survival data and model outputs
+#' @param atlas_results List returned from `scrape_atlas_results()`.
+#'   Replaces the old survival_results parameter.
+#' @param location Character string. Location code ("RI" or "PR").
+#' @param species Character string. Species name ("Chinook" or "Steelhead").
+#' @param include_pooled Logical. If TRUE (default), includes POOLED tagger.
 #'
-#' @return Data frame with columns: reach, tagger_a_est, tagger_a_se, tagger_b_est,
-#'   tagger_b_se, tagger_c_est, tagger_c_se, p_value
+#' @return Data frame with reach as first column, then columns for each tagger's
+#'   estimate and standard error in the format: TAGGER_est, TAGGER_se
 #'
 #' @details
-#' This function creates a summary table suitable for markdown export. The F-test
-#' p-values indicate whether survival estimates differ significantly among taggers
-#' for each reach. Values < 0.05 suggest significant tagger effects.
+#' This function wraps `create_survival_comparison_table()` to create a wide-format
+#' table suitable for markdown export and visualization. One row per reach, columns
+#' for each tagger's survival estimate and standard error.
 #'
-#' @keywords internal
-create_tagger_summary_table <- function(survival_results) {
+#' @export
+create_tagger_summary_table <- function(
+    atlas_results,
+    location = "RI",
+    species = "Chinook",
+    include_pooled = TRUE) {
 
-  # Placeholder structure for summary table
-  # In actual workflow, this would be populated from fitted CJS models
+  # Source the new comparison table function if not already loaded
+  if (!exists("create_survival_comparison_table")) {
+    source("R/create_survival_comparison_table.R")
+  }
 
-  summary_df <- data.frame(
-    reach = character(),
-    tagger_a_est = numeric(),
-    tagger_a_se = numeric(),
-    tagger_b_est = numeric(),
-    tagger_b_se = numeric(),
-    tagger_c_est = numeric(),
-    tagger_c_se = numeric(),
-    p_value = numeric(),
-    stringsAsFactors = FALSE
+  # Use the new function to create the comparison table
+  summary_table <- create_survival_comparison_table(
+    atlas_results = atlas_results,
+    location = location,
+    species = species,
+    include_pooled = include_pooled,
+    include_se = TRUE
   )
 
-  return(summary_df)
+  return(summary_table)
 }

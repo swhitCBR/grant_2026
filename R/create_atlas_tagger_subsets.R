@@ -14,6 +14,9 @@
 #'   Defaults to "data/clean/pre_tagpro/nodes.csv".
 #'
 #' @return NULL (invisibly). Saves filtered ATLAS files to output_dir.
+#'
+#' @keywords assumption_check
+#' @export
 
 create_atlas_tagger_subsets <- function(atlas_file_path, 
                                         output_dir = "data/clean/post_tagpro",

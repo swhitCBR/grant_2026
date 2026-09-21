@@ -1,4 +1,57 @@
-# Function to create a general nested directory structure with markdown files
+#' Create nested directory structure with markdown files
+#'
+#' Creates a nested directory structure at multiple levels with specified
+#' markdown files in the innermost directories. Highly flexible for creating
+#' various nested structures.
+#'
+#' @param base_path Character string specifying where to create the structure.
+#'        Can be absolute or relative to the working directory.
+#'
+#' @param outer_folder Character string specifying the name of the outer folder.
+#'        Default: "tagger_effects". The structure will be created at
+#'        base_path/outer_folder.
+#'
+#' @param level1_dirs Character vector of level 1 directory names.
+#'        Default: c("POOLED", "TAGGER A", "TAGGER B", "TAGGER C")
+#'
+#' @param level2_dirs Character vector of level 2 directory names.
+#'        Default: c("PR_CHN", "PR_STH", "RI_CHN", "RI_STH")
+#'
+#' @param level3_dirs Character vector of level 3 directory names (if you want
+#'        an additional nesting level). Default: NULL (no third level).
+#'        If provided, md_files will be created in level 3 directories.
+#'
+#' @param md_files Character vector of markdown file names to create in each
+#'        leaf directory. Default: c("Capture History Report .md", "CJS_report.md")
+#'
+#' @param additional_mds Named list mapping level2 directory names to character
+#'        vectors of additional markdown files. For example:
+#'        list(RI_CHN = c("Cumul_surv.md"), RI_STH = c("Cumul_surv.md"))
+#'        Default adds Cumul_surv.md to RI_CHN and RI_STH directories.
+#'        Set to NULL or an empty list to disable this feature.
+#'
+#' @return A data frame with columns:
+#'   - path: path created or already existing
+#'   - type: "directory" or "file"
+#'   - action: what action was taken ("created", "already exists")
+#'
+#' @keywords assumption_check
+#' @export
+#' @examples
+#' \dontrun{
+#'   # Default: creates the standard tagger_effects structure
+#'   make_dirs_mds_for_pasting("./output")
+#'
+#'   # Custom directories and files
+#'   make_dirs_mds_for_pasting(
+#'     "./output",
+#'     level1_dirs = c("Site A", "Site B"),
+#'     level2_dirs = c("Spring", "Summer", "Fall"),
+#'     md_files = c("summary.md", "details.md"),
+#'     additional_mds = list(Spring = c("notes.md"), Summer = c("report.md"))
+#'   )
+#' }
+
 make_dirs_mds_for_pasting <- function(
     base_path,
     outer_folder = "tagger_effects",
@@ -7,57 +60,6 @@ make_dirs_mds_for_pasting <- function(
     level3_dirs = NULL,
     md_files = c("Capture History Report .md", "CJS_report.md"),
     additional_mds = list(RI_CHN = c("Cumul_surv.md"), RI_STH = c("Cumul_surv.md"))) {
-  #' Create nested directory structure with markdown files
-  #'
-  #' Creates a nested directory structure at multiple levels with specified
-  #' markdown files in the innermost directories. Highly flexible for creating
-  #' various nested structures.
-  #'
-  #' @param base_path Character string specifying where to create the structure.
-  #'        Can be absolute or relative to the working directory.
-  #'
-  #' @param outer_folder Character string specifying the name of the outer folder.
-  #'        Default: "tagger_effects". The structure will be created at
-  #'        base_path/outer_folder.
-  #'
-  #' @param level1_dirs Character vector of level 1 directory names.
-  #'        Default: c("POOLED", "TAGGER A", "TAGGER B", "TAGGER C")
-  #'
-  #' @param level2_dirs Character vector of level 2 directory names.
-  #'        Default: c("PR_CHN", "PR_STH", "RI_CHN", "RI_STH")
-  #'
-  #' @param level3_dirs Character vector of level 3 directory names (if you want
-  #'        an additional nesting level). Default: NULL (no third level).
-  #'        If provided, md_files will be created in level 3 directories.
-  #'
-  #' @param md_files Character vector of markdown file names to create in each
-  #'        leaf directory. Default: c("Capture History Report .md", "CJS_report.md")
-  #'
-  #' @param additional_mds Named list mapping level2 directory names to character
-  #'        vectors of additional markdown files. For example:
-  #'        list(RI_CHN = c("Cumul_surv.md"), RI_STH = c("Cumul_surv.md"))
-  #'        Default adds Cumul_surv.md to RI_CHN and RI_STH directories.
-  #'        Set to NULL or an empty list to disable this feature.
-  #'
-  #' @return A data frame with columns:
-  #'   - path: path created or already existing
-  #'   - type: "directory" or "file"
-  #'   - action: what action was taken ("created", "already exists")
-  #'
-  #' @examples
-  #' \dontrun{
-  #'   # Default: creates the standard tagger_effects structure
-  #'   make_dirs_mds_for_pasting("./output")
-  #'
-  #'   # Custom directories and files
-  #'   make_dirs_mds_for_pasting(
-  #'     "./output",
-  #'     level1_dirs = c("Site A", "Site B"),
-  #'     level2_dirs = c("Spring", "Summer", "Fall"),
-  #'     md_files = c("summary.md", "details.md"),
-  #'     additional_mds = list(Spring = c("notes.md"), Summer = c("report.md"))
-  #'   )
-  #' }
 
   if (!dir.exists(base_path)) {
     stop(sprintf("Base path does not exist: %s", base_path))

@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0fabd3a3528ac23d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data_cleaning/README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
             "id": "18ca38e0b5183cd6",
             "type": "leaf",
             "state": {
@@ -36,19 +22,35 @@
             }
           },
           {
+            "id": "0fabd3a3528ac23d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
             "id": "42357229ec7c4f18",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "media/png/Pasted image 20260920153612.png"
+                "file": "data_cleaning/README.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260920153612"
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -82,7 +84,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "click",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -110,7 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 259.5
+    "width": 398.5
   },
   "right": {
     "id": "f0f253f3ff9da9d5",
@@ -215,52 +217,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "bfcd686b69d86087",
+  "active": "0fabd3a3528ac23d",
   "lastOpenFiles": [
-    "media/png/Pasted image 20260920154825.png",
-    "assumption_checking/all_sites_run/TAGGER A/RI_CHN/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_STH/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_STH/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_STH/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_CHN/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_CHN/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER C/RI_CHN/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_STH/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_STH/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_STH/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_CHN/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_CHN/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER B/RI_CHN/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER A/RI_STH/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER A/RI_STH/CJS_report.md",
-    "assumption_checking/all_sites_run/TAGGER A/RI_STH/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER A/RI_CHN/Capture History Report .md",
-    "assumption_checking/all_sites_run/POOLED/RI_STH/Capture History Report .md",
-    "assumption_checking/all_sites_run/TAGGER A/RI_CHN/Cumul_surv.md",
-    "assumption_checking/all_sites_run/TAGGER A/PR_CHN/Capture History Report .md",
-    "assumption_checking/all_sites_run/POOLED/RI_CHN/Capture History Report .md",
-    "data/clean/post_tagpro/RI_BRZsel_ATLAS_tagger_C.csv",
-    "data/clean/post_tagpro/RI_BRZsel_ATLAS_tagger_B.csv",
-    "data/clean/post_tagpro/RI_BRZsel_ATLAS_tagger_A.csv",
-    "data/clean/post_tagpro/RI_all_sites_MOD_ATLAS_tagger_C.csv",
-    "data/clean/post_tagpro/RI_all_sites_MOD_ATLAS_tagger_B.csv",
-    "data/clean/post_tagpro/RI_all_sites_MOD_ATLAS_tagger_A.csv",
-    "data/clean/post_tagpro/RI_all_sites_ATLAS_tagger_C.csv",
-    "data/clean/post_tagpro/RI_all_sites_ATLAS_tagger_B.csv",
-    "data/clean/post_tagpro/RI_all_sites_ATLAS_tagger_A.csv",
-    "data/clean/post_tagpro/PR_BRZsel_ATLAS_tagger_C.csv",
-    "assumption_checking/all_sites_run/POOLED/RI_STH/CJS_report.md",
-    "assumption_checking/all_sites_run/POOLED/RI_STH/Cumul_surv.md",
-    "assumption_checking/all_sites_run/POOLED/RI_CHN/CJS_report.md",
-    "assumption_checking/all_sites_run/POOLED/RI_CHN/Cumul_surv.md",
-    "media/png/Pasted image 20260920154543.png",
+    "assumption_checking/TagPro settings (all_sites and BRZsel).md",
+    "data_cleaning/README.md",
+    "README.md",
     "media/png/Pasted image 20260920153612.png",
+    "R/create_dirs_mds_for_pasting.R",
+    "old/obsolete_funs/README.md",
+    "old/obsolete_funs/plot_DH_by_repID.R",
+    "old/obsolete_funs/get_tagger_comp_tables.R",
+    "old/obsolete_funs/get_DH_tag_code_summ.R",
+    "old/obsolete_funs/get_DH_tab_by_tagger_MOD.R",
+    "old/obsolete_funs/create_post_tagpro_subsets.R",
+    "old/obsolete_funs/create_dirs_mds_for_pasting.R",
+    "old/obsolete_funs/build_tag_subsets.R",
+    "old/obsolete_funs",
+    "assumption_checking/README.md",
+    "assumption_checking/03_compile_postATLAS_results_and_perform_F_tests_on tagger esitmates.R",
+    "assumption_checking/Test of Tagger Effects_exerpt.md",
+    "assumption_checking/round_3/Test of Tagger Effects_exerpt.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/Cumul_surv.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Cumul_surv.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/PR_CHN/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER C/PR_CHN/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/Cumul_surv.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/PR_CHN/CJS_report.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/PR_CHN/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Cumul_surv.md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Capture History Report .md",
+    "old/sequestered_assmuption_checking_code/round_3/tagger_effects/TAGGER B/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_cumul_survival_comparison.png",
+    "assumption_checking/tagger_survival_comparison.png",
+    "media/png/Pasted image 20260920154825.png",
+    "media/png/Pasted image 20260920154543.png",
     "media/DH_tiles_example.png",
     "media/png/screenshot of Rich data files from 2017 study.png",
     "media/png/TagLifeCurve.png",
     "media/png/TagLife vs Annual Timing Ringold.png",
-    "media/png/TagLife vs Annual Timing Hanford.png",
-    "media/png/historical timing at Rock Island.png",
-    "media/png/Downstream Mixing Ringold.png"
+    "media/png/TagLife vs Annual Timing Hanford.png"
   ]
 }
