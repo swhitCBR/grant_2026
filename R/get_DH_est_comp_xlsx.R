@@ -39,6 +39,20 @@ DH_comb_ls <- list(
   )
 
 
+# Create cumulative survival comparison tables
+CHN_R1_to_LowerRing <- create_cumul_survival_comparison_table(
+  atlas_results = BRZsel_atlas_results,
+  location = "RI",
+  species = "Chinook"
+)|> filter(reach=="Release to Lower Ringold")
+
+STH_R1_to_LowerRing <- create_cumul_survival_comparison_table(
+  atlas_results = BRZsel_atlas_results,
+  location = "RI",
+  species = "Steelhead"
+) |> filter(reach=="Release to Lower Ringold")
+
+
 # Export as Excel with separate sheets for CHN and STH
 library(openxlsx)
 # Create Excel workbook with two sheets
@@ -46,7 +60,8 @@ wb <- createWorkbook()
 addWorksheet(wb, "CHN_RI")
 writeData(wb, "CHN_RI", DH_comb_ls$CHN_RI,startRow=1,colNames = F)
 writeData(wb, "CHN_RI", comp_tabs$CHN$RI,startRow=nrow(DH_comb_ls$CHN_RI)+3)
-
+writeData(wb, "CHN_RI", CHN_R1_to_LowerRing,startRow=nrow(comp_tabs$CHN$RI) + nrow(DH_comb_ls$CHN_RI)+2+3)
++
 addWorksheet(wb, "CHN_PR")
 writeData(wb, "CHN_PR", DH_comb_ls$CHN_PR,startRow=1,colNames = F)
 writeData(wb, "CHN_PR", comp_tabs$CHN$PR,startRow=nrow(DH_comb_ls$CHN_PR)+3)
@@ -54,6 +69,8 @@ writeData(wb, "CHN_PR", comp_tabs$CHN$PR,startRow=nrow(DH_comb_ls$CHN_PR)+3)
 addWorksheet(wb, "STH_RI")
 writeData(wb, "STH_RI", DH_comb_ls$STH_RI,startRow=1,colNames = F)
 writeData(wb, "STH_RI", comp_tabs$STH$RI,startRow=nrow(DH_comb_ls$STH_RI)+3)
+writeData(wb, "STH_RI", STH_R1_to_LowerRing,startRow=nrow(comp_tabs$STH$RI) + nrow(DH_comb_ls$STH_RI)+2+3)
+
 
 addWorksheet(wb, "STH_PR")
 writeData(wb, "STH_PR", DH_comb_ls$STH_PR,startRow=1,colNames = F)

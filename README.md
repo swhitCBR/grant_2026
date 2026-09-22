@@ -2,7 +2,7 @@
 
 This repository contains the complete analysis pipeline for the 2026 Grant Survival Study, including data cleaning, quality assurance/quality control (QAQC), and assumption checking for CJS (Cormack-Jolly-Seber) survival analysis using ATLAS 
 
-## Analysis Pipeline Overview
+## Tasks Completed and in Progress
 
 The analysis follows a three-stage workflow:
 
@@ -106,34 +106,7 @@ Must complete Stage 1 and Stage 2 first. Also requires manual runs of TagPro and
 
 ---
 
-## Quick Start
-
-To run the complete analysis pipeline:
-
-```r
-# Stage 1: Data Cleaning (requires raw CSV files in data/Round 2/)
-source("data_cleaning/01_load_csvs.R")
-source("data_cleaning/02_create_tag_subsets.R")
-source("data_cleaning/03_create_DH_from_tag_subsets.R")
-
-# Stage 2: QAQC (uses outputs from Stage 1)
-source("QAQC/QAQC_tables.R")
-
-# Stage 3: Assumption Checking & Analysis
-#   Part A: Prepare for TagPro
-source("assumption_checking/01_tagpro_preprocessing.R")
-#   [Then manually run TagPro software]
-
-#   Part B: Create ATLAS subsets
-source("assumption_checking/02_post_tagpro_preATLAS_subsets.R")
-#   [Then manually run ATLAS software]
-
-#   Part C: Compile results and analyze
-source("assumption_checking/03_compile_postATLAS_results_and_perform_F_tests_on_tagger_estimates.R")
-```
-
----
-
+## 
 ## Directory Structure
 
 ```
@@ -170,55 +143,6 @@ grant_2026/
 │
 └── README.md              ← You are here
 ```
-
----
-
-## Key Concepts
-
-### Tag Subsets
-The analysis works with different subsets of fish tags based on criteria like:
-- Survival use status
-- Fish status (alive, euthanized)
-- Capture/detection activity
-
-### Tagger Groups
-Fish are tagged in three physically separate batches (Tagger A, B, C), plus a combined POOLED group. Analysis tests whether survival differs across tagger groups (a potential source of bias).
-
-### Release Locations
-Data covers two release locations:
-- **RI** (Rock Island Tailrace)
-- **PR** (Priest Rapids Tailrace)
-
-### Species
-- **CHN** (Chinook salmon)
-- **STH** (Steelhead)
-
-### River Reaches
-For Rock Island releases, survival is estimated across 7 reaches from release to Lower Ringold. Priest Rapids has a single reach (Release to Lower Ringold).
-
----
-
-## Software Requirements
-
-This analysis pipeline uses:
-
-- **R** (≥4.5.0) with packages:
-  - tidyverse (dplyr, tidyr, ggplot2)
-  - openxlsx (Excel export)
-  - knitr (markdown formatting)
-
-- **External Software** (required for Stage 3):
-  - **TagPro** — Processes raw telemetry into detection arrays for ATLAS
-  - **ATLAS** — Estimates CJS survival and capture probabilities
-
----
-
-## Contact & Questions
-
-For questions about this analysis pipeline, see the detailed README files in each stage directory:
-- Data cleaning questions → [`data_cleaning/README.md`](data_cleaning/README.md)
-- QAQC questions → [`QAQC/README.md`](QAQC/README.md)
-- Assumption checking & statistical questions → [`assumption_checking/README.md`](assumption_checking/README.md)
 
 ---
 

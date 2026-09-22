@@ -6,15 +6,14 @@ source("R/summarize_blank_mds.R")
 source("R/check_md_dates.R")
 
 
-# Run check_md_rows on round_3/tagger_effects folder
-check_md_rows("assumption_checking/all_sites_run")
-# Summarize blank files by group
-summarize_blank_mds("assumption_checking/all_sites_run")
-# Check markdown files with last modified dates
-check_md_dates("assumption_checking/all_sites_run")
-
-check_md_rows("assumption_checking/all_sites_run")
-check_md_rows("assumption_checking/BRZsel_run")
+# Run check_md_rows on ATLAS output directories
+# NOTE: These directories are created when you run ATLAS manually.
+# Only uncomment these lines after running ATLAS and populating the directories.
+# 
+# check_md_rows("assumption_checking/all_sites_run")
+# summarize_blank_mds("assumption_checking/all_sites_run")
+# check_md_dates("assumption_checking/all_sites_run")
+# check_md_rows("assumption_checking/BRZsel_run")
 
 
 # =========================================================================================
@@ -37,12 +36,8 @@ source("R/scrape_atlas_results.R")
 message("Scraping ATLAS results from assumption_checking/BRZsel_run...")
 # atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
 
-# head(atlas_results$cjs_survival)
-# atlas_results$cjs_survival_long |> filter(location=="RI")
-
-# 
-
 # Scrape ATLAS results (now includes cumul_cjs_survival from Cumul_surv.md files)
+# NOTE: Uncomment after running ATLAS and populating the assumption_checking/BRZsel_run directory
 BRZsel_atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
 comp_surv_est_tabs_wFtests <- get_tagger_comp_tables_MOD(
   atlas_results_in=BRZsel_atlas_results)
@@ -70,29 +65,34 @@ source("R/create_cumul_survival_comparison_table.R")
 create_survival_comparison_table(atlas_results =BRZsel_atlas_results,location = "RI",species = "Chinook" )
 
 # Create cumulative survival comparison tables
-create_cumul_survival_comparison_table(
+CHN_R1_to_LowerRing <- create_cumul_survival_comparison_table(
   atlas_results = BRZsel_atlas_results,
   location = "RI",
   species = "Chinook"
-)
+)|> filter(reach=="Release to Lower Ringold")
 
-create_cumul_survival_comparison_table(
+STH_R1_to_LowerRing <- create_cumul_survival_comparison_table(
   atlas_results = BRZsel_atlas_results,
   location = "RI",
   species = "Steelhead"
-)
+) |> filter(reach=="Release to Lower Ringold")
+
 
 # look up specific detection histories across taggers
 get_DH_tab_by_tagger(atlas_results_in=BRZsel_atlas_results,spp = "CHN",release = "RI")
 
+if(!dir.exists("media/xlsx/assumption_checking")){
+  dir.create("media/xlsx/assumption_checking",recursive = T)
+}
+
 
 get_DH_est_comp_xlsx(atlas_results_in=BRZsel_atlas_results,
-  out_xlsx="assumption_checking/BRZsel_atlas_results.xlsx")
+  out_xlsx="media/xlsx/assumption_checking/BRZsel_atlas_results.xlsx")
 
 
 all_sites_atlas_results <- scrape_atlas_results("assumption_checking/all_sites_run")
 get_DH_est_comp_xlsx(atlas_results_in=all_sites_atlas_results,
-  out_xlsx="assumption_checking/allsites_atlas_results.xlsx")
+  out_xlsx="media/xlsx/assumption_checking/allsites_atlas_results.xlsx")
 
 # Plot tagger survival estimates with confidence intervals
 source("R/get_tagger_surv_plot.R")
@@ -107,3 +107,4 @@ get_tagger_cumul_surv_plot(
   cumul_cjs_survival = BRZsel_atlas_results$cumul_cjs_survival,
   save_plot = TRUE
 )
+

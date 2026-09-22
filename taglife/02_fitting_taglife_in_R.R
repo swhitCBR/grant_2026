@@ -7,11 +7,102 @@ taglife_rawDF <- csv_fl_ls$GPUD2026_taglife_17Aug2026
 # Fit vitality.ku model for Lot 1
 lot1_data <- taglife_rawDF$days_difference[taglife_rawDF$lot == "Lot 1"]
 lot1_fit <- fc_fit(time = lot1_data, model = "vitality.ku", SEs = TRUE)
+plot(lot1_fit)
+summary(lot1_fit)
+
+
+# Fit 2-parameter Weibull model for Lot 1
+lot1_weibull_fit <- fc_fit(time = lot1_data, model = "weibull", SEs = TRUE)
+plot(lot1_weibull_fit)
+summary(lot1_weibull_fit)
+
+# Calculate mean failure time from Weibull parameters
+# Mean = scale * Gamma(1 + 1/shape)
+lot1_weibull_mft <- scale * gamma(1 + 1/shape)
+
+# Extract Weibull parameters (shape and scale)
+lot1_weibull_pars <- lot1_weibull_fit$par_tab
+cat("Lot 1 - Weibull Parameters:\n")
+cat("Shape (k):", round(lot1_weibull_pars[1, 1], 6), "\n")
+cat("Scale (λ):", round(lot1_weibull_pars[2, 1], 6), "\n\n")
+
+# Calculate mean failure time from Weibull parameters
+# Mean = scale * Gamma(1 + 1/shape)
+shape <- lot1_weibull_pars[1, 1]
+scale <- lot1_weibull_pars[2, 1]
+lot1_weibull_mft <- scale * gamma(1 + 1/shape)
+
+cat("Lot 1 - Weibull Mean Failure Time:", round(lot1_weibull_mft, 4), "days\n")
+cat("ATLAS reported mean:", 66.9825, "days\n")
+cat("Difference:", round(abs(lot1_weibull_mft - 66.9825), 4), "days\n\n")
+
+# Compare to vitality.ku mean (from parametric extrapolation)
+cat("COMPARISON:\n")
+cat("Weibull mean failure time:        ", round(lot1_weibull_mft, 4), "days\n")
+cat("Vitality.ku parametric mean:      ", round(mean_trap, 4), "days\n")
+cat("ATLAS reported value:             ", 66.9825, "days\n")
+
+lot1_fit$fit_vals$est
+lot1_fit$fit_vals$time
+lot1_data
+# 
+# lot1_fit <- fc_fit(time = lot1_data, model = "weibull", SEs = TRUE)
+# lot1_fit$KM_DF
+# mean(lot1_fit$fit_vals$time)
+
+
+lot3_data <- taglife_rawDF$days_difference[taglife_rawDF$lot == "Lot 3"]
+lot3_fit <- fc_fit(time = lot3_data, model = "vitality.ku", SEs = TRUE)
+plot(lot3_fit)
+summary(lot3_fit)
+# Extract lot1_fit parameter estimates (r, s, k, u order)
+lot3_pars <- setNames(lot3_fit$par_tab[, 1], c("r", "s", "k", "u"))
+# Calculate mean survival time using Lot 1 fitted parameters
+lot3_mst_result <- calc_mean_survival_time_ku(lot3_pars, time_max = 100)
+lot3_mst_result$mst
+# lot2_pars <- setNames(lot2_fit$par_tab[, 1], c("r", "s", "k", "u"))
+# lot2_mst_result <- calc_mean_survival_time_ku(lot2_pars, time_max = 100)
+# lot2_mean_survival_time <- lot2_mst_result$mst
+
+
+# time_v <- seq(0, 100, 0.1)
+# pred_v <- failCompare::fc_pred(mod_obj = lot1_fit, time = time_v)
+# mean(time_v * pred_v)
+
+# data.frame(time_v,pred_v)
+
+lot1_fit$par_tab
+lot1_fit$mod_objs[,1]
+
+
+# Load function for calculating mean survival time
+source("R/calc_mean_survival_time_ku.R")
+
+# Extract lot1_fit parameter estimates (r, s, k, u order)
+lot1_pars <- setNames(lot1_fit$par_tab[, 1], c("r", "s", "k", "u"))
+
+# Calculate mean survival time using Lot 1 fitted parameters
+lot1_mst_result <- calc_mean_survival_time_ku(lot1_pars, time_max = 100)
+lot1_mean_survival_time <- lot1_mst_result$mst
+
+mean(lot1_mean_survival_time)
+# hist(lot1_mst_result$time_seq)
+# hist(lot1_mst_result$survival_probs)
+# hist(lot1_mst_result$mst)
+
 
 # Fit vitality.ku model for Lot 2
 lot2_data <- taglife_rawDF$days_difference[taglife_rawDF$lot == "Lot 2"]
 lot2_fit <- fc_fit(time = lot2_data, model = "vitality.ku", SEs = TRUE)
 
+# Extract lot2_fit parameter estimates and calculate mean survival time
+lot2_pars <- setNames(lot2_fit$par_tab[, 1], c("r", "s", "k", "u"))
+lot2_mst_result <- calc_mean_survival_time_ku(lot2_pars, time_max = 100)
+lot2_mean_survival_time <- lot2_mst_result$mst
+
+cat("Lot 2 - Vitality.ku Parameter Estimates:\n")
+print(lot2_pars)
+cat("\nLot 2 - Mean Survival Time:", round(lot2_mean_survival_time, 4), "days\n")
 
 cens_v <- rep(1,length(lot2_data))
 cens_v <- c(rep(1,length(lot2_data)-1),0)
@@ -20,23 +111,6 @@ lot2_fit_RC1 <- fc_fit(time = sort(lot2_data), model = "vitality.ku", SEs = TRUE
 summary(lot2_fit)
 summary(lot2_fit_RC1)
 
-
-# lot2_fit_RC1 <- fc_fit(time = sort(lot2_data), model = "vitality.ku", SEs = TRUE)#,rc.value =70)#   sort(lot2_data)[length(lot2_data)-1])
-
-fc_test(times = lot2_fit_RC1,model = "vitality.ku",iters = 100000,plot=TRUE)
-
-# failCompare::fc_test(lot2_fit_RC1$times)
-# 
-# fc_test(lot2_fit_RC1)
-# lot2_fit$times$non_cen
-# lot2_fit_RC1$times$non_cen
-# lot2_fit_RC1 <- fc_fit(time = sort(lot2_data), model = "vitality.ku", SEs = TRUE,rc.value =70)#   sort(lot2_data)[length(lot2_data)-1])
-# lot2_fit$times$non_cen
-# lot2_fit_RC1$times$non_cen
-# tmp <- fc_fit(time = sort(lot2_data), model = "all", SEs = TRUE,rc.value =70)#   sort(lot2_data)[length(lot2_data)-1])
-# # summary(tmp)
-# tmp_r <- fc_rank(tmp)
-# plot(tmp_r)
 
 tmp1 <- fc_fit(time = sort(lot2_data), model = "all", SEs = TRUE)#,rc.value =sort(lot2_data)[length(lot2_data)])
 tmp2 <- fc_fit(time = sort(lot2_data), model = "all", SEs = TRUE,rc.value =sort(lot2_data)[length(lot2_data)])
@@ -65,6 +139,52 @@ trout_mods_R=fc_rank(trout_mods)
 # Fit vitality.ku model for Lot 3
 lot3_data <- taglife_rawDF$days_difference[taglife_rawDF$lot == "Lot 3"]
 lot3_fit <- fc_fit(time = lot3_data, model = "vitality.ku", SEs = TRUE)
+
+# Extract lot3_fit parameter estimates and calculate mean survival time
+lot3_pars <- setNames(lot3_fit$par_tab[, 1], c("r", "s", "k", "u"))
+
+# Method 1: Analytical integration
+lot3_mst_result <- calc_mean_survival_time_ku(lot3_pars, time_max = 100)
+lot3_mean_survival_time <- lot3_mst_result$mst
+
+# Method 2: Parametric extrapolation using fc_pred
+lot3_time_fine <- seq(0, 500, by = 0.1)
+lot3_pred_fine <- fc_pred(lot3_fit, lot3_time_fine)
+lot3_mean_trap <- sum(diff(lot3_time_fine) * (lot3_pred_fine[-1] + lot3_pred_fine[-length(lot3_pred_fine)]) / 2)
+
+cat("\n===========================================\n")
+cat("LOT 3 - VITALITY.KU MODEL COMPARISON\n")
+cat("===========================================\n\n")
+
+cat("Lot 3 - Vitality.ku Parameter Estimates:\n")
+print(lot3_pars)
+cat("\nMean Failure Time Estimates:\n")
+cat("  Analytical integration:          ", round(lot3_mean_survival_time, 4), "days\n")
+cat("  Parametric extrapolation (fc_pred):", round(lot3_mean_trap, 4), "days\n")
+cat("  ATLAS reported value:            ", 57.5574, "days\n\n")
+
+cat("Comparison:\n")
+cat("  Difference (analytical vs ATLAS):      ", round(abs(lot3_mean_survival_time - 57.5574), 4), "days\n")
+cat("  Difference (parametric vs ATLAS):      ", round(abs(lot3_mean_trap - 57.5574), 4), "days\n\n")
+
+# Fit 2-parameter Weibull model for Lot 3
+lot3_weibull_fit <- fc_fit(time = lot3_data, model = "weibull", SEs = TRUE)
+
+# Extract Weibull parameters (shape and scale)
+lot3_weibull_pars <- lot3_weibull_fit$par_tab
+cat("Lot 3 - Weibull Parameters:\n")
+cat("Shape (k):", round(lot3_weibull_pars[1, 1], 6), "\n")
+cat("Scale (λ):", round(lot3_weibull_pars[2, 1], 6), "\n\n")
+
+# Calculate mean failure time from Weibull parameters
+# Mean = scale * Gamma(1 + 1/shape)
+shape_lot3 <- lot3_weibull_pars[1, 1]
+scale_lot3 <- lot3_weibull_pars[2, 1]
+lot3_weibull_mft <- scale_lot3 * gamma(1 + 1/shape_lot3)
+
+cat("Lot 3 - Weibull Mean Failure Time:", round(lot3_weibull_mft, 4), "days\n")
+cat("ATLAS reported mean (Weibull):     ", 67.9043, "days\n")
+cat("Difference:                        ", round(abs(lot3_weibull_mft - 67.9043), 4), "days\n\n")
 
 # Fit vitality.ku model on pooled data (all lots combined)
 pooled_data <- taglife_rawDF$days_difference

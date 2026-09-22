@@ -154,7 +154,7 @@ get_tagger_cumul_surv_plot <- function(cumul_cjs_survival, save_plot = FALSE) {
   
   # Optionally save the plot
   if (save_plot) {
-    output_dir <- "assumption_checking"
+    output_dir <- "media/png/assumption_checking"
     if (!dir.exists(output_dir)) {
       dir.create(output_dir, recursive = TRUE)
     }
@@ -165,9 +165,9 @@ get_tagger_cumul_surv_plot <- function(cumul_cjs_survival, save_plot = FALSE) {
     cat("✓ Plot saved to:", png_path, "\n")
     
     # Save as PDF
-    pdf_path <- file.path(output_dir, "tagger_cumul_survival_comparison.pdf")
-    ggsave(pdf_path, plot, width = 12, height = 8)
-    cat("✓ Plot saved to:", pdf_path, "\n")
+    # pdf_path <- file.path(output_dir, "tagger_cumul_survival_comparison.pdf")
+    # ggsave(pdf_path, plot, width = 12, height = 8)
+    # cat("✓ Plot saved to:", pdf_path, "\n")
   }
   
   return(plot)
