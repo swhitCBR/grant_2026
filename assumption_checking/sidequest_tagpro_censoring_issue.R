@@ -9,30 +9,11 @@ tags <- read.csv(file.path(pre_tagpro_dir, "tags.csv"))
 events <- read.csv(file.path(pre_tagpro_dir, "events.csv"))
 nodes <- read.csv(file.path(pre_tagpro_dir, "nodes.csv"))
 
-# Display basic information
-cat("Tags loaded:\n")
-cat(sprintf("  Rows: %d, Columns: %d\n", nrow(tags), ncol(tags)))
-cat(sprintf("  Column names: %s\n", paste(names(tags), collapse = ", ")))
+# tagIDs with censoring 
+cens_tags <- c("G72B4A509","G72B4A509")
 
-cat("\nEvents loaded:\n")
-cat(sprintf("  Rows: %d, Columns: %d\n", nrow(events), ncol(events)))
-cat(sprintf("  Column names: %s\n", paste(names(events), collapse = ", ")))
+# G72790346
 
-cat("\nNodes loaded:\n")
-cat(sprintf("  Rows: %d, Columns: %d\n", nrow(nodes), ncol(nodes)))
-cat(sprintf("  Column names: %s\n", paste(names(nodes), collapse = ", ")))
-
-# Examine first few rows
-cat("\n=== First few rows of tags ===\n")
-head(tags)
-
-cat("\n=== First few rows of events ===\n")
-head(events)
-
-cat("\n=== First few rows of nodes ===\n")
-head(nodes)
-
-events[events$tag_code=="G72B4A509",]
 
 
 events |> filter(tag_code=="G72B4A509")

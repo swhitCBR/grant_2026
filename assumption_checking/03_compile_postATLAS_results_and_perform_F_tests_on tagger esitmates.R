@@ -29,8 +29,12 @@ summary_results_ls$tagger_summ
 # SCRAPE ATLAS RESULTS FROM BRZsel_run and all_sites run (MOD version omits extra sites)
 # =========================================================================================
 
-# Load scraping function
+# Load all required functions first
 source("R/scrape_atlas_results.R")
+source("R/create_survival_comparison_table.R")
+source("R/get_tagger_comp_tables_MOD.R")
+source("R/get_DH_tab_by_tagger.R")
+source("R/get_DH_est_comp_xlsx.R")
 
 # Execute scraping on BRZsel_run directory
 message("Scraping ATLAS results from assumption_checking/BRZsel_run...")
@@ -47,14 +51,6 @@ BRZsel_atlas_results$cjs_survival_long |> filter(location=="PR")
 BRZsel_atlas_results$cjs_survival_long |> filter(location=="PR")
 BRZsel_atlas_results$cjs_survival_long |> filter(location=="RI")
 BRZsel_atlas_results$cjs_survival_long |> filter(location=="RI")
-
-
-# Load scraping function
-source("R/create_survival_comparison_table.R")
-# source("R/get_tagger_comp_tables.R") #dumb and bad
-source("R/get_tagger_comp_tables_MOD.R")
-source("R/get_DH_tab_by_tagger.R")
-source("R/get_DH_est_comp_xlsx.R")
 
 get_tagger_comp_tables_MOD(atlas_results_in=BRZsel_atlas_results)
 
@@ -107,4 +103,42 @@ get_tagger_cumul_surv_plot(
   cumul_cjs_survival = BRZsel_atlas_results$cumul_cjs_survival,
   save_plot = TRUE
 )
+
+# =========================================================================================
+# PERFORM F-TESTS ON TAGGER EFFECTS BY REACH
+# =========================================================================================
+# Perform F-tests by reach (excludes POOLED tagger, tests homogeneity across taggers)
+f_test_results_by_reach <- compute_f_tests_by_reach( BRZsel_atlas_results$cjs_survival_long |> filter(location_code=="RI_CHN"),verbose=TRUE)
+
+f_test_results_by_reach_rnd4 <- compute_f_tests_by_reach( BRZsel_atlas_results$cjs_survival_long |> filter(location_code=="RI_CHN"),verbose=TRUE,est_digits=4)
+
+source("R/compute_f_tests_by_reach.R")
+f_test_results_by_reach
+f_test_results_by_reach_rnd4
+
+# comp_surv_est_tabs_wFtests$CHN
+
+
+
+
+cat("F-Test Results by Reach:\n")
+cat("Testing hypothesis: No significant difference in survival estimates across taggers\n\n")
+print(f_test_results_by_reach)
+cat("\n\n")
+cat("Interpretation:\n")
+cat("- F_statistic: test statistic for comparing tagger effects\n")
+cat("- p_value: probability of observing these differences by chance if null hypothesis is true\n")
+cat("- p < 0.05 suggests significant tagger effect at that reach\n")
+
+# Extract cumulative survival data for F-tests
+atlas_cumul_long <- BRZsel_atlas_results$cumul_cjs_survival
+
+# Perform F-tests on cumulative survival by reach
+f_test_results_cumul <- compute_f_tests_by_reach_cumul(atlas_cumul_long)
+
+cat("\n\n=========================================================================================\n")
+cat("F-TESTS FOR TAGGER EFFECTS - CUMULATIVE SURVIVAL\n")
+cat("=========================================================================================\n\n")
+
+print(f_test_results_cumul)
 

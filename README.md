@@ -15,7 +15,8 @@ Raw Data
     ↓
 [Stage 3] Assumption Checking & Statistical Analysis
     ↓
-Publication-Ready Results & Visualizations
+[Stage 4] Assumption Checking & Statistical Analysis
+    ↓
 ```
 
 ---
