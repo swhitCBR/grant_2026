@@ -4,13 +4,6 @@ library(failCompare)
 library(dplyr)
 library(ggplot2)
 
-# source("R/nll_lookup.R")
-# source("R/fc_lrt.R")
-# source("fc_lrt_table.R")
-# source("R/run_vitality_lrt_grid.R")
-
-# source("fc_nll.R")
-# source("patch_fc_fit.R")
 
 csv_fl_ls <- readRDS("data/clean/csv_fl_ls.rds")
 
