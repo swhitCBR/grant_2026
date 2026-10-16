@@ -48,9 +48,49 @@
               "icon": "lucide-file",
               "title": "README"
             }
+          },
+          {
+            "id": "abd4b7649bfc39dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Notes on condition factor differences.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Notes on condition factor differences"
+            }
+          },
+          {
+            "id": "7450641fc5021449",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "more research and condition factor.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "more research and condition factor"
+            }
+          },
+          {
+            "id": "1f7ec8c7cc260045",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "media/png/Pasted image 20261015085802.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20261015085802"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -108,12 +148,11 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 398.5
+    "width": 440.5
   },
   "right": {
     "id": "f0f253f3ff9da9d5",
@@ -218,11 +257,34 @@
       "bases:Create new base": false
     }
   },
-  "active": "0fabd3a3528ac23d",
+  "active": "bfcd686b69d86087",
   "lastOpenFiles": [
-    "R/compute_f_tests_by_reach.R",
-    "media/docx/~$PORT TEMPLATE Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids.docx",
-    "media/docx/QAQC word docs/~$_QAQC_tabs_1_2.docx",
+    "media/xlsx/4C2A6D00",
+    "taglife/tangential/vitality_mods_simple_examp_for_ATLAS_comparison.R",
+    "taglife/tangential",
+    "taglife/New folder",
+    "mixing plots/more_mixing_plots_live_and_dead_fish.R",
+    "media/png/mixing_dead_plts/sent to RAB/fig_3_6b_STH_det_dead_vs_rel.png",
+    "media/png/mixing_dead_plts/sent to RAB/fig_3_6a_STH_det_vs_rel.png",
+    "media/png/mixing_dead_plts/sent to RAB/fig_3_2b_CHN_det_dead_vs_rel.png",
+    "media/png/mixing_dead_plts/sent to RAB/fig_3_2a_CHN_det_vs_rel.png",
+    "media/png/mixing_dead_plts/sent to RAB",
+    "media/png/mixing_dead_plts/New folder",
+    "media/png/mixing_dead_plts/fig_3_6b_STH_det_dead_vs_rel.png",
+    "media/png/mixing_dead_plts/fig_3_6a_STH_det_vs_rel.png",
+    "media/png/mixing_dead_plts/fig_3_2b_CHN_det_dead_vs_rel.png",
+    "media/png/mixing_dead_plts/fig_3_2a_CHN_det_vs_rel.png",
+    "media/png/mixing_dead_plts/fig_3_3b_STH_det_dead_vs_rel.png",
+    "media/png/mixing_dead_plts/fig_3_3a_STH_det_vs_rel.png",
+    "media/docx/~$AFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx",
+    "media/png/mixing_dead_plts",
+    "media/docx/DRAFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx.crswap",
+    "media/docx/DRAFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx",
+    "Mixing plots.md",
+    "more research and condition factor.md",
+    "assumption_checking/all_sites_run/POOLED/RI_STH/Capture History Report .md",
+    "Notes on condition factor differences.md",
+    "README.md",
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Cumul_surv.md",
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/CJS_report.md",
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Capture History Report .md",
@@ -242,29 +304,6 @@
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Cumul_surv.md",
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/CJS_report.md",
     "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_CHN/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_CHN/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_CHN/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/PR_CHN/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_1/tagger_effects/TAGGER A/PR_CHN/atlas.rtf",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_STH",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_CHN",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_STH",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_STH",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN",
-    "media/png/assumption_checking/tagger_cumul_survival_comparison.png",
-    "media/xlsx/assumption_checking/tagger_cumul_survival_comparison.png",
-    "media/png/assumption_checking/tagger_survival_comparison.png",
-    "media/png/Pasted image 20260920153612.png",
-    "assumption_checking/tagger_cumul_survival_comparison.png",
-    "assumption_checking/tagger_survival_comparison.png",
-    "media/png/Pasted image 20260920154825.png",
-    "media/png/Pasted image 20260920154543.png",
-    "media/DH_tiles_example.png",
-    "media/png/screenshot of Rich data files from 2017 study.png"
+    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/CJS_report.md"
   ]
 }

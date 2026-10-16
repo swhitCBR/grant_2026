@@ -13,3 +13,6 @@ plot(km_mod)
 
 
 hist(tl_dat$days_difference)
+
+
+failCompare::fc_fit(time = sort(tl_dat$days), model = "vitality.ku", SEs = TRUE)

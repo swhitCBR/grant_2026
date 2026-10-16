@@ -403,3 +403,4 @@ format_survival_table_display <- function(
   
   return(result)
 }
+

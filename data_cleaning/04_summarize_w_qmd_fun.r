@@ -120,9 +120,90 @@ if (length(DH_plots) > 0) {
 # ============================================================================
 
 output_path <- "data/clean/summary_results_SURVUSE_OR_EUTH_ACTIVE.rds"
-saveRDS(summary_results_ls, output_path)
+# saveRDS(summary_results_ls, output_path)
 cat("\nSaved to:", output_path, "\n")
 
 
 names(summary_results_ls)
+
+# ============================================================================
+# Summarize time from tag activation and release to detection at the
+# lowermost detection site (Rock Island Tailrace releases only)
+# ============================================================================
+
+source("R/get_time_to_lowermost_detect_summ.R")
+source("R/plot_time_to_lowermost_detect.R")
+
+cat("Generating time-to-lowermost-detection summary...\n")
+time_to_lowermost_detect_summ <- get_time_to_lowermost_detect_summ(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+time_to_lowermost_detect_summ
+
+cat("Generating time-to-lowermost-detection histograms and ECDFs...\n")
+time_to_lowermost_detect_plots <- plot_time_to_lowermost_detect(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+time_to_lowermost_detect_plots$hist_activate_to_detect
+time_to_lowermost_detect_plots$hist_release_to_detect
+time_to_lowermost_detect_plots$ecdf_activate_to_detect
+time_to_lowermost_detect_plots$ecdf_release_to_detect
+
+# ============================================================================
+# Summarize maximum activation-to-detection time by each tag's lowermost
+# detected site (i.e. the furthest downstream site it actually reached)
+# ============================================================================
+
+source("R/get_max_time_by_lowermost_site_summ.R")
+
+cat("Generating max activation-to-detection time by lowermost detected site...\n")
+max_time_by_lowermost_site_summ <- get_max_time_by_lowermost_site_summ(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+max_time_by_lowermost_site_summ
+
+cat("Generating max activation-to-detection time histogram by lowermost detected site...\n")
+source("R/plot_max_time_by_lowermost_site.R")
+max_time_by_lowermost_site_hist <- plot_max_time_by_lowermost_site(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+max_time_by_lowermost_site_hist
+
+cat("Generating max activation-to-detection time ECDF by lowermost detected site...\n")
+source("R/plot_max_time_by_lowermost_site_ecdf.R")
+max_time_by_lowermost_site_ecdf <- plot_max_time_by_lowermost_site_ecdf(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+max_time_by_lowermost_site_ecdf
+
+ggsave(
+  "media/png/max_time_by_lowermost_site_ecdf.png",
+  plot = max_time_by_lowermost_site_ecdf,
+  width = 8, height = 5, dpi = 300
+)
+
+cat("Generating cumulative count plot by lowermost detected site...\n")
+source("R/plot_cumulative_count_by_lowermost_site.R")
+cumulative_count_by_lowermost_site <- plot_cumulative_count_by_lowermost_site(
+  tags_dat_wrepID_in = tags_dat_SURVUSE_OR_EUTH_ACTIVE,
+  events_dat_in = events_dat,
+  node_dat_in = node_dat
+)
+cumulative_count_by_lowermost_site
+
+ggsave(
+  "media/png/cumulative_count_by_lowermost_site.png",
+  plot = cumulative_count_by_lowermost_site,
+  width = 8, height = 5, dpi = 300
+)
 
