@@ -63,11 +63,11 @@ Here are lines from `data_cleaning/create_tag_subsets.R` that show the precise f
 The QAQC stage generates comprehensive summary tables and reports using the cleaned data from Stage 1.
 
 **Key Script**:
-- `QAQC_tables.R` — Generate QAQC contingency and detection history tables
+- `QAQC_tables_full_set.R` — Generate QAQC contingency and detection history tables
 
 **Outputs**:
 - Word documents (.docx) with contingency tables and detection history summaries
-- Markdown reports with summary statistics
+- Quarto-generated reports with summary statistics
 
 **Prerequisites**: 
 Must complete Stage 1 (data_cleaning) first.
@@ -119,7 +119,7 @@ grant_2026/
 │   └── README.md          ← See here for detailed documentation
 │
 ├── QAQC/                   # Stage 2: Quality control summaries
-│   ├── QAQC_tables.R
+│   ├── QAQC_tables_full_set.R
 │   └── README.md          ← See here for detailed documentation
 │
 ├── assumption_checking/    # Stage 3: Statistical analysis

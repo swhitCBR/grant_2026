@@ -75,14 +75,14 @@ The script `data_cleaning/01_create_tag_subsets.R` performs the following:
 ### Downstream Usage
 
 `tag_subsets_ls.rds` is loaded and used by:
-- **QAQC/QAQC_tables.R** - Generates contingency tables and detection history reports
+- **QAQC/QAQC_tables_full_set.R** - Generates contingency tables and detection history reports
 - Reports reference specific subsets (e.g., RAW, tags_SURVUSE_OR_EUTH_&_ACTIVE) for different analyses
 
 ### Related Files
 
 - **Input:** `data/Round 2/GPUD2026_tags_17Aug2026.csv` and related CSVs
 - **Script:** `data_cleaning/01_create_tag_subsets.R`
-- **Consumer:** `QAQC/QAQC_tables.R`
+- **Consumer:** `QAQC/QAQC_tables_full_set.R`
 - **Output:** QAQC reports (`SW_QAQC_tabs_1_2.docx`, `SW_QAQC_tabs_2_2.docx`)
 
 ### Updating the Data

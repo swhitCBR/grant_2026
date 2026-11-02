@@ -1,1 +1,5 @@
-{}
+{
+  "enabledCssSnippets": [
+    "CSS_init"
+  ]
+}

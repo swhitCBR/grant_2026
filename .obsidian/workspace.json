@@ -8,89 +8,35 @@
         "type": "tabs",
         "children": [
           {
-            "id": "18ca38e0b5183cd6",
+            "id": "7802ca0262aa36b0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "assumption_checking/all_sites_run/POOLED/RI_STH/Capture History Report .md",
+                "file": "2026-11-01.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capture History Report"
+              "title": "2026-11-01"
             }
           },
           {
-            "id": "0fabd3a3528ac23d",
+            "id": "372a9108c9cb1ab4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "mixing plots/Creation of mixing plots_PROTOCOL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "42357229ec7c4f18",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data_cleaning/README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "abd4b7649bfc39dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Notes on condition factor differences.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Notes on condition factor differences"
-            }
-          },
-          {
-            "id": "7450641fc5021449",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "more research and condition factor.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "more research and condition factor"
-            }
-          },
-          {
-            "id": "1f7ec8c7cc260045",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "media/png/Pasted image 20261015085802.png"
-              },
-              "icon": "lucide-image",
-              "title": "Pasted image 20261015085802"
+              "title": "Creation of mixing plots_PROTOCOL"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -124,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "COMB_REL_lrg_hanf_pooled",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -148,11 +94,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 440.5
+    "width": 319.5
   },
   "right": {
     "id": "f0f253f3ff9da9d5",
@@ -257,53 +204,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "bfcd686b69d86087",
+  "active": "372a9108c9cb1ab4",
   "lastOpenFiles": [
-    "media/xlsx/4C2A6D00",
-    "taglife/tangential/vitality_mods_simple_examp_for_ATLAS_comparison.R",
-    "taglife/tangential",
-    "taglife/New folder",
-    "mixing plots/more_mixing_plots_live_and_dead_fish.R",
-    "media/png/mixing_dead_plts/sent to RAB/fig_3_6b_STH_det_dead_vs_rel.png",
-    "media/png/mixing_dead_plts/sent to RAB/fig_3_6a_STH_det_vs_rel.png",
-    "media/png/mixing_dead_plts/sent to RAB/fig_3_2b_CHN_det_dead_vs_rel.png",
-    "media/png/mixing_dead_plts/sent to RAB/fig_3_2a_CHN_det_vs_rel.png",
-    "media/png/mixing_dead_plts/sent to RAB",
-    "media/png/mixing_dead_plts/New folder",
-    "media/png/mixing_dead_plts/fig_3_6b_STH_det_dead_vs_rel.png",
-    "media/png/mixing_dead_plts/fig_3_6a_STH_det_vs_rel.png",
-    "media/png/mixing_dead_plts/fig_3_2b_CHN_det_dead_vs_rel.png",
-    "media/png/mixing_dead_plts/fig_3_2a_CHN_det_vs_rel.png",
-    "media/png/mixing_dead_plts/fig_3_3b_STH_det_dead_vs_rel.png",
-    "media/png/mixing_dead_plts/fig_3_3a_STH_det_vs_rel.png",
-    "media/docx/~$AFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx",
-    "media/png/mixing_dead_plts",
-    "media/docx/DRAFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx.crswap",
-    "media/docx/DRAFT Report Grant PUD 2026 Yearling Chinook and Steelhead Survival Study through Priest Rapids 10_16_2026.docx",
-    "Mixing plots.md",
-    "more research and condition factor.md",
+    "media/xlsx/replicate_regrouping/~$SW_replicate_level_DH_counts_11_1_26.xlsx",
+    "media/xlsx/replicate_regrouping/sent to RAB/SW_replicate_level_DH_counts_11_1_26.xlsx",
+    "media/xlsx/replicate_regrouping/sent to RAB",
+    "media/xlsx/replicate_regrouping/New folder",
+    "media/xlsx/replicate_regrouping/SW_replicate_level_DH_counts_11_1_26.xlsx",
+    "media/xlsx/replicate_regrouping/~$replicate_level_DH_counts_single_sheet.xlsx",
+    "media/xlsx/replicate_regrouping/replicate_level_DH_counts_single_sheet.xlsx",
+    "2026-11-01.md",
+    "data_cleaning/04_create_DH_for_spec_repIDs_and_survuse_subset.R",
+    "mixing plots/old/more_mixing_plots_live_and_dead_fish_scratchpad.R",
+    "mixing plots/old/mixing_plots_scratchpad.R",
+    "mixing plots/old",
+    "Untitled.md",
+    "file:C:/Users/swhit/Downloads/stratification_improvement_summary.md",
+    "lol.md",
+    "Water Supply at the Dalles.md",
+    "## Queries on CJS models with low P.md",
+    "Untitled 1.md",
+    "FPC reports.md",
+    "Widener 2026 notes figs tabs/Widener 2026.md",
+    "QAQC/README.md",
     "assumption_checking/all_sites_run/POOLED/RI_STH/Capture History Report .md",
-    "Notes on condition factor differences.md",
+    "2025 CSS report.md",
+    "Water supply high, average, and low years.md",
+    "Pasted image 20261022093700.png",
+    "Pasted image 20261022093043.png",
+    "Pasted image 20261022092831.png",
+    "Pasted image 20261022090106.png",
+    "Pasted image 20261022085909.png",
+    "Pasted image 20261022085230.png",
+    "Pasted image 20261022084852.png",
+    "Pasted image 20261022084725.png",
+    "Pasted image 20261022084520.png",
+    "Pasted image 20261022084118.png",
+    "vignettes/README.md",
+    "vignettes/QAQC_docx_creation/QUICK_START.md",
+    "vignettes/QAQC_docx_creation/README.md",
+    "vignettes/qaqc-tables-vignette.knit.md",
+    "vignettes/QUICK_START.md",
+    "QAQC/SW_QAQC_tabs_2_2.knit.md",
+    "QAQC/SW_QAQC_tabs_1_2.knit.md",
+    "mixing plots/Creation of mixing plots_PROTOCOL.md",
     "README.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_STH/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_STH/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_STH/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/RI_CHN/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_CHN/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER B/PR_CHN/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_STH/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_STH/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_STH/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/POOLED/RI_STH/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Cumul_surv.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/CJS_report.md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/RI_CHN/Capture History Report .md",
-    "old/sequestered_assmpt_checking_code/round_3/tagger_effects/TAGGER C/PR_STH/CJS_report.md"
+    "data_cleaning/README.md",
+    "notes and background research/Notes on condition factor differences.md",
+    "notes and background research/more research and condition factor.md"
   ]
 }

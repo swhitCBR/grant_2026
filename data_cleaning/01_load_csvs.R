@@ -33,8 +33,3 @@ saveRDS(csv_fl_ls, "data/clean/csv_fl_ls.rds")
 
 cat("CSV files loaded and saved to data/clean/csv_fl_ls.rds\n")
 
-
-
-# View(csv_fl_ls)
-
-# csv_fl_ls$GPUD2026_tags_12Aug2026

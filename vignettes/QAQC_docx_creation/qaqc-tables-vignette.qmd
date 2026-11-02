@@ -1,0 +1,504 @@
+---
+title: "QAQC Tables Vignette: Programmatically Building Quarto Documents"
+author: "Your Name"
+date: today
+format: 
+  docx:
+    number-sections: true
+    toc: true
+    toc-depth: 2
+editor: visual
+---
+
+# Introduction
+
+This vignette demonstrates how the QAQC workflow programmatically constructs Quarto (`.qmd`) documents by building markdown and R code blocks as character vectors, then appending them to files. This approach allows dynamic generation of complex reports from data and templates.
+
+The key insight: **A `.qmd` file is just text.** By understanding markdown syntax and code block structure, we can generate entire documents programmatically using R's string functions.
+
+# Key Concepts
+
+## Quarto Markdown Basics
+
+A `.qmd` file contains:
+1. **YAML header** - Document metadata and options (between `---` delimiters)
+2. **Markdown text** - Formatted text with headings, lists, etc.
+3. **Code blocks** - R code wrapped in triple backticks with optional execution parameters
+
+## Building Content as Strings
+
+The QAQC workflow builds document content as character vectors, then appends them line-by-line to files. This allows:
+- Dynamic headers based on data subset names
+- Programmatic table generation based on available data
+- Reusable helper functions that construct standard sections
+- Easy modification of report structure without editing templates
+
+---
+
+# Part 1: Understanding Helper Functions
+
+## Core Functions
+
+The workflow uses several helper functions working together:
+
+| Function | Purpose |
+|----------|---------|
+| `append_to_qmd()` | Appends text lines to a `.qmd` file |
+| `add_qsec3()` | Constructs markdown + code block for a single table |
+| `add_qsec3_elwise()` | Constructs markdown + code block for element-wise table access |
+| `get_conting_tbs_qmd_els()` | Orchestrates multiple appends to build full report |
+| `create_qmd_template()` | Creates initial template with YAML header and setup code |
+
+## The Simplest Function: `append_to_qmd()`
+
+```{r append-to-qmd-demo, eval=FALSE}
+# This is the foundation: append text to a file
+append_to_qmd <- function(file_path, text_lines) {
+  cat(text_lines, sep = "\n", file = file_path, append = TRUE)
+}
+
+# Example usage:
+# append_to_qmd("report.qmd", "# My Section")
+# This appends the text "# My Section" to report.qmd
+```
+
+**What it does:** Takes a character vector and appends each element as a separate line to a file. The `append = TRUE` parameter means it adds to the existing file rather than overwriting it.
+
+---
+
+# Part 2: Building Markdown Sections
+
+## Building a Markdown Header + Code Block
+
+The `add_qsec3()` function demonstrates how to build a complete section (header + code block) as a character vector:
+
+```{r add-qsec3-function, eval=FALSE}
+#' Create markdown header + code block for displaying a contingency table
+#'
+#' This function builds a vector of text lines that together form:
+#' - A markdown header
+#' - A code block with R code to display a table
+#'
+#' @param header_in Character string for the section header
+#' @param tag_sub_nm Name of the tag subset (used in R code)
+#' @param tb_nm_in Name of the table to retrieve (used in R code)
+#' @param header_level Character string for markdown header level (default: "###")
+#'
+#' @return Character vector where each element is one line of output
+
+add_qsec3 <- function(
+  header_in = "Live/Dead Status vs. survival_use",
+  tag_sub_nm = "RAW",
+  tb_nm_in = "usable_CT_tab", 
+  header_level = "###"
+) {
+  # Build a character vector with one element per line
+  c(
+    # Line 1: The markdown header
+    paste(header_level, header_in),
+    
+    # Line 2-4: Code block opening and R code
+    "```{r,echo=F,eval=T}",
+    paste0(
+      "knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['",
+      tag_sub_nm,
+      "']], tb_nm_in = '",
+      tb_nm_in,
+      "'))"
+    ),
+    "```"
+  )
+}
+```
+
+## Understanding the Output
+
+The `add_qsec3()` function returns a character vector with 4 elements:
+
+```{r show-example-output}
+# Example output structure
+example_lines <- c(
+  "### Fish Status vs. Release Method",
+  "```{r,echo=F,eval=T}",
+  "knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['RAW']], tb_nm_in = 'status_method_tab'))",
+  "```"
+)
+
+cat("What add_qsec3() produces:\n")
+cat("─────────────────────────────────\n")
+cat(example_lines, sep = "\n")
+cat("\n─────────────────────────────────\n\n")
+
+# Show as a table
+data.frame(
+  Element_number = 1:4,
+  Element_type = c("Markdown header", "Code block open", "R code", "Code block close"),
+  Content = example_lines
+) |>
+  knitr::kable(caption = "Structure of add_qsec3() output")
+```
+
+When these lines are appended to a `.qmd` file using `append_to_qmd()`, they form a complete section that Quarto will render as a heading followed by an executed code block that displays a table.
+
+---
+
+# Part 3: Element-Wise Access Function
+
+## Accessing Elements from Lists
+
+The `add_qsec3_elwise()` function extends `add_qsec3()` for accessing specific elements from nested data structures (like lists of tables):
+
+```{r add-qsec3-elwise, eval=FALSE}
+#' Create markdown header + code block for element-wise table access
+#'
+#' Similar to add_qsec3(), but for accessing specific elements from lists
+#'
+#' @param header_in Character string for the section header
+#' @param tag_sub_nm Name of the tag subset
+#' @param tb_nm_in Name of the table list to access
+#' @param ele_nm_in Name of the element within the list
+#' @param header_level Markdown header level (default: "#####")
+#'
+#' @return Character vector of markdown + code block lines
+
+add_qsec3_elwise <- function(
+  header_in = "Live/Dead Status vs. survival_use",
+  tag_sub_nm = "RAW",
+  tb_nm_in = "usable_CT_tab",
+  ele_nm_in,
+  header_level = "#####"
+) {
+  c(
+    paste(header_level, header_in),
+    "```{r,echo=F,eval=T}",
+    paste0(
+      "knitr::kable(get_conting_tabs_by_name(tags_dat_in = tag_subsets_ls[['",
+      tag_sub_nm,
+      "']], tb_nm_in = '",
+      tb_nm_in,
+      "', ele_nm_in = '",
+      ele_nm_in,
+      "'))"
+    ),
+    "```"
+  )
+}
+```
+
+**Key difference:** This function accepts an `ele_nm_in` parameter that gets embedded in the R code as `ele_nm_in = '...'`. This allows accessing specific elements from list-based tables like `species_tables_ls[["CHN"]]`.
+
+---
+
+# Part 4: The Master Orchestration Function
+
+## How `get_conting_tbs_qmd_els()` Works
+
+The `get_conting_tbs_qmd_els()` function coordinates the entire report-building process. Here's the pattern:
+
+```{r get-conting-tbs-demo, eval=FALSE}
+# Simplified version showing the pattern
+
+get_conting_tbs_qmd_els_simplified <- function(
+  tab_subset_nm = "RAW", 
+  qmd_file = "report.qmd"
+) {
+  # Step 1: Create fresh file from template or use existing
+  if (!file.exists(qmd_file)) {
+    # Start with template containing YAML and setup code
+    template_content <- c(
+      "---",
+      'title: "My Report"',
+      "format: docx",
+      "---",
+      "",
+      "```{r setup, include=FALSE}",
+      "library(dplyr)",
+      "tag_subsets_ls <- readRDS('data/tag_subsets_ls.rds')",
+      "```"
+    )
+    writeLines(template_content, qmd_file)
+  }
+  
+  # Step 2: Add main section header
+  append_to_qmd(qmd_file, "\n")
+  append_to_qmd(qmd_file, paste0("# Summaries for tag subset: ", tab_subset_nm))
+  
+  # Step 3: Add contingency tables section
+  append_to_qmd(qmd_file, "\n## Contingency Tables\n")
+  
+  # Step 4: Add multiple table sections using helper functions
+  append_to_qmd(qmd_file, add_qsec3(
+    header_in = "Live/Dead Status vs. Survival Use",
+    tb_nm_in = "status_survival_tab",
+    tag_sub_nm = tab_subset_nm
+  ))
+  
+  append_to_qmd(qmd_file, add_qsec3(
+    header_in = "Live/Dead Status vs. Tagger",
+    tb_nm_in = "status_tagger_tab",
+    tag_sub_nm = tab_subset_nm
+  ))
+  
+  # Step 5: Add nested sections for multiple elements (loop-based)
+  append_to_qmd(qmd_file, "\n### By Species\n")
+  
+  for (species in c("CHN", "STH")) {
+    append_to_qmd(qmd_file, add_qsec3_elwise(
+      header_in = species,
+      tb_nm_in = "species_summary_list",
+      ele_nm_in = species,
+      tag_sub_nm = tab_subset_nm,
+      header_level = "####"
+    ))
+  }
+}
+```
+
+**The workflow:**
+
+1. **Initialize file** - Copy template with YAML and setup code (or use existing file)
+2. **Append headers** - Add section headers appropriate to the data subset
+3. **Build tables** - Use `add_qsec3()` and `add_qsec3_elwise()` to create sections
+4. **Loop over data** - For each species/location/category, generate the corresponding section
+5. **Result** - A complete, ready-to-render `.qmd` file built entirely from R
+
+---
+
+# Part 5: Live Demonstration
+
+## Building a Report Step by Step
+
+Let's demonstrate the complete workflow:
+
+```{r live-demo}
+# Create a temporary file to demonstrate
+temp_qmd <- file.path(tempdir(), "demo_report.qmd")
+
+# Helper function for appending
+append_to_qmd <- function(file_path, text_lines) {
+  cat(text_lines, sep = "\n", file = file_path, append = TRUE)
+}
+
+# Step 1: Create the template with YAML and setup
+template_content <- c(
+  "---",
+  'title: "Demo QAQC Report"',
+  'format:',
+  '  docx:',
+  '    number-sections: true',
+  "---",
+  "",
+  "```{r setup, include=FALSE}",
+  "library(dplyr)",
+  "library(knitr)",
+  "```"
+)
+
+writeLines(template_content, temp_qmd)
+cat("✓ Step 1: Created template file\n\n")
+
+# Step 2: Append an introduction section
+append_to_qmd(temp_qmd, "\n# Introduction\n")
+append_to_qmd(temp_qmd, "This report demonstrates programmatic .qmd generation.\n")
+
+# Step 3: Add helper function for creating sections
+add_qsec3_demo <- function(
+  header_in = "Example Table",
+  tb_nm = "my_table"
+) {
+  c(
+    paste("###", header_in),
+    "```{r, echo=FALSE}",
+    paste0("# Display table: ", tb_nm),
+    "```"
+  )
+}
+
+# Step 4: Add a table section
+append_to_qmd(temp_qmd, "\n## Summary Tables\n")
+append_to_qmd(temp_qmd, add_qsec3_demo(
+  header_in = "Example Table 1",
+  tb_nm = "example_table"
+))
+
+cat("✓ Step 2: Appended sections\n\n")
+
+# Step 5: Add loop-generated sections
+append_to_qmd(temp_qmd, "\n### Tables by Category\n")
+
+categories <- c("Category_A", "Category_B", "Category_C")
+for (cat in categories) {
+  section <- c(
+    paste("####", cat),
+    "```{r, echo=FALSE}",
+    paste0("# Table for: ", cat),
+    "```"
+  )
+  append_to_qmd(temp_qmd, section)
+}
+
+cat("✓ Step 3: Added loop-generated sections\n\n")
+
+# Display the resulting .qmd file
+cat("📄 Generated .qmd file contents:\n")
+cat("═════════════════════════════════════════════════════════════════\n")
+cat(readLines(temp_qmd), sep = "\n")
+cat("\n═════════════════════════════════════════════════════════════════\n")
+```
+
+## Key Observations from the Demo
+
+1. **The file grows incrementally** - Each `append_to_qmd()` call adds content
+2. **Helper functions create reusable patterns** - `add_qsec3_demo()` makes each section consistent
+3. **Loops generate multiple similar sections** - Same code structure, different data
+4. **String manipulation is powerful** - `paste0()` builds exactly the R code we need
+5. **The result is pure text** - Quarto renders this text file to produce the final document
+
+---
+
+# Part 6: Why This Approach?
+
+## Advantages of Programmatic Document Generation
+
+**Flexibility**
+- Generate different reports for different data subsets without manual editing
+- Update report structure by changing code, not templates
+
+**Consistency**
+- Same formatting applied to all tables automatically
+- Reduced chance of human error (typos, inconsistent styling)
+
+**Scalability**
+- Generate 10 reports as easily as 1
+- Add new table types to all reports with minimal code changes
+
+**Reproducibility**
+- Document structure is version-controlled R code
+- Exact report generation can be reproduced from the same script any time
+
+**Example: The actual QAQC workflow**
+
+```{r actual-workflow, eval=FALSE}
+# In QAQC_tables_full_set.R, this single approach generates tables for all subsets:
+
+# Define the different tag subsets to analyze
+tab_subsets <- c(
+  "RAW", 
+  "tags_SURVUSE_OR_EUTH_&_ACTIVE", 
+  "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER"
+)
+
+# Loop through each subset and generate its section
+for (i in seq_along(tab_subsets)) {
+  subset <- tab_subsets[i]
+  # First iteration: overwrite and create fresh file
+  # Subsequent iterations: append to existing file
+  get_conting_tbs_qmd_els(
+    tab_subset_nm = subset, 
+    overwrite = (i == 1)
+  )
+}
+
+# Render the complete .qmd file to Word
+quarto::quarto_render("QAQC/SW_QAQC_tabs_1_2.qmd")
+```
+
+This generates a complete, multi-section, multi-subset report from data and templates—no manual document editing needed.
+
+---
+
+# Part 7: Building Your Own Dynamic Sections
+
+## Template: Creating a Custom Helper Function
+
+```{r custom-section-template, eval=FALSE}
+# If you need to create a custom section with multiple tables:
+
+create_summary_section <- function(
+  section_name,
+  table_names,
+  tag_subset = "RAW"
+) {
+  # Initialize the output vector
+  lines <- c()
+  
+  # Add section header
+  lines <- c(lines, paste0("## ", section_name))
+  
+  # Add introduction text
+  lines <- c(lines, "This section contains summary tables for the analysis.\n")
+  
+  # Loop over each table
+  for (tbl in table_names) {
+    # Create a subsection for each table
+    subsection <- c(
+      paste("###", tbl),
+      "```{r, echo=FALSE}",
+      paste0("knitr::kable(my_tables[[\"", tbl, "\"]])"),
+      "```"
+    )
+    lines <- c(lines, subsection)
+  }
+  
+  return(lines)
+}
+
+# Usage:
+my_section <- create_summary_section(
+  section_name = "Data Quality Tables",
+  table_names = c("table_1", "table_2", "table_3"),
+  tag_subset = "RAW"
+)
+
+# Append to your .qmd file:
+append_to_qmd("report.qmd", my_section)
+```
+
+---
+
+# Summary
+
+This vignette demonstrated:
+
+✓ **How Quarto documents are built as text** - YAML, markdown, code blocks are just strings
+
+✓ **Helper functions that construct sections** - `add_qsec3()` builds reusable templates
+
+✓ **Programmatic appending** - `append_to_qmd()` adds content line-by-line to files
+
+✓ **Orchestration functions** - `get_conting_tbs_qmd_els()` coordinates multiple appends
+
+✓ **Why this approach is powerful** - Flexibility, consistency, scalability, reproducibility
+
+✓ **How to create your own dynamic sections** - Template pattern for custom helpers
+
+✓ **Live demonstration** - Step-by-step building of a complete report
+
+---
+
+# Key Takeaway
+
+**The QAQC workflow treats report generation as a data problem:** Just as you might transform data with dplyr, you can transform templates and data into complete, formatted reports using R's string manipulation functions combined with Quarto's rendering.
+
+This enables:
+- Dynamic reports that respond to data changes
+- Batch generation of similar reports
+- Version-controlled document structure
+- Automated quality assurance documentation
+
+---
+
+# Next Steps
+
+1. Examine the actual functions in `R/append_to_qmd_etc.R` and `R/get_conting_tbs_qmd_els.R`
+2. Review `QAQC_tables_full_set.R` to see how these are orchestrated
+3. Create your own custom helper functions following the patterns shown here
+4. Render your programmatically-generated `.qmd` files to Word with `quarto::quarto_render()`
+
+---
+
+# Session Information
+
+```{r session-info}
+sessionInfo()
+```

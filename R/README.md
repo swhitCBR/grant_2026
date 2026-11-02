@@ -45,7 +45,7 @@ data_cleaning/01_create_tag_subsets.R
   ├─ build_tag_subsets()
   └─ get_rel_loc_by_repID_tabs()
 
-QAQC/QAQC_tables.R
+QAQC/QAQC_tables_full_set.R
   ├─ get_conting_tabs_by_name()
   │   ├─ get_tagger_rel_loc_status_tb_ls()
   │   ├─ tag_rel_tagger_summ_tb()
@@ -67,7 +67,7 @@ source("R/get_rel_loc_by_repID_tabs.R")
 source("R/build_tag_subsets.R")
 ```
 
-**QAQC/QAQC_tables.R:**
+**QAQC/QAQC_tables_full_set.R:**
 ```r
 source("R/get_rel_loc_by_repID_tabs.R")
 source("R/build_tag_subsets.R")

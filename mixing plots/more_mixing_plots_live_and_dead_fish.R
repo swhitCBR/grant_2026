@@ -16,14 +16,8 @@ events_raw <- csv_fl_ls$GPUD2026_events_17Aug2026
 nodes_raw <- csv_fl_ls$GPUD2026_nodes_12Aug2026
 
 # no euthanized fish subset used in TAGGER effect study
-# subset_name <- "tags_SURVUSE_no_EUTH"
 subset_name <- "tags_SURVUSE_OR_EUTH_&_ACTIVE" # BAD b/c inclusive of Euthanized
-# subset_name <- "RAW" # BAD b/c inclusive of Euthanized
 
-sapply(tag_subsets_ls,nrow)
-
-cat("Processing tag subset:", subset_name, "/n")
-cat("Number of tags:", nrow(tag_subsets_ls[[subset_name]]), "/n")
 
 # Function to filter events and nodes by tag subset
 filter_events_nodes <- function(tag_subset, events_raw, nodes_raw) {
@@ -193,26 +187,6 @@ rel_PR_dead_det_PR_live_by_dayDF_presumed_dead <- bind_rows(
   dead_PR_releaseDF %>% select(species_code,category,date_time,prop_tags)
 )
 
-
-
-# ggplot() + 
-#   geom_line(data=rel_PR_dead_det_PR_live_by_dayDF %>% filter(category=="R1 Detection"),aes(x=date_time,y=prop_tags*100)) + 
-#   geom_point(data=rel_PR_dead_det_PR_live_by_dayDF,aes(x=date_time,y=prop_tags*100,fill=category,shape=category,size=category)) + 
-#   facet_wrap(~species_code,ncol=1,scales="free_y") + theme_minimal() +theme(legend.position = "bottom") +
-#   scale_size_manual(values=c(2,3)) +
-#   scale_shape_manual(values=c(24,21)) +
-#   scale_fill_manual(values=c("red","blue")) +
-#   labs(y="Percent",x="Date") + 
-#   theme(legend.position=c(0.87,0.9),legend.title = element_blank(),
-#         axis.line.x.bottom = element_line(color="black"),
-#         axis.line.y = element_line(color="black"),
-#         axis.text.x=element_text(color="black"),
-#         axis.text.y=element_text(color="black"),
-#         axis.title.x=element_text(color="black",face="bold",size=12),
-#         axis.title.y=element_text(color="black",face="bold",size=12),
-#         panel.grid.major = element_blank(),
-#         panel.grid.minor = element_blank(),
-#         )
 
 
 plt_ls <- list(
@@ -437,25 +411,25 @@ ggplot() +
 
 
 
-grid.arrange(
-  ggplot() + 
-    geom_line(data=rel_PR_dead_det_PR_live_by_dayDF %>% filter(category=="R1 Detection"),aes(x=date_time,y=prop_tags*100)) + 
-    geom_point(data=rel_PR_dead_det_PR_live_by_dayDF,aes(x=date_time,y=prop_tags*100,fill=category),shape=21,size=2) + 
-    # geom_errorbarh(data=rel_PR_dead_det_PR_liveDF,aes(xmin=date_min,xmax=date_max,y=prop_tags,fill=category),alpha=0.4,width = 0,linewidth = 1) + 
-    facet_wrap(~species_code,ncol=1,scales="free_y") + theme_bw() +theme(legend.position = "bottom")+
-    labs(y="Percent",x="Date"),#+ theme(legend.position=c(0.87,0.9),legend.title = element_blank()),
-  
-  ggplot() + 
-    geom_line(data=rel_PR_dead_det_PR_live_by_dayDF %>% filter(category=="R1 Detection"),aes(x=date_time,y=prop_tags*100)) + 
-    geom_point(data=rel_PR_dead_det_PR_live_by_dayDF,aes(x=date_time,y=prop_tags*100,fill=category),shape=21,size=2) + 
-    geom_errorbarh(data=rel_PR_dead_det_PR_live_by_dayDF,aes(xmin=date_min,xmax=date_max,y=prop_tags*100,fill=category),alpha=0.4,width = 0,linewidth = 1) + 
-    facet_wrap(~species_code,ncol=1,scales="free_y") + theme_bw() +theme(legend.position = "bottom") +
-    labs(y="Percent",x="Date"),
-  ncol=2)#,#+ theme(legend.position=c(0.87,0.9),legend.title = element_blank()),ncol=2)
-
-
+# grid.arrange(
+#   ggplot() + 
+#     geom_line(data=rel_PR_dead_det_PR_live_by_dayDF %>% filter(category=="R1 Detection"),aes(x=date_time,y=prop_tags*100)) + 
+#     geom_point(data=rel_PR_dead_det_PR_live_by_dayDF,aes(x=date_time,y=prop_tags*100,fill=category),shape=21,size=2) + 
+#     # geom_errorbarh(data=rel_PR_dead_det_PR_liveDF,aes(xmin=date_min,xmax=date_max,y=prop_tags,fill=category),alpha=0.4,width = 0,linewidth = 1) + 
+#     facet_wrap(~species_code,ncol=1,scales="free_y") + theme_bw() +theme(legend.position = "bottom")+
+#     labs(y="Percent",x="Date"),#+ theme(legend.position=c(0.87,0.9),legend.title = element_blank()),
+#   
+#   ggplot() + 
+#     geom_line(data=rel_PR_dead_det_PR_live_by_dayDF %>% filter(category=="R1 Detection"),aes(x=date_time,y=prop_tags*100)) + 
+#     geom_point(data=rel_PR_dead_det_PR_live_by_dayDF,aes(x=date_time,y=prop_tags*100,fill=category),shape=21,size=2) + 
+#     geom_errorbarh(data=rel_PR_dead_det_PR_live_by_dayDF,aes(xmin=date_min,xmax=date_max,y=prop_tags*100,fill=category),alpha=0.4,width = 0,linewidth = 1) + 
+#     facet_wrap(~species_code,ncol=1,scales="free_y") + theme_bw() +theme(legend.position = "bottom") +
+#     labs(y="Percent",x="Date"),
+#   ncol=2)#,#+ theme(legend.position=c(0.87,0.9),legend.title = element_blank()),ncol=2)
+# 
+# 
 # checking matching
-table(match(rel_time_tab_repID$mtch_code,repID_pool_tab$mtch_cod))
+# table(match(rel_time_tab_repID$mtch_code,repID_pool_tab$mtch_cod))
 
 # no variability in release times at the replicate level
 rel_time_tab_orig_repID_avg <- rel_time_tab_repID %>% 

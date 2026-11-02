@@ -2,7 +2,7 @@
 
 Code for running QAQC data summarization for 2026 Grant Survival study.
 
-## Main Script: `QAQC_tables.R`
+## Main Script: `QAQC_tables_full_set.R`
 
 This script generates quality assurance/quality control tables and reports:
 
@@ -33,7 +33,7 @@ The following sourced files are **not used** and can be removed:
 
 ## Prerequisites
 
-**Important:** The following scripts must be run in order before running `QAQC_tables.R`:
+**Important:** The following scripts must be run in order before running `QAQC_tables_full_set.R`:
 
 ### 1. `data_cleaning/01_load_csvs.R`
 - **Purpose**: Loads all CSV files from `data/Round 2/` directory
@@ -70,5 +70,5 @@ source("data_cleaning/02_create_tag_subsets.R")
 source("data_cleaning/03_create_DH_from_tag_subsets.R")
 
 # Then run the QAQC report generation:
-source("QAQC/QAQC_tables.R")
+source("QAQC/QAQC_tables_full_set.R")
 ```

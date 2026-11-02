@@ -2,7 +2,7 @@
 #' Prerequisites: Run data_cleaning/01_create_tag_subsets.R first to generate tag_subsets_ls.rds
 
 library(dplyr)
-library(ggplot2) 
+library(ggplot2)
 library(tidyr)
 library(quarto)
 
@@ -26,17 +26,19 @@ if (!dir.exists(output_dir_docx)) {
 # ============================================================================
 
 source("R/get_rel_loc_by_repID_tabs.R")
-source("R/build_tag_subsets.R")
-source("R/get_conting_tabs.R")
+# source("R/build_tag_subsets.R")
+# source("R/get_conting_tabs.R")
 source("R/append_to_qmd_etc.R")
 source("R/get_tagger_rel_loc_status_tb_ls.R")
-source("R/get_DH_tag_code_summ.R")
+# source("R/get_DH_tag_code_summ.R")
 
 source("R/create_qmd_template.R")
 source("R/create_qmd_templates_dir.R")
 source("R/get_conting_tbs_qmd_els.R")
 source("R/add_DH_qsec3_elwise.R")
 source("R/append_DH_tabs_qmd.R")
+
+source("R/tag_rel_tagger_summ_tb.R")
 
 # Load tag subsets created by data_cleaning/01_create_tag_subsets.R
 tag_subsets_ls <- readRDS("data/clean/tag_subsets_ls.rds")
@@ -54,6 +56,9 @@ tags_dat_ALIVE_EUTH_wrepID <- tags_dat_raw_wrepID |>
 # ============================================================================
 # PART 1: Generate contingency table summaries for part 1 Quarto report
 # ============================================================================
+
+
+
 
 # Generate tagger summaries by release location and replicate
 tags_dat_raw_tagger_summ <- tag_rel_tagger_summ_tb(tags_dat_wrepID_in = tag_subsets_ls[["RAW"]])
@@ -113,7 +118,7 @@ append_DH_tabs_qmd(tag_subset_nm = "tags_ALIVE_ACTIVE_OTHER_OR_EUTH_ACTIVE_OTHER
 # Render part 2 Quarto report
 quarto_render("QAQC/SW_QAQC_tabs_2_2.qmd")
 
-# Move output file to designated output directory
+# # Move output file to designated output directory
 file.rename(
   "QAQC/SW_QAQC_tabs_2_2.docx",
   file.path(output_dir_docx, "SW_QAQC_tabs_2_2.docx")

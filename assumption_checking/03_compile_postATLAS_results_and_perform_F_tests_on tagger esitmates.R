@@ -36,6 +36,8 @@ source("R/get_tagger_comp_tables_MOD.R")
 source("R/get_DH_tab_by_tagger.R")
 source("R/get_DH_est_comp_xlsx.R")
 
+source("R/compute_f_tests_by_reach.R")
+
 # Execute scraping on BRZsel_run directory
 message("Scraping ATLAS results from assumption_checking/BRZsel_run...")
 # atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
@@ -108,11 +110,12 @@ get_tagger_cumul_surv_plot(
 # PERFORM F-TESTS ON TAGGER EFFECTS BY REACH
 # =========================================================================================
 # Perform F-tests by reach (excludes POOLED tagger, tests homogeneity across taggers)
+
+
 f_test_results_by_reach <- compute_f_tests_by_reach( BRZsel_atlas_results$cjs_survival_long |> filter(location_code=="RI_CHN"),verbose=TRUE)
 
 f_test_results_by_reach_rnd4 <- compute_f_tests_by_reach( BRZsel_atlas_results$cjs_survival_long |> filter(location_code=="RI_CHN"),verbose=TRUE,est_digits=4)
 
-source("R/compute_f_tests_by_reach.R")
 f_test_results_by_reach
 f_test_results_by_reach_rnd4
 

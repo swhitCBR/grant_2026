@@ -4,6 +4,9 @@ This folder contains the analysis pipeline for checking assumptions and testing 
 
 ## Overview
 
+expects .csv files from grant here: data/Round 2
+
+
 The scripts process fish telemetry data through three main stages:
 1. **Script 01**: Preprocessing for TagPro software
 2. **Script 02**: Post-TagPro setup and tagger subsetting  

@@ -1,3 +1,7 @@
+# Plots and tables that were made in advance of taglife curve fitting and the creation of mixing plots
+# used to be in data_cleaning/04_summarize_w_qmd_fun.r
+
+
 #' Generate summary tables for tags_SURVUSE_OR_EUTH_&_ACTIVE subset
 #'
 #' Executes all tabulate functions on the "tags_SURVUSE_OR_EUTH_&_ACTIVE" tag
@@ -102,25 +106,25 @@ cat("═════════════════════════
 # Generate visualizations
 # ============================================================================
 
-cat("Generating visualizations...\n\n")
-
-# Generate detection history tile plots
-cat("Creating detection history plots by replicate ID...\n")
-DH_plots <- plot_DH_by_repID(summary_results_ls, node_dat_in = node_dat)
-cat("✓ Generated", length(DH_plots), "detection history plots\n\n")
-
-# Display first plot
-if (length(DH_plots) > 0) {
-  cat("Displaying first plot:\n")
-  print(DH_plots[[1]])
-}
+# cat("Generating visualizations...\n\n")
+# 
+# # Generate detection history tile plots
+# cat("Creating detection history plots by replicate ID...\n")
+# DH_plots <- plot_DH_by_repID(summary_results_ls, node_dat_in = node_dat)
+# cat("✓ Generated", length(DH_plots), "detection history plots\n\n")
+# 
+# # Display first plot
+# if (length(DH_plots) > 0) {
+#   cat("Displaying first plot:\n")
+#   print(DH_plots[[1]])
+# }
 
 # ============================================================================
 # Save results to RDS file
 # ============================================================================
 
 output_path <- "data/clean/summary_results_SURVUSE_OR_EUTH_ACTIVE.rds"
-# saveRDS(summary_results_ls, output_path)
+saveRDS(summary_results_ls, output_path)
 cat("\nSaved to:", output_path, "\n")
 
 
@@ -148,10 +152,13 @@ time_to_lowermost_detect_plots <- plot_time_to_lowermost_detect(
   events_dat_in = events_dat,
   node_dat_in = node_dat
 )
-time_to_lowermost_detect_plots$hist_activate_to_detect
-time_to_lowermost_detect_plots$hist_release_to_detect
-time_to_lowermost_detect_plots$ecdf_activate_to_detect
-time_to_lowermost_detect_plots$ecdf_release_to_detect
+
+library(gridExtra)
+grid.arrange(
+  time_to_lowermost_detect_plots$hist_activate_to_detect,
+  time_to_lowermost_detect_plots$hist_release_to_detect,
+  time_to_lowermost_detect_plots$ecdf_activate_to_detect,
+  time_to_lowermost_detect_plots$ecdf_release_to_detect)
 
 # ============================================================================
 # Summarize maximum activation-to-detection time by each tag's lowermost
