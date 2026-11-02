@@ -150,3 +150,11 @@ grant_2026/
 ## Documentation Last Updated
 
 September 21, 2026
+
+---
+
+## Log: 2026-11-01 - data_cleaning/04_create_DH_for_spec_repIDs_and_survuse_subset.R
+Pools replicate IDs (CHN 14,15; STH 9,10 / 20,21,22 / 23,24) and joins them to the pooled ATLAS capture file by tag_code.
+Builds detection-history (DHcode) counts per release location, species and replicate, including empty histories as 0.
+Writes media/xlsx/replicate_regrouping/replicate_level_DH_counts_single_sheet.xlsx with DH_counts_long and DH_counts wide sheets.
+Known issue: rel_tot_DF_CHN/STH still read from tmpDF, which is no longer created in the script.

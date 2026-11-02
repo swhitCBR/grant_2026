@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "7802ca0262aa36b0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2026-11-01.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2026-11-01"
-            }
-          },
-          {
             "id": "372a9108c9cb1ab4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mixing plots/Creation of mixing plots_PROTOCOL.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Creation of mixing plots_PROTOCOL"
+              "title": "README"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -94,8 +79,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -206,6 +190,8 @@
   },
   "active": "372a9108c9cb1ab4",
   "lastOpenFiles": [
+    "mixing plots/Creation of mixing plots_PROTOCOL.md",
+    "2026-11-01.md",
     "media/xlsx/replicate_regrouping/~$SW_replicate_level_DH_counts_11_1_26.xlsx",
     "media/xlsx/replicate_regrouping/sent to RAB/SW_replicate_level_DH_counts_11_1_26.xlsx",
     "media/xlsx/replicate_regrouping/sent to RAB",
@@ -213,11 +199,9 @@
     "media/xlsx/replicate_regrouping/SW_replicate_level_DH_counts_11_1_26.xlsx",
     "media/xlsx/replicate_regrouping/~$replicate_level_DH_counts_single_sheet.xlsx",
     "media/xlsx/replicate_regrouping/replicate_level_DH_counts_single_sheet.xlsx",
-    "2026-11-01.md",
     "data_cleaning/04_create_DH_for_spec_repIDs_and_survuse_subset.R",
     "mixing plots/old/more_mixing_plots_live_and_dead_fish_scratchpad.R",
     "mixing plots/old/mixing_plots_scratchpad.R",
-    "mixing plots/old",
     "Untitled.md",
     "file:C:/Users/swhit/Downloads/stratification_improvement_summary.md",
     "lol.md",
@@ -247,7 +231,6 @@
     "vignettes/QUICK_START.md",
     "QAQC/SW_QAQC_tabs_2_2.knit.md",
     "QAQC/SW_QAQC_tabs_1_2.knit.md",
-    "mixing plots/Creation of mixing plots_PROTOCOL.md",
     "README.md",
     "data_cleaning/README.md",
     "notes and background research/Notes on condition factor differences.md",
