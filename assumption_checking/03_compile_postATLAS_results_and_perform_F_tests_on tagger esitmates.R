@@ -10,10 +10,10 @@ source("R/check_md_dates.R")
 # NOTE: These directories are created when you run ATLAS manually.
 # Only uncomment these lines after running ATLAS and populating the directories.
 # 
-# check_md_rows("assumption_checking/all_sites_run")
-# summarize_blank_mds("assumption_checking/all_sites_run")
-# check_md_dates("assumption_checking/all_sites_run")
-# check_md_rows("assumption_checking/BRZsel_run")
+check_md_rows("assumption_checking/all_sites_run")
+summarize_blank_mds("assumption_checking/all_sites_run")
+check_md_dates("assumption_checking/all_sites_run")
+check_md_rows("assumption_checking/BRZsel_run")
 
 
 # =========================================================================================

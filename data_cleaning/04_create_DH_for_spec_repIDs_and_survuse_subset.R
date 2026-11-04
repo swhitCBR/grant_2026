@@ -98,20 +98,10 @@ tags_new_repID_DF <- tag_mtch_tbl %>%
               select(mtch_code,new_repID),
             by="mtch_code") 
 
-head(tags_new_repID_DF)
+# ATLAS files in the same place
+# COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/mixing plots/ATLAS_files_for_RAB_10-15-26/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
+COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/data/NOV_runCOMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
 
-# head(eventDF_CLEAN)
-# eventDF_CLEAN_new_repID <- eventDF_CLEAN  %>%
-#   mutate(mtch_code=paste(species_code,as.integer(orig_repID))) %>%
-#   left_join(repID_pool_tab %>%
-#               mutate(mtch_code=paste(species_code,orig_repID)) %>%
-#               select(mtch_code,new_repID),
-#             by="mtch_code") 
-# 
-# head(eventDF_CLEAN_new_repID)
-
-
-COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/mixing plots/ATLAS_files_for_RAB_10-15-26/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
 
 names(COMB_REL_ATLAS_csv_raw) <- c("release_spp", "num1", "tag_code", "release_time", 
                                "detection_time", "site_name", "num2", "lst_dt")
@@ -306,8 +296,20 @@ openxlsx::saveWorkbook(
   overwrite = TRUE
 )
 
+################################ #
+## Attributes table for Atlas
+################################ #
 
+new_rep_ID_attrib_ATLAS <- tags_new_repID_DF %>%
+  select(tag_code,new_repID,species_code) %>%
+  mutate(repID_code=paste(species_code,new_repID,sep="_")) %>%
+  select(-species_code,-new_repID ) %>%
+  # rename(repID=new_repID) %>%
+  mutate(repID_code=gsub(x=repID_code,pattern=",",replacement = "_"))#,
+         # repID=gsub(x=repID,pattern=",",replacement = "_"))
 
+table(new_rep_ID_attrib_ATLAS$repID_code)
 
+write.csv(new_rep_ID_attrib_ATLAS,"data/Nov_run/new_rep_ID_attrib_ATLAS.csv",row.names = FALSE,quote = FALSE)
 
 
