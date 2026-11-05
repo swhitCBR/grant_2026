@@ -1,3 +1,4 @@
+library(dplyr)
 
 # run all the models in ATLAS and then copy and paste full html window output into corresponding.md
 source("R/make_dirs_mds_for_pasting.R")
@@ -10,10 +11,10 @@ source("R/check_md_dates.R")
 # NOTE: These directories are created when you run ATLAS manually.
 # Only uncomment these lines after running ATLAS and populating the directories.
 # 
-check_md_rows("assumption_checking/all_sites_run")
-summarize_blank_mds("assumption_checking/all_sites_run")
-check_md_dates("assumption_checking/all_sites_run")
-check_md_rows("assumption_checking/BRZsel_run")
+check_md_rows("assumption_checking/tagger_effects/all_sites_run")
+summarize_blank_mds("assumption_checking/tagger_effects/all_sites_run")
+check_md_dates("assumption_checking/tagger_effects/all_sites_run")
+check_md_rows("assumption_checking/tagger_effects/BRZsel_run")
 
 
 # =========================================================================================
@@ -39,12 +40,12 @@ source("R/get_DH_est_comp_xlsx.R")
 source("R/compute_f_tests_by_reach.R")
 
 # Execute scraping on BRZsel_run directory
-message("Scraping ATLAS results from assumption_checking/BRZsel_run...")
-# atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
+message("Scraping ATLAS results from assumption_checking/tagger_effects/BRZsel_run...")
+# atlas_results <- scrape_atlas_results("assumption_checking/tagger_effects/BRZsel_run")
 
 # Scrape ATLAS results (now includes cumul_cjs_survival from Cumul_surv.md files)
-# NOTE: Uncomment after running ATLAS and populating the assumption_checking/BRZsel_run directory
-BRZsel_atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
+# NOTE: Uncomment after running ATLAS and populating the assumption_checking/tagger_effects/BRZsel_run directory
+BRZsel_atlas_results <- scrape_atlas_results("assumption_checking/tagger_effects/BRZsel_run")
 comp_surv_est_tabs_wFtests <- get_tagger_comp_tables_MOD(
   atlas_results_in=BRZsel_atlas_results)
 
@@ -88,7 +89,7 @@ get_DH_est_comp_xlsx(atlas_results_in=BRZsel_atlas_results,
   out_xlsx="media/xlsx/assumption_checking/BRZsel_atlas_results.xlsx")
 
 
-all_sites_atlas_results <- scrape_atlas_results("assumption_checking/all_sites_run")
+all_sites_atlas_results <- scrape_atlas_results("assumption_checking/tagger_effects/all_sites_run")
 get_DH_est_comp_xlsx(atlas_results_in=all_sites_atlas_results,
   out_xlsx="media/xlsx/assumption_checking/allsites_atlas_results.xlsx")
 

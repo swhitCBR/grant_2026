@@ -64,7 +64,7 @@ eventDF_CLEAN<- subset_data[["events"]] %>%
 ##################### #
 {
   # summary table with release size tables
-  rep_pool_tab_pth <- "C:/repos/grant_2026/media/xlsx/replicate_regrouping/replicate releases and suggested replicate pooling.xlsx"
+  rep_pool_tab_pth <- "media/xlsx/replicate_regrouping/replicate releases and suggested replicate pooling.xlsx"
   CHN_exerpt <- readxl::read_excel(rep_pool_tab_pth,range = "B3:F27") %>% 
     mutate(across(where(is.numeric), ~ tidyr::replace_na(., 0)))
   names(CHN_exerpt)[3:5] <- c("RI_live","PR_live","PR_dead")

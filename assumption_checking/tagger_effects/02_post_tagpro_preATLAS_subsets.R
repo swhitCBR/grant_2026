@@ -4,17 +4,19 @@
 #' to data/clean/post_tagpro/
 #'
 #' Prerequisites:
-#'   - Run 03_pre_tagpro_runscript.R first to generate processed TagPro files
+#'   - Run 01_tagpro_preprocessing.R, then run TagPro by hand (see TagPro settings md)
 #'   - ATLAS CSV files must exist in data/clean/post_tagpro/
 
-if(getwd() != "c:/repos/grant_2026"){
+library(dplyr)
+# no setwd: run from repo root via grant_2026.Rproj or run_pipeline.R
+if(FALSE){
   setwd("c:/repos/grant_2026")}
 
 # ============================================================================
 # Source functions
 # ============================================================================
 
-RI_all_sites_tmp <- read.csv("c:/repos/grant_2026/data/clean/post_tagpro/RI_all_sites_MOD_ATLAS.csv",header = F)
+RI_all_sites_tmp <- read.csv("data/clean/post_tagpro/RI_all_sites_MOD_ATLAS.csv",header = F)
 names(RI_all_sites_tmp) <- c("release_spp","num1","tag_code","release_time","detection_time","site_name","num2","lst_dt")
 
 unique(RI_all_sites_tmp$site_name)
@@ -36,7 +38,7 @@ RI_all_sites_mod <- RI_all_sites_tmp |> filter(site_name %in% sites_used)
 # G72790346
 RI_all_sites_mod |> filter(tag_code=="G72790346")
 
-write.table(RI_all_sites_mod,"c:/repos/grant_2026/data/clean/post_tagpro/RI_all_sites_MOD_ATLAS.csv",
+write.table(RI_all_sites_mod,"data/clean/post_tagpro/RI_all_sites_MOD_ATLAS.csv",
   row.names=F,col.names=F,sep=",",quote = FALSE)
 
 source("R/create_atlas_tagger_subsets.R")
@@ -57,7 +59,7 @@ process_all_atlas_files()
 # run all the models in ATLAS and then copy and paste full html window output into corresponding.md
 source("R/make_dirs_mds_for_pasting.R")
 # make_dirs_mds_for_pasting(
-#   base_path = "assumption_checking",
+#   base_path = "assumption_checking/tagger_effects",
 #   outer_folder = "all_sites_run",
 #   level1_dirs = c("POOLED", "TAGGER A", "TAGGER B", "TAGGER C"),
 #   level2_dirs = c("PR_CHN", "PR_STH", "RI_CHN", "RI_STH"),
@@ -66,7 +68,7 @@ source("R/make_dirs_mds_for_pasting.R")
 #   additional_mds = list(RI_CHN = c("Cumul_surv.md"), RI_STH = c("Cumul_surv.md")))
 
 # make_dirs_mds_for_pasting(
-#   base_path = "assumption_checking",
+#   base_path = "assumption_checking/tagger_effects",
 #   outer_folder = "BRZsel_run",
 #   level1_dirs = c("POOLED", "TAGGER A", "TAGGER B", "TAGGER C"),
 #   level2_dirs = c("PR_CHN", "PR_STH", "RI_CHN", "RI_STH"),

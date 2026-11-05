@@ -39,3 +39,10 @@ everything else the same
 ![[Pasted image 20260920154543.png]]
 
 ![[Pasted image 20260920154825.png]]
+
+## NOTE: release group selection for the BRZsel runs
+In the "BRZsel" runs, the `PR_BRZsel` run must select **only the two Priest Rapids release groups**
+(Chinook and steelhead), and `RI_BRZsel` only the two Rock Island groups, exactly as for the
+all_sites runs. On 2026-11-04 `PR_BRZsel_ATLAS.csv` was found to contain all four release groups
+(identical to `COMB_REL_lrg_hanf_pooled_ATLAS.csv`). It was filtered to the Priest Rapids rows; the
+original is in `data/clean/post_tagpro/old/PR_BRZsel_ATLAS_with_RI_rows_BACKUP_2026-11-04.csv`.

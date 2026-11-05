@@ -207,7 +207,7 @@ pairwise_lrt_uncen <- lapply(lot_pairs, function(pair) {
 names(pairwise_lrt_uncen) <- sapply(lot_pairs, paste, collapse = " vs ")
 pairwise_lrt_uncen
 
-source("fc_lrt_table.R")
+source("R/fc_lrt_table.R")
 fc_lrt_table(lrt_uncen, pairwise_lrt_uncen, omnibus_label = "All lots")
 
 # Partial pooling: for each pair, "that pair shares parameters, third lot

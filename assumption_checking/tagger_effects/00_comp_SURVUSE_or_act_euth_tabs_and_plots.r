@@ -14,10 +14,8 @@
 library(dplyr)
 library(tidyr)
 
-# Set working directory to top-level repo directory
-if (getwd() != "c:/repos/grant_2026") {
-  setwd("c:/repos/grant_2026")
-}
+# Working directory: must be the repo root
+# (no setwd needed; run from repo root via grant_2026.Rproj or run_pipeline.R)
 
 # ============================================================================
 # Load required helper functions
