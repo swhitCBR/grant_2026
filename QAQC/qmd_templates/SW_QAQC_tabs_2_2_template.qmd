@@ -3,7 +3,7 @@ title: "GRANT 2026; SW QA/QC Tables v3 (2/2)"
 format:
   docx:
     toc: true
-    reference-doc: ../media/docx/ref_doc_w_QAQC.docx
+    reference-doc: ../media/docx/ref_doc_QAQC.docx
     execute:
 warning: false
 message: false  # Highly recommended to also hide package startup messages

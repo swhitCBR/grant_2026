@@ -2,7 +2,7 @@
 #'
 #' Loads raw CSV files, adds derived fields (species, rearing type, release date,
 #' replicate IDs), creates tag subsets based on fish status and survival use criteria,
-#' and saves to QAQC/tmp_data/tag_subsets_ls.rds
+#' and saves to data/clean/tag_subsets_ls.rds
 #'
 #' Tag subsets:
 #' - RAW: All tags
@@ -16,11 +16,12 @@ library(dplyr)
 library(ggplot2) 
 library(tidyr)
 
-if(getwd() != "c:/repos/grant_2026"){
-  setwd("c:/repos/grant_2026")}
+# Expects the working directory to be the repo root (grant_2026.Rproj or run_pipeline.R)
+#
+#
 
 source("R/get_rel_loc_by_repID_tabs.R")
-source("R/build_tag_subsets.R")
+# (build_tag_subsets is defined inline below; R/build_tag_subsets.R now lives in old/obsolete_funs)
 source("R/get_conting_tabs.R")
 source("R/append_to_qmd_etc.R")
 source("R/get_tagger_rel_loc_status_tb_ls.R")

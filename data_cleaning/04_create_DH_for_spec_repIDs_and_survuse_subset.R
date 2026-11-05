@@ -64,7 +64,7 @@ eventDF_CLEAN<- subset_data[["events"]] %>%
 ##################### #
 {
   # summary table with release size tables
-  rep_pool_tab_pth <- "C:/repos/grant_2026/media/xlsx/replicate_regrouping/replicate releases and suggested replicate pooling.xlsx"
+  rep_pool_tab_pth <- "media/xlsx/replicate_regrouping/replicate releases and suggested replicate pooling.xlsx"
   CHN_exerpt <- readxl::read_excel(rep_pool_tab_pth,range = "B3:F27") %>% 
     mutate(across(where(is.numeric), ~ tidyr::replace_na(., 0)))
   names(CHN_exerpt)[3:5] <- c("RI_live","PR_live","PR_dead")
@@ -100,7 +100,7 @@ tags_new_repID_DF <- tag_mtch_tbl %>%
 
 # ATLAS files in the same place
 # COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/mixing plots/ATLAS_files_for_RAB_10-15-26/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
-COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/data/NOV_runCOMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
+COMB_REL_ATLAS_csv_raw <- read.csv("data/Nov_run/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
 
 
 names(COMB_REL_ATLAS_csv_raw) <- c("release_spp", "num1", "tag_code", "release_time", 
@@ -117,7 +117,7 @@ DH_long_DF <- COMB_REL_ATLAS_csv %>%
                   levels=c("1 1","0 1","2 0","1 0","0 0")))
 
 
-rel_tot_DF_CHN <- tmpDF %>% 
+rel_tot_DF_CHN <- DH_long_DF %>% ungroup() %>% 
   filter(species_code=="CHN") %>% 
   group_by(release_location,species_code,DHcode,.drop = FALSE) %>% 
   summarize(tot_count=n()) 
@@ -151,7 +151,7 @@ DH_wide_DF_CHN <- DH_long_DF_CHN %>%
 
 
 
-rel_tot_DF_STH <- tmpDF %>% 
+rel_tot_DF_STH <- DH_long_DF %>% ungroup() %>% 
   filter(species_code=="STH") %>% 
   group_by(release_location,species_code,DHcode,.drop = FALSE) %>% 
   summarize(tot_count=n()) 

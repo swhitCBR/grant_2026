@@ -24,7 +24,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   check_md_rows("assumption_checking/round_3/tagger_effects")
+#'   check_md_rows("assumption_checking/tagger_effects/BRZsel_run")
 #' }
 
 check_md_rows <- function(folder_path, recursive = TRUE) {

@@ -3,8 +3,8 @@ library(ggplot2)
 library(gridExtra)
 
 # sourceable compilation fie
-source("C:/repos/grant_2026/analysis/extractinng_ATLAS_rtfs_CHN.R")
-source("C:/repos/grant_2026/analysis/extractinng_ATLAS_rtfs_STH.R")
+source("analysis/extractinng_ATLAS_rtfs_CHN.R")
+source("analysis/extractinng_ATLAS_rtfs_STH.R")
 
 # dir("analysis",pattern = ".rds")
 # readRDS("")
@@ -23,7 +23,7 @@ plt1_STH <- ggplot(data=STH_estDF_4plt %>% filter(type=="pool"),
                aes(y=est,ymin=est-1.96*SE,ymax=est+1.96*SE,x=spp_rel_loc,
                    fill=spp_rel_loc)) +
   facet_wrap(~param,ncol=1,scales="free_x") + 
-  geom_errorbar(width=0,,position = position_dodge(width=0.5)) + 
+  geom_errorbar(width=0,position = position_dodge(width=0.5)) + 
   geom_point(shape=21,position = position_dodge(width=0.5),size=2.5)+
   scale_y_continuous(limits = c(0, 1.1)) + theme(legend.position = "none")
 
@@ -31,7 +31,7 @@ plt1_STH <- ggplot(data=STH_estDF_4plt %>% filter(type=="pool"),
 plt2_STH <- ggplot(data=STH_estDF_4plt %>% filter(type=="rep"),
                aes(y=est,ymin=est-1.96*SE,ymax=est+1.96*SE,x=spp_repID,
                    fill=spp_rel_loc,color=fixed)) +
-  facet_wrap(~param,ncol=1,,scales="free_x") +
+  facet_wrap(~param,ncol=1,scales="free_x") +
   geom_errorbar(width=0,position = position_dodge(width=0.5)) + 
   geom_point(shape=21,position = position_dodge(width=0.5),size=2.5) + 
   scale_y_continuous(limits = c(0, 1.1)) + 
@@ -57,7 +57,7 @@ plt1_CHN <- ggplot(data=CHN_estDF_4plt %>% filter(type=="pool"),
                aes(y=est,ymin=est-1.96*SE,ymax=est+1.96*SE,x=spp_rel_loc,
                    fill=spp_rel_loc)) +
   facet_wrap(~param,ncol=1,scales="free_x") + 
-  geom_errorbar(width=0,,position = position_dodge(width=0.5)) + 
+  geom_errorbar(width=0,position = position_dodge(width=0.5)) + 
   geom_point(shape=21,position = position_dodge(width=0.5),size=2.5)+
   scale_y_continuous(limits = c(0, 1.2)) + theme(legend.position = "none")
 
@@ -65,7 +65,7 @@ plt1_CHN <- ggplot(data=CHN_estDF_4plt %>% filter(type=="pool"),
 plt2_CHN <- ggplot(data=CHN_estDF_4plt %>% filter(type=="rep"),
                aes(y=est,ymin=est-1.96*SE,ymax=est+1.96*SE,x=spp_repID,
                    fill=spp_rel_loc,color=fixed)) +
-  facet_wrap(~param,ncol=1,,scales="free_x") +
+  facet_wrap(~param,ncol=1,scales="free_x") +
   geom_errorbar(width=0,position = position_dodge(width=0.5)) + 
   geom_point(shape=21,position = position_dodge(width=0.5),size=2.5) + 
   scale_y_continuous(limits = c(0, 1.2)) + 

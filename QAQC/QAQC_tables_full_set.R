@@ -1,14 +1,15 @@
 #' Generate QAQC contingency tables and detection histories
-#' Prerequisites: Run data_cleaning/01_create_tag_subsets.R first to generate tag_subsets_ls.rds
+#' Prerequisites: Run data_cleaning/01_load_csvs.R, 02_create_tag_subsets.R and 03_create_DH_from_tag_subsets.R first
+#' to generate csv_fl_ls.rds, tag_subsets_ls.rds and tag_DH_ls.rds in data/clean/
 
 library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(quarto)
 
-# Set working directory to top-level repo directory
-if(getwd() != "c:/repos/grant_2026"){
-  setwd("c:/repos/grant_2026")}
+# Working directory: must be the repo root
+# (no setwd needed; run from repo root via grant_2026.Rproj or run_pipeline.R)
+
 
 # ============================================================================
 # Set output directory for generated Word documents
@@ -39,7 +40,7 @@ source("R/get_DH_tbs_qmd_els.R")
 
 source("R/tag_rel_tagger_summ_tb.R")
 
-# Load tag subsets created by data_cleaning/01_create_tag_subsets.R
+# Load tag subsets created by data_cleaning/02_create_tag_subsets.R
 tag_subsets_ls <- readRDS("data/clean/tag_subsets_ls.rds")
 
 # Load raw data for detection history analysis

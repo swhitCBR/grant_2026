@@ -5,7 +5,7 @@
 #'
 #' @param atlas_results_in List returned from \code{scrape_atlas_results()}
 #' @param out_xlsx Character. Path to output Excel file.
-#'   Defaults to "assumption_checking/Tagger_comp_tmp.xlsx"
+#'   Defaults to "media/xlsx/assumption_checking/Tagger_comp_tmp.xlsx"
 #'
 #' @return NULL (invisibly). Saves Excel file to disk.
 #'
@@ -22,11 +22,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' atlas_results <- scrape_atlas_results("assumption_checking/BRZsel_run")
+#' atlas_results <- scrape_atlas_results("assumption_checking/tagger_effects/BRZsel_run")
 #' get_DH_est_comp_xlsx(atlas_results, out_xlsx = "my_results.xlsx")
 #' }
 
-get_DH_est_comp_xlsx <- function(atlas_results_in,out_xlsx="assumption_checking/Tagger_comp_tmp.xlsx"){
+get_DH_est_comp_xlsx <- function(atlas_results_in,out_xlsx="media/xlsx/assumption_checking/Tagger_comp_tmp.xlsx"){
 
 comp_tabs <- get_tagger_comp_tables_MOD(atlas_results_in=atlas_results_in)
 
@@ -41,13 +41,13 @@ DH_comb_ls <- list(
 
 # Create cumulative survival comparison tables
 CHN_R1_to_LowerRing <- create_cumul_survival_comparison_table(
-  atlas_results = BRZsel_atlas_results,
+  atlas_results = atlas_results_in,
   location = "RI",
   species = "Chinook"
 )|> filter(reach=="Release to Lower Ringold")
 
 STH_R1_to_LowerRing <- create_cumul_survival_comparison_table(
-  atlas_results = BRZsel_atlas_results,
+  atlas_results = atlas_results_in,
   location = "RI",
   species = "Steelhead"
 ) |> filter(reach=="Release to Lower Ringold")
@@ -61,7 +61,6 @@ addWorksheet(wb, "CHN_RI")
 writeData(wb, "CHN_RI", DH_comb_ls$CHN_RI,startRow=1,colNames = F)
 writeData(wb, "CHN_RI", comp_tabs$CHN$RI,startRow=nrow(DH_comb_ls$CHN_RI)+3)
 writeData(wb, "CHN_RI", CHN_R1_to_LowerRing,startRow=nrow(comp_tabs$CHN$RI) + nrow(DH_comb_ls$CHN_RI)+2+3)
-+
 addWorksheet(wb, "CHN_PR")
 writeData(wb, "CHN_PR", DH_comb_ls$CHN_PR,startRow=1,colNames = F)
 writeData(wb, "CHN_PR", comp_tabs$CHN$PR,startRow=nrow(DH_comb_ls$CHN_PR)+3)

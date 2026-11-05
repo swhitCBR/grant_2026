@@ -82,7 +82,7 @@ create_qmd_template <- function(
     "format:",
     "  docx:",
     "    toc: true",
-    "    reference-doc: ../media/docx/ref_doc_w_QAQC.docx"
+    "    reference-doc: ../media/docx/ref_doc_QAQC.docx"
   )
   
   yaml_2_2 <- c(

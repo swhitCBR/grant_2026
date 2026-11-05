@@ -3,6 +3,8 @@
 #' Finds all ATLAS CSV files in a directory that don't contain "tagger" in the 
 #' filename and creates tagger-level subdivisions for each.
 #'
+#' @param exclude_pattern Character. Regex; ATLAS files whose names match are skipped.
+#'   Defaults to "COMB_REL" (pooled replicate-level file).
 #' @param atlas_dir Character. Directory containing ATLAS files to process.
 #'   Defaults to "data/clean/post_tagpro".
 #' @param output_dir Character. Directory where output files will be saved.
@@ -20,6 +22,7 @@
 #' @export
 
 process_all_atlas_files <- function(atlas_dir = "data/clean/post_tagpro",
+                                    exclude_pattern = "COMB_REL",
                                     output_dir = "data/clean/post_tagpro",
                                     tags_file = "data/clean/pre_tagpro/tags.csv",
                                     events_file = "data/clean/pre_tagpro/events.csv",
@@ -28,6 +31,8 @@ process_all_atlas_files <- function(atlas_dir = "data/clean/post_tagpro",
   # Find all ATLAS files that don't have "tagger" in the name
   all_files <- list.files(atlas_dir, pattern = "_ATLAS\\.csv$", full.names = TRUE)
   atlas_files <- all_files[!grepl("tagger", all_files, ignore.case = TRUE)]
+  # pooled replicate-level files (COMB_REL_*) are not part of the tagger-effects runs
+  atlas_files <- atlas_files[!grepl(exclude_pattern, basename(atlas_files))]
   
   if (length(atlas_files) == 0) {
     cat("No ATLAS files found in", atlas_dir, "\n")

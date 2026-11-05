@@ -6,7 +6,7 @@ library(dplyr)
 #' Loads all CSV files from data/Round 2/ directory and saves as an RDS list
 #' for use in downstream QAQC analyses.
 #'
-#' Output: QAQC/tmp_data/csv_fl_ls.rds
+#' Output: data/clean/csv_fl_ls.rds
 
 getwd()
 
