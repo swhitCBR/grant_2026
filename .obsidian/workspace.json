@@ -13,9 +13,23 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "mixing plots/Creation of mixing plots_PROTOCOL.md",
+                "file": "analysis/mixing plots/Creation of mixing plots_PROTOCOL.md",
                 "mode": "source",
                 "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Creation of mixing plots_PROTOCOL"
+            }
+          },
+          {
+            "id": "e1e5a30ed348ad16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "analysis/mixing plots/Creation of mixing plots_PROTOCOL.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
               "title": "Creation of mixing plots_PROTOCOL"
@@ -49,7 +63,8 @@
               "title": "STH_Modeled Parameter Report"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -83,7 +98,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "_PROTOCOL",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -107,11 +122,12 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 412.5
+    "width": 563.5
   },
   "right": {
     "id": "f0f253f3ff9da9d5",
@@ -216,12 +232,46 @@
       "bases:Create new base": false
     }
   },
-  "active": "bfcd686b69d86087",
+  "active": "e1e5a30ed348ad16",
   "lastOpenFiles": [
-    "media/other",
+    "sed1cyRpx",
+    "sedXadAlr",
+    "sedKdZ9u1",
+    "repo_diagram.svg",
+    "R/create_repo_diagram.R",
+    "QAQC/SW_QAQC_tabs_2_2.docx",
+    "QAQC/SW_QAQC_tabs_2_2_files/mediabag",
+    "QAQC/SW_QAQC_tabs_2_2_files",
+    "QAQC/SW_QAQC_tabs_2_2.knit.md",
+    "QAQC/SW_QAQC_tabs_2_2.rmarkdown",
+    "QAQC/SW_QAQC_tabs_1_2.docx",
+    "QAQC/SW_QAQC_tabs_1_2_files/mediabag",
+    "QAQC/SW_QAQC_tabs_1_2_files",
+    "QAQC/SW_QAQC_tabs_1_2.knit.md",
+    "analysis/Grant_ATLAS_analysis_PROTOCOL.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_STH/Cumul_surv.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_CHN/Cumul_surv.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/PR_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_CHN/Cumul_surv.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/PR_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/PR_CHN/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_STH/Cumul_surv.md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/PR_CHN/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_STH/Capture History Report .md",
+    "assumption_checking/tagger_effects/all_sites_run/TAGGER A/RI_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/POOLED/PR_STH/CJS_report.md",
+    "assumption_checking/tagger_effects/all_sites_run/POOLED/RI_STH/Cumul_surv.md",
     "media/png/Grant_ATLAS_analysis/Pasted image 20261103094808.png",
-    "analysis/pooled/STH_Cormack-Jolly-Seber Report.md",
-    "mixing plots/Creation of mixing plots_PROTOCOL.md",
     "media/png/mixing plots_PROTOCOL/Pasted image 20261015085802.png",
     "media/png/mixing plots_PROTOCOL/Pasted image 20261015093400.png",
     "media/png/mixing plots_PROTOCOL/Pasted image 20261014152907.png",
@@ -229,40 +279,6 @@
     "media/png/mixing plots_PROTOCOL/Pasted image 20261014150355.png",
     "media/png/mixing plots_PROTOCOL/Pasted image 20261015090856.png",
     "media/png/mixing plots_PROTOCOL/Pasted image 20261015085848.png",
-    "media/png/mixing plots_PROTOCOL/Pasted image 20261014152811.png",
-    "analysis/pooled/STH_Modeled Parameter Report.md",
-    "media/png/mixing plots_PROTOCOL",
-    "analysis/Grant_ATLAS_analysis_PROTOCOL.md",
-    "media/png/Grant_ATLAS_analysis",
-    "media/xlsx/~$hours _log.xlsx",
-    "analysis/plotting_replicate_level_vs. pooled..R",
-    "analysis/STH_ATLAS_out.rds",
-    "analysis/CHN_ATLAS_out.rds",
-    "analysis/replicate_level/STH/STH_20_21_22/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_Modeled.rtf",
-    "analysis/replicate_level/STH/STH_20_21_22/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_Cjs.rtf",
-    "analysis/replicate_level/STH/STH_20_21_22/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_CaptHist.rtf",
-    "analysis/replicate_level/STH/STH_1/COMB_REL_lrg_hanf_pooled_ATLAS_Modeled.rtf",
-    "media/png/Grant_ATLAS_analysis/Pasted image 20261103130721.png",
-    "analysis/pooled/CHN_report/CHN_Modeled Parameter Report.md",
-    "analysis/pooled/CHN_report/CHN_Cormack-Jolly-Seber Report.md",
-    "analysis/pooled/CHN_report/CHN_Tag Correction Report.md",
-    "analysis/pooled/STH_Tag Correction Report.md",
-    "README.md",
-    "2026-11-01.md",
-    "file:C:/Users/swhit/Downloads/stratification_improvement_summary.md",
-    "lol.md",
-    "Water Supply at the Dalles.md",
-    "## Queries on CJS models with low P.md",
-    "Untitled 1.md",
-    "FPC reports.md",
-    "Widener 2026 notes figs tabs/Widener 2026.md",
-    "QAQC/README.md",
-    "assumption_checking/all_sites_run/POOLED/RI_STH/Capture History Report .md",
-    "2025 CSS report.md",
-    "Water supply high, average, and low years.md",
-    "vignettes/README.md",
-    "vignettes/QAQC_docx_creation/QUICK_START.md",
-    "vignettes/QAQC_docx_creation/README.md",
-    "vignettes/qaqc-tables-vignette.knit.md"
+    "media/png/mixing plots_PROTOCOL/Pasted image 20261014152811.png"
   ]
 }
