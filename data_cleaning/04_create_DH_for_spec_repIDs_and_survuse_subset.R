@@ -98,6 +98,8 @@ tags_new_repID_DF <- tag_mtch_tbl %>%
               select(mtch_code,new_repID),
             by="mtch_code") 
 
+saveRDS(tags_new_repID_DF,"data/clean/tags_new_repID_DF.rds")
+
 # ATLAS files in the same place
 # COMB_REL_ATLAS_csv_raw <- read.csv("C:/repos/grant_2026/mixing plots/ATLAS_files_for_RAB_10-15-26/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
 COMB_REL_ATLAS_csv_raw <- read.csv("data/Nov_run/COMB_REL_lrg_hanf_pooled_ATLAS.csv",header = F)
