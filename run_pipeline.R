@@ -147,5 +147,12 @@ run_pipeline <- function(stages = unique(pipeline_steps$stage),
   }
   log <- do.call(rbind, log)
   print(log)
+  # Redraw repo_diagram.svg from the current scripts (static analysis; runs nothing)
+  if (make_diagram) {
+    tryCatch({
+      source("R/create_repo_diagram.R")
+      create_repo_diagram(out_file = "repo_diagram.svg", steps = pipeline_steps)
+    }, error = function(e) message("repo_diagram.svg not updated: ", conditionMessage(e)))
+  }
   invisible(log)
 }

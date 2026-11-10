@@ -32,7 +32,16 @@ Required inputs (checked at the start): `data/Round 2/` (raw CSVs), `data/Nov_ru
 | 5 | `length_weight_condition` | `assumption_checking/length_weight_condition/condition_factor_plotting_by_species_MOD.R` | condition-factor figures in `media/png/assumption_checking/` |
 | 6 | `mixing_plots` | `analysis/mixing plots/more_mixing_plots_live_and_dead_fish.R` | `media/png/mixing_dead_plts/*.png` |
 | 7 | `taglife` | `analysis/taglife/Weibull_LRT_across_RC_values.R`, `analysis/taglife/vitality_LRT.R` | LRT summaries; `media/docx/taglife/lrt_table_weibull_rc68.98....docx` (needs flextable) |
-| 8 | `analysis` | `analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R` (after the manual ATLAS pooled and replicate-level runs) | `analysis/{CHN,STH}_ATLAS_out.rds` |
+| 8 | `analysis` | `analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R` (after the manual ATLAS pooled, replicate-level and TLSR runs) | `analysis/{CHN,STH}_ATLAS_out.rds`; `analysis/{CHN,STH}_ATLAS_TLSR_out.rds` (TLSR, see below) |
+
+## TLSR: Tag-Life adjusted Single Release models
+
+"TLSR" stands for **T**ag-**L**ife adjusted **S**ingle **R**elease. These are single-release ATLAS survival models that are fit post hoc, using the pooled data (all replicates combined, not tagger-specific), with the tag-life correction applied (Weibull-2 tag-life curve fit to `data/Nov_run/Pooled_taglife.csv`, 10,000 bootstrap iterations). A separate model is fit for each species and release site (Rock Island `RI`, Priest Rapids `PR`), using the BRZsel detection data (`data/clean/post_tagpro/{RI,PR}_BRZsel_ATLAS.csv`).
+
+- **Manual step**: the ATLAS runs are documented in `analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md`. The saved reports go in `analysis/pooled/Single Release Pooled TL/{CHN,STH}/{RI,PR}/`.
+- **Extracted reports**: `*_Modeled.rtf` (reach-level survival and capture estimates) and `*_ModeledCum.rtf` (cumulative survival from release), read by `R/extract_atlas_modeled_tl_tables.R`.
+- **Outputs**: `analysis/CHN_ATLAS_TLSR_out.rds` and `analysis/STH_ATLAS_TLSR_out.rds`. Each is a list of `<spp>_TL_Modeled_tab` and `<spp>_TL_ModeledCum_tab` (estimates, standard errors and `se_method`).
+- **Not the same as**: the paired-release replicate-level and pooled estimates in `analysis/{CHN,STH}_ATLAS_out.rds` (`*_Pair_CJS_tab`), which are the paired-release models from `analysis/Grant_ATLAS_analysis_PROTOCOL.md`.
 
 ## Pipeline diagram
 
@@ -164,10 +173,13 @@ grant_2026/
 │   ├── mixing plots/
 │   ├── taglife/
 │   ├── pooled/, replicate_level/   # saved ATLAS reports (HTML saved as .rtf)
-│   ├── extractinng_ATLAS_rtfs_{CHN,STH}.R
-│   └── Grant_ATLAS_analysis_PROTOCOL.md
+│   │   └── pooled/Single Release Pooled TL/   # TLSR reports (*_Modeled.rtf, *_ModeledCum.rtf)
+│   ├── extractinng_ATLAS_rtfs_{CHN,STH}.R     # -> *_ATLAS_out.rds and *_ATLAS_TLSR_out.rds
+│   ├── Grant_ATLAS_analysis_PROTOCOL.md
+│   ├── ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md   # TLSR ATLAS runs
+│   └── README.md
 │
-├── R/                      # Shared functions (e.g. extract_atlas_rtf_tables.R, scrape_atlas_results.R, create_repo_diagram.R)
+├── R/                      # Shared functions (e.g. extract_atlas_rtf_tables.R, extract_atlas_modeled_tl_tables.R, scrape_atlas_results.R, create_repo_diagram.R)
 ├── data/                   # Round 2 raw CSVs, Nov_run ATLAS inputs, clean/ (processed data)
 ├── media/                  # Outputs (docx, xlsx, png); git-ignored
 ├── old/                    # Archive
@@ -178,7 +190,7 @@ grant_2026/
 
 ## Documentation Last Updated
 
-November 4, 2026
+November 9, 2026
 
 ---
 
@@ -191,6 +203,10 @@ Fixed 2026-11-04: rel_tot_DF_CHN/STH now read from DH_long_DF (they used tmpDF, 
 ## Log: 2026-11-04 - run_pipeline.R
 New master script: runs the sourceable scripts in stage order, logs ok/warning/error/skipped, and skips scripts whose manual inputs are missing.
 Removed setwd/absolute paths from the scripts; fixed stale tagger_effects paths and ATLAS extraction (repID_code attrib, pooled IDs); PR_BRZsel_ATLAS.csv filtered to Priest Rapids rows.
+
+## Log: 2026-11-09 - analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R (TLSR)
+Added extraction of the tag-life adjusted single-release (TLSR) ATLAS reports (`*_Modeled.rtf`, `*_ModeledCum.rtf`) from analysis/pooled/Single Release Pooled TL/ via R/extract_atlas_modeled_tl_tables.R.
+Writes analysis/{CHN,STH}_ATLAS_TLSR_out.rds. run_pipeline.R and R/create_repo_diagram.R do not list these outputs yet.
 
 ## Log: 2026-11-05 - R/create_repo_diagram.R
 create_repo_diagram() parses the pipeline scripts and the R/ files they source and draws repo_diagram.svg (scripts, functions, data sets, outputs).

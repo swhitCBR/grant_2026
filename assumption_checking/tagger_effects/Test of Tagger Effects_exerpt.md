@@ -4,10 +4,10 @@ First, analyses will be performed to evaluate whether the proportions of fish ta
 
 An F-test will be used to test for homogeneous survival of the form:
 
-F_{k-1,\infty }=\frac{S_{{\widehat{S}}_{i}}^{2}}{\left[\frac{\sum_{i=1}^{k} \widehat{\mathrm{Var}}\left({\widehat{S}}_{i}\middle| S_{i}\right)}{k}\right]}
+$$F_{k-1,\infty }=\frac{S_{{\widehat{S}}_{i}}^{2}}{\left[\frac{\sum_{i=1}^{k} \widehat{\mathrm{Var}}\left({\widehat{S}}_{i}\middle| S_{i}\right)}{k}\right]}$$
 
 where
-S_{{\widehat{S}}_{i}}^{2}=\frac{\sum_{i=1}^{k} {\left({\widehat{S}}_{i}-\widehat{\bar{S}}\right)}^{2}}{k-1}
+$$S_{{\widehat{S}}_{i}}^{2}=\frac{\sum_{i=1}^{k} {\left({\widehat{S}}_{i}-\widehat{\bar{S}}\right)}^{2}}{k-1}$$
 
  $k$ = number of replicate survival estimates,
 
