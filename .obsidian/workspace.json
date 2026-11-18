@@ -95,12 +95,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md",
+                "file": "rixTagPro_and_ATLAS_PROTOCOL.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "fixing_censoring_TagPro_and_ATLAS_PROTOCOL"
+              "title": "rixTagPro_and_ATLAS_PROTOCOL"
             }
           }
         ],
@@ -271,24 +271,27 @@
       "bases:Create new base": false
     }
   },
-  "active": "6798390eb2d92c04",
+  "active": "bfcd686b69d86087",
   "lastOpenFiles": [
-    "results/ATLAS/RI_CHN_censor_fix_11_17/README.md",
-    "results/ATLAS/Single Release Pooled TL/CHN/RI/README.md",
-    "results/ATLAS/README.md",
-    "data/reach_spec_censor_fix/README.md",
-    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162418.png",
-    "media/png/censoring_fix_for_CHN_RI_single_release",
-    "fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md",
-    "analysis/extracting_ATLAS_rtfs_STH.R",
+    "media/xlsx/COMB_pool_pair_est_output_11_17.xlsx",
+    "media/xlsx/CE20F420",
+    "media/xlsx/AA20F420",
+    "media/docx/sent 11-17/~WRL3454.tmp",
+    "media/docx/sent 11-17/~WRD3447.tmp",
+    "media/xlsx/~$COMB_pool_pair_est_output.xlsx",
     "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_TagLife.rtf",
     "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_ModeledCum.rtf",
     "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_Modeled.rtf",
     "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_CjsCum.rtf",
     "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_Cjs.rtf",
-    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_CaptHist.rtf",
-    "results/ATLAS/Single Release Pooled TL/CHN/RI/old/RI_BRZsel_ATLAS_CaptHist.rtf",
-    "results/ATLAS/Single Release Pooled TL/CHN/RI/old/RI_BRZsel_ATLAS_TagLife.rtf",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117173601.png",
+    "media/png/R1_cumul_surv_plots/R1_rel_CHN_STH_cumul_plt.png",
+    "results/ATLAS/RI_CHN_censor_fix_11_17/README.md",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/README.md",
+    "results/ATLAS/README.md",
+    "data/reach_spec_censor_fix/README.md",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162418.png",
+    "rixTagPro_and_ATLAS_PROTOCOL.md",
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163451.png",
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163159.png",
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163111.png",
@@ -296,8 +299,6 @@
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162914.png",
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162755.png",
     "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162725.png",
-    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162712.png",
-    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162604.png",
     "analysis/mixing plots/Creation of mixing plots_PROTOCOL.md",
     "analysis/Grant_ATLAS_analysis_PROTOCOL.md",
     "analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md",
@@ -317,7 +318,6 @@
     "results/ATLAS/CHN_report/CHN_Tag Correction Report.md",
     "results/ATLAS/CHN_report/CHN_Modeled Parameter Report.md",
     "results/ATLAS/CHN_report/CHN_Cormack-Jolly-Seber Report.md",
-    "analysis/README.md",
-    "analysis/ATLAS_calc_pooled_TL_corr_reach_ests.md"
+    "analysis/README.md"
   ]
 }
