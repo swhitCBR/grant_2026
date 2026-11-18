@@ -107,7 +107,7 @@ source("data_cleaning/01_create_tag_subsets.R")  # Create tag subsets and save
 
 These hold the files going into and coming out of TagPro.
 
-- **`pre_tagpro/`**: now contains only the original `events.csv`. `nodes.csv` and `tags.csv` were moved to `data/reach_spec_censor_fix/`, together with a revised `events.csv` (3 events removed for tag `G72B4A509`).
-- **`post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`**: new. The ATLAS input for the rerun of the Rock Island Chinook tag-life adjusted single release (TLSR) model, made by TagPro from the revised files.
+- **`pre_tagpro/`**: now contains only the original `events.csv`. `nodes.csv` and `tags.csv` were moved to `data/reach_spec_censor_fix/`, together with a revised `events.csv` (2 events removed for tag `G72790346`).
+- **`post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`**: superseded. This is the ATLAS input from the earlier version of the Rock Island Chinook tag-life adjusted single release (TLSR) rerun in which I mistakenly omitted rows for the wrong tag (events removed for `G72B4A509` instead of `G72790346`). An identical copy is in `data/reach_spec_censor_fix/ATLAS_input_file/old/`. The current input is `data/reach_spec_censor_fix/ATLAS_input_file/RI_rerun_after_G72790346_fix_ATLAS.csv`.
 
-"RAB" had me recompute the TLSR Chinook estimates because the product of the reach probabilities did not match the total survival estimates. Two censored tags (`G72790346`, `G72B4A509`) were examined; RAB decided not to undo the censoring on one of them. See `data/reach_spec_censor_fix/README.md` and `fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md` (repo root, with instructions and screenshots).
+"RAB" had me recompute the TLSR Chinook estimates because the product of the reach probabilities did not match the total survival estimates. Two censored tags (`G72790346`, `G72B4A509`) were examined; RAB decided not to undo the censoring on one of them (`G72B4A509`); it was undone for `G72790346`. See `data/reach_spec_censor_fix/README.md` and `rixTagPro_and_ATLAS_PROTOCOL.md` (repo root, with instructions and screenshots).

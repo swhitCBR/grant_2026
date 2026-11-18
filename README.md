@@ -45,13 +45,13 @@ Required inputs (checked at the start): `data/Round 2/` (raw CSVs), `data/Nov_ru
 
 ### TLSR Chinook recomputed (November 17, 2026)
 
-"RAB" had me recompute the TLSR **Chinook salmon** estimates because the product of the reach probabilities did not match the total survival estimates. Only the Rock Island Chinook model was rerun. While preparing it, two censored tags (`G72790346` and `G72B4A509`) were examined. I considered undoing the censoring for both, and RAB decided not to undo it on one of them (`G72790346`); the censoring was undone for `G72B4A509` by removing its 3 flagged Sunland events from the TagPro input.
+"RAB" had me recompute the TLSR **Chinook salmon** estimates because the product of the reach probabilities did not match the total survival estimates. Only the Rock Island Chinook model was rerun. While preparing it, two censored tags (`G72790346` and `G72B4A509`) were examined. I considered undoing the censoring for both, and RAB decided not to undo it on one of them (`G72B4A509`); the censoring was undone for `G72790346` by removing its 2 flagged Wanapum BRZ events from the TagPro input. I mistakenly omitted rows for the wrong tag in an earlier rerun (`G72B4A509` instead of `G72790346`); its reports and input were set aside, not deleted, in `results/ATLAS/Single Release Pooled TL/CHN/RI/wrong_tag_hist_edit/` and `data/reach_spec_censor_fix/ATLAS_input_file/old/`.
 
-- **Instructions and screenshots** for the TagPro and ATLAS steps: [`fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md`](fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md).
+- **Instructions and screenshots** for the TagPro and ATLAS steps: [`rixTagPro_and_ATLAS_PROTOCOL.md`](rixTagPro_and_ATLAS_PROTOCOL.md). The screenshots are in `media/png/censoring_fix_for_CHN_RI_single_release/` (`media/` is git-ignored, so they are not in the repository).
 - **Script**: `analysis/RI_reach_spec_data_comp.R` (workbook `media/xlsx/censored_tags_detections.xlsx`, revised `events.csv`).
-- **Revised TagPro inputs**: `data/reach_spec_censor_fix/` (see its README); ATLAS input `data/clean/post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`.
-- **New reports**: `results/ATLAS/Single Release Pooled TL/CHN/RI/` (originals in its `old/` folder; see its README for before-and-after estimates) and a dated copy in `results/ATLAS/RI_CHN_censor_fix_11_17/`.
-- **Not yet refreshed**: the extracted `.rds` files in `results/` predate the rerun. Run `analysis/01_extracting_ATLAS_rtfs_COMB.R` to update them.
+- **Revised TagPro inputs**: `data/reach_spec_censor_fix/` (see its README); ATLAS input `data/reach_spec_censor_fix/ATLAS_input_file/RI_rerun_after_G72790346_fix_ATLAS.csv` (the copy in `data/clean/post_tagpro/` is the superseded earlier version).
+- **New reports**: `results/ATLAS/Single Release Pooled TL/CHN/RI/` (originals in its `old/` folder, the earlier wrong-tag rerun in `wrong_tag_hist_edit/`; see its README for the before-and-after estimates) and a dated copy in `results/ATLAS/RI_CHN_censor_fix_11_17/`.
+- **Extracted tables**: the `results/*.rds` files, the workbook `media/xlsx/COMB_pool_pair_est_output.xlsx` and the cumulative survival figures were rerun on November 17 from the current reports.
 
 ## Pipeline diagram
 
@@ -192,7 +192,7 @@ grant_2026/
 ├── results/                # extracted tables (.rds) and saved ATLAS reports
 │   └── ATLAS/              # replicate_level/, pooled/, Single Release Pooled TL/, RI_CHN_censor_fix_11_17/ (README)
 │
-├── fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md   # instructions and screenshots for the censoring fix
+├── rixTagPro_and_ATLAS_PROTOCOL.md   # instructions and screenshots for the censoring fix
 │
 ├── R/                      # Shared functions (e.g. extract_atlas_rtf_tables.R, extract_atlas_modeled_tl_tables.R, scrape_atlas_results.R, create_repo_diagram.R)
 ├── data/                   # Round 2 raw CSVs, Nov_run ATLAS inputs, clean/ (processed data)
@@ -222,9 +222,9 @@ Removed setwd/absolute paths from the scripts; fixed stale tagger_effects paths 
 
 ## Log: 2026-11-17 - TLSR Chinook rerun after the censoring check
 RAB had me recompute the tag-life adjusted single release Chinook estimates because the product of the reach probabilities did not match the total survival estimates.
-Two censored tags (G72790346, G72B4A509) were examined (analysis/RI_reach_spec_data_comp.R); the censoring was undone for G72B4A509 (3 Sunland events removed), and RAB decided not to undo it for G72790346.
+Two censored tags (G72790346, G72B4A509) were examined (analysis/RI_reach_spec_data_comp.R); the censoring was undone for G72790346 (2 Wanapum BRZ events removed) and kept for G72B4A509 (considered, not undone). I mistakenly omitted rows for the wrong tag in an earlier rerun (G72B4A509 instead of G72790346); its reports and input were set aside in results/ATLAS/Single Release Pooled TL/CHN/RI/wrong_tag_hist_edit/ and data/reach_spec_censor_fix/ATLAS_input_file/old/.
 nodes.csv and tags.csv moved from data/clean/pre_tagpro/ to data/reach_spec_censor_fix/ with a revised events.csv. New ATLAS reports are in results/ATLAS/Single Release Pooled TL/CHN/RI/ (originals in old/).
-Instructions and screenshots: fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md. The results/*.rds extracts have not been refreshed yet.
+Instructions and screenshots: rixTagPro_and_ATLAS_PROTOCOL.md. The results/*.rds extracts, the workbook and the plots were rerun from the current reports.
 
 ## Log: 2026-11-09 - analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R (TLSR)
 Added extraction of the tag-life adjusted single-release (TLSR) ATLAS reports (`*_Modeled.rtf`, `*_ModeledCum.rtf`) from analysis/pooled/Single Release Pooled TL/ via R/extract_atlas_modeled_tl_tables.R.

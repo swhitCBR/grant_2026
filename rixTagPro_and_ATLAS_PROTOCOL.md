@@ -13,3 +13,11 @@ click bulk add
 ![[Pasted image 20261117163111.png]]![[Pasted image 20261117163159.png]]
 compute
 ![[Pasted image 20261117163451.png]]
+
+
+
+
+
+
+update after error
+![[Pasted image 20261117173601.png]]

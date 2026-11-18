@@ -9,7 +9,7 @@ After the ATLAS runs are done and their reports are saved in `results/ATLAS/` (s
 1. **`01_extracting_ATLAS_rtfs_COMB.R`**: parses the saved ATLAS reports for both species (paired-release/CJS tables and the TLSR tables) and writes `results/{CHN,STH}_ATLAS_out.rds` and `results/{CHN,STH}_ATLAS_TLSR_out.rds`. Run this first.
 2. **`02_replicate_level_wtavg_F_test_comp.R`**: reads the extracted estimates, runs the replicate-level weighted averages and F tests, and writes the workbook `media/xlsx/COMB_pool_pair_est_output.xlsx`.
 3. **`03_data_prep_for_plotting.R`**: joins release dates onto the estimates for plotting (reads `results/rep_level_ests_Ftests_tb_ls.rds`).
-4. **`plotting_*.R`**: figures (`plotting_replicate_level_vs. pooled_COMB..R`, `plotting_pooled_cumul_surv.R`).
+4. **`plotting_*.R`**: figures (`plotting_replicate_level_vs. pooled_COMB..R`, `plotting_pooled_cumul_surv.R`). The cumulative survival script reads `results/cum_surv_RI.rds` and `results/river_km_tab.rds` and saves its PNGs to `media/png/R1_cumul_surv_plots/` (Chinook and steelhead side by side in `R1_rel_CHN_STH_cumul_plt.png`, plus one file per species), so rerunning it refreshes them.
 
 `extracting_ATLAS_rtfs_STH.R` is an older steelhead-only version of step 1 (it still writes to `analysis/`); use `01_...COMB.R`.
 
@@ -17,13 +17,13 @@ After the ATLAS runs are done and their reports are saved in `results/ATLAS/` (s
 
 **`RI_reach_spec_data_comp.R`** is the script for the censoring fix. "RAB" had me recompute the tag-life adjusted single release (TLSR) **Chinook salmon** estimates because the product of the reach probabilities did not match the total survival estimates. The script looks at two censored tags, `G72790346` and `G72B4A509`, and:
 
-1. writes `media/xlsx/censored_tags_detections.xlsx` (one sheet per tag: ATLAS record on top, pre-ATLAS events below, long-interval rows highlighted; `G72790346` in pink with a note);
+1. writes `media/xlsx/censored_tags_detections.xlsx` (one sheet per tag: ATLAS record on top, pre-ATLAS events below, long-interval rows highlighted; `G72790346` rows, which are removed, in yellow; `G72B4A509` rows, which are kept, in pink with a note);
 2. moves `nodes.csv` and `tags.csv` to `data/reach_spec_censor_fix/`;
-3. drops the flagged `G72B4A509` events and writes the revised `events.csv` there.
+3. drops the flagged `G72790346` events (its 2 very long Wanapum BRZ detections) and writes the revised `events.csv` there.
 
-I considered undoing the censoring for both tags, and RAB decided not to undo it for one of them (`G72790346`; its rows are kept). Details are in `data/reach_spec_censor_fix/README.md`. **`fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md` (repo root) has the instructions and screenshots** for the TagPro and ATLAS steps that produce the rerun reports in `results/ATLAS/Single Release Pooled TL/CHN/RI/` (the original reports are in its `old/` folder).
+I considered undoing the censoring for both tags, and RAB decided not to undo it for one of them (`G72B4A509`; its 3 Sunland rows are kept). The censoring was undone for `G72790346`. Details are in `data/reach_spec_censor_fix/README.md`. **`rixTagPro_and_ATLAS_PROTOCOL.md` (repo root) has the instructions and screenshots** for the TagPro and ATLAS steps that produce the rerun reports in `results/ATLAS/Single Release Pooled TL/CHN/RI/` (the original reports are in its `old/` folder; an earlier rerun, in which I mistakenly omitted rows for the wrong tag, is in `wrong_tag_hist_edit/`).
 
-The extracted tables in `results/` were written before the rerun and still hold the old Chinook TLSR values, so rerun step 1 to refresh them.
+The extracted tables in `results/`, the workbook and the plots were rerun on November 17 from the current reports. After any new ATLAS run, rerun steps 1 to 4 in order.
 
 ## ATLAS protocols (`*_PROTOCOL.md`)
 
@@ -31,7 +31,7 @@ The files with `_PROTOCOL.md` in their names are walkthroughs of the repeatable 
 
 - `Grant_ATLAS_analysis_PROTOCOL.md` and `ATLAS_calc_CHN_9 & STH_4_PROTOCOL.md`: paired-release pooled and replicate-level runs.
 - `ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md`: the TLSR runs (see below).
-- `../fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md`: the TagPro and ATLAS steps for the censoring fix, with screenshots.
+- `../rixTagPro_and_ATLAS_PROTOCOL.md`: the TagPro and ATLAS steps for the censoring fix, with screenshots.
 - `mixing plots/Creation of mixing plots_PROTOCOL.md`: the mixing-plot steps.
 
 ## Contents
@@ -55,7 +55,7 @@ The files with `_PROTOCOL.md` in their names are walkthroughs of the repeatable 
 - Tag-life data from `data/Nov_run/Pooled_taglife.csv`, Weibull 2-parameter fit, tag-life corrections and full variance with 10,000 bootstrap iterations.
 - Some parameters are constrained (for example, capture probabilities fixed at 1.0 at some sites).
 - Reports are saved to `results/ATLAS/Single Release Pooled TL/{CHN,STH}/{RI,PR}/`.
-- **Chinook, Rock Island release:** recomputed on November 17, 2026 (see above), using `data/clean/post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`.
+- **Chinook, Rock Island release:** recomputed on November 17, 2026 (see above), using `data/reach_spec_censor_fix/ATLAS_input_file/RI_rerun_after_G72790346_fix_ATLAS.csv`.
 
 **What is extracted** (by `R/extract_atlas_modeled_tl_tables.R`):
 

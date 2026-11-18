@@ -104,11 +104,12 @@ atlas_sheets <- list(
 
 wb_cens <- createWorkbook()
 highlight_style <- createStyle(fgFill = "yellow")
-# G72790346: pink instead of yellow, plus a note at the bottom of its sheet (these rows are
+# G72790346: yellow rows = removed from the revised events.
+# G72B4A509: pink instead of yellow, plus a note at the bottom of its sheet (these rows are
 # flagged but were NOT removed from the revised events)
 pink_style <- createStyle(fgFill = "pink")
 note_style <- createStyle(textDecoration = "italic")
-tag_notes <- c("G72790346" = "I considered removing these rows but didn't go through with it.")
+tag_notes <- c("G72B4A509" = "I considered removing these rows but didn't go through with it.")
 heading_style <- createStyle(fontSize = 12, textDecoration = "bold")
 for (tag in names(tag_sheets)) {
   atlas_tb <- atlas_sheets[[tag]]
@@ -128,15 +129,16 @@ for (tag in names(tag_sheets)) {
   writeData(wb_cens, tag, events_tb, startRow = events_header_row)
 
   # highlight events rows (data starts below the column names): all Sunland rows for G72B4A509
-  # (its two longest interv_time rows are Sunland rows, plus one shorter Sunland row), otherwise
-  # the two rows with the longest interv_time
+  # (pink: its two longest interv_time rows are Sunland rows, plus one shorter Sunland row;
+  # considered for removal but kept), otherwise the two rows with the longest interv_time
+  # (yellow: G72790346's Wanapum BRZ rows, removed from the revised events)
   highlight_pos <- if (tag == "G72B4A509") {
     which(events_tb$location == "Sunland")
   } else {
     order(events_tb$interv_time, decreasing = TRUE)[1:2]
   }
   highlight_rows <- events_header_row + highlight_pos
-  addStyle(wb_cens, tag, if (tag == "G72790346") pink_style else highlight_style,
+  addStyle(wb_cens, tag, if (tag == "G72B4A509") pink_style else highlight_style,
            rows = highlight_rows, cols = seq_len(ncol(events_tb)), gridExpand = TRUE)
 
   # note under the events table, after one blank row
@@ -193,13 +195,13 @@ nodes_path <- nodes_path[file.exists(nodes_path)][1]
 node_loc <- read.csv(nodes_path) |> distinct(node_code, location)
 stopifnot(!anyDuplicated(node_loc$node_code))
 
-# Only G72B4A509's flagged rows are removed: its very long detections at Sunland. Long intervals
-# are common elsewhere in the data (e.g. tags resting near an antenna), so the rule is scoped to
-# the tag and location, and an interval longer than 1 hour (the normal events at this tag/site
-# combination are all well under it, the flagged ones far over it). No events are removed for
-# G72790346; its Wanapum BRZ rows are shown in pink in the xlsx (section 4) but are kept here.
-censor_rules <- data.frame(tag_code = "G72B4A509",
-                           location = "Sunland")
+# Only G72790346's flagged rows are removed: its two very long detections at Wanapum BRZ. Long
+# intervals are common elsewhere in the data (e.g. tags resting near an antenna), so the rule is
+# scoped to the tag and location, and an interval longer than 1 hour (the other two events for
+# this tag at that site are about 40 minutes, the flagged ones far over an hour). No events are
+# removed for G72B4A509; its Sunland rows are shown in pink in the xlsx (section 4) but are kept.
+censor_rules <- data.frame(tag_code = "G72790346",
+                           location = "Wanapum BRZ")
 interv_threshold_sec <- 3600
 
 eventsDF_revis <- eventsDF |>
@@ -209,7 +211,7 @@ eventsDF_revis <- eventsDF |>
   filter(!drop_row) |>
   select(-drop_row, -location)
 
-# rows removed (3 expected: the 3 Sunland rows for G72B4A509; none for G72790346)
+# rows removed (2 expected: the 2 long Wanapum BRZ rows for G72790346; none for G72B4A509)
 nrow(eventsDF) - nrow(eventsDF_revis)
 
 

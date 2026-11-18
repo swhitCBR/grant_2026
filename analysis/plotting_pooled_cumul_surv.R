@@ -3,10 +3,10 @@ library(dplyr)
 library(ggplot2)
 library(gridExtra)
 
-cum_surv_RI <- readRDS("analysis/cum_surv_RI.rds")
+cum_surv_RI <- readRDS("results/cum_surv_RI.rds")
 
 
-river_km_tab <- readRDS("analysis/river_km_tab.rds")
+river_km_tab <- readRDS("results/river_km_tab.rds")
 
 # one row per plotted site: where the dotted vertical lines, their labels and the axis ticks go
 # river_km_tab <- distinct(cum_surv_RI, site, river_kilometer)
@@ -61,21 +61,27 @@ STH_cum_plt <- ggplot(data = cum_surv_RI %>% filter(species=="STH"),
   scale_y_continuous(limits = c(0.48, 1)) +
   labs(x = "River Kilometer (RKM)", y = "Cumulative Survival", color = NULL) + theme_cust
 
-# one species per plot, stacked; titles replace the facet strips used before the split
-grid.arrange(CHN_cum_plt + ggtitle("Chinook"),
+# one species per plot, side by side (ncol = 2); titles replace the facet strips used before the split
+CHN_STH_cum_plt <- arrangeGrob(CHN_cum_plt + ggtitle("Chinook"),
              STH_cum_plt + ggtitle("Steelhead"),
              ncol = 2)
 
 cumul_dir <- "media/png/R1_cumul_surv_plots"
 if(!dir.exists(cumul_dir)){dir.create(cumul_dir,recursive = T)}
 
+# draw the combined figure and save it on every run, so the PNG follows the results/ tables
+# whenever the pipeline is rerun
+grid.draw(CHN_STH_cum_plt)
+ggsave(file.path(cumul_dir, "R1_rel_CHN_STH_cumul_plt.png"), CHN_STH_cum_plt,
+       width = 12, height = 5.8, units = "in", dpi = 600)
+
 
 png(file.path(cumul_dir,"R1_rel_CHN_cumul_plt.png"),width=8.5,height=5.8,units = "in",res=600)
-CHN_cum_plt
+print(CHN_cum_plt)
 dev.off()
 
 png(file.path(cumul_dir,"R1_rel_STH_cumul_plt.png"),width=8.5,height=5.8,units = "in",res=600)
-STH_cum_plt
+print(STH_cum_plt)
 dev.off()
 
 
