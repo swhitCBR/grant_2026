@@ -3,14 +3,14 @@ library(ggplot2)
 library(gridExtra)
 
 # sourceable compilation fie
-source("analysis/extractinng_ATLAS_rtfs_CHN.R")
-source("analysis/extractinng_ATLAS_rtfs_STH.R")
+source("results/extractinng_ATLAS_rtfs_CHN.R")
+source("results/extractinng_ATLAS_rtfs_STH.R")
 
 # dir("analysis",pattern = ".rds")
 # readRDS("")
 
 
-STH_ATLAS_out <- readRDS("analysis/STH_ATLAS_out.rds")
+STH_ATLAS_out <- readRDS("results/STH_ATLAS_out.rds")
 
 STH_estDF_4plt <- STH_ATLAS_out$"STH_Pair_CJS_tab"
 STH_estDF_4plt$fixed <- ifelse(STH_estDF_4plt$SE==0,"fixed","est")
@@ -19,7 +19,7 @@ STH_estDF_4plt$spp_repID <- factor(STH_estDF_4plt$spp_repID,
            "16","17","18","19","20_21_22","23_24"))
 
 
-CHN_ATLAS_out <- readRDS("analysis/CHN_ATLAS_out.rds")
+CHN_ATLAS_out <- readRDS("results/CHN_ATLAS_out.rds")
 
 
 CHN_estDF_4plt <- CHN_ATLAS_out$"CHN_Pair_CJS_tab"
@@ -47,7 +47,7 @@ CHN_F_test_tbDF <- CHN_estDF_4plt %>% filter(param=="pair_surv_p" & new_repID!="
 CHN_F_test_tbDF_POOLED <- CHN_estDF_4plt %>% filter(param=="pair_surv_p" & new_repID=="pool") %>%
   mutate(CV = SE / est,wt_tmp=1/(CV^2),invCV2_wt=wt_tmp/sum(wt_tmp)) |>
   select(-wt_tmp)
-CHN_F_test_tbDF_POOLED %>% select(param,est,se,CV)
+CHN_F_test_tbDF_POOLED %>% select(param,est,SE,CV)
 
 
 # type  wt_avg wt_avgSE   lcl   ucl

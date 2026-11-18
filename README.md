@@ -32,16 +32,26 @@ Required inputs (checked at the start): `data/Round 2/` (raw CSVs), `data/Nov_ru
 | 5 | `length_weight_condition` | `assumption_checking/length_weight_condition/condition_factor_plotting_by_species_MOD.R` | condition-factor figures in `media/png/assumption_checking/` |
 | 6 | `mixing_plots` | `analysis/mixing plots/more_mixing_plots_live_and_dead_fish.R` | `media/png/mixing_dead_plts/*.png` |
 | 7 | `taglife` | `analysis/taglife/Weibull_LRT_across_RC_values.R`, `analysis/taglife/vitality_LRT.R` | LRT summaries; `media/docx/taglife/lrt_table_weibull_rc68.98....docx` (needs flextable) |
-| 8 | `analysis` | `analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R` (after the manual ATLAS pooled, replicate-level and TLSR runs) | `analysis/{CHN,STH}_ATLAS_out.rds`; `analysis/{CHN,STH}_ATLAS_TLSR_out.rds` (TLSR, see below) |
+| 8 | `analysis` | `analysis/01_extracting_ATLAS_rtfs_COMB.R`, then `02_`, `03_` and `plotting_*.R` (after the manual ATLAS pooled, replicate-level and TLSR runs; see `analysis/README.md`) | `results/{CHN,STH}_ATLAS_out.rds`; `results/{CHN,STH}_ATLAS_TLSR_out.rds` (TLSR, see below) |
 
 ## TLSR: Tag-Life adjusted Single Release models
 
 "TLSR" stands for **T**ag-**L**ife adjusted **S**ingle **R**elease. These are single-release ATLAS survival models that are fit post hoc, using the pooled data (all replicates combined, not tagger-specific), with the tag-life correction applied (Weibull-2 tag-life curve fit to `data/Nov_run/Pooled_taglife.csv`, 10,000 bootstrap iterations). A separate model is fit for each species and release site (Rock Island `RI`, Priest Rapids `PR`), using the BRZsel detection data (`data/clean/post_tagpro/{RI,PR}_BRZsel_ATLAS.csv`).
 
-- **Manual step**: the ATLAS runs are documented in `analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md`. The saved reports go in `analysis/pooled/Single Release Pooled TL/{CHN,STH}/{RI,PR}/`.
+- **Manual step**: the ATLAS runs are documented in `analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md`. The saved reports go in `results/ATLAS/Single Release Pooled TL/{CHN,STH}/{RI,PR}/`.
 - **Extracted reports**: `*_Modeled.rtf` (reach-level survival and capture estimates) and `*_ModeledCum.rtf` (cumulative survival from release), read by `R/extract_atlas_modeled_tl_tables.R`.
-- **Outputs**: `analysis/CHN_ATLAS_TLSR_out.rds` and `analysis/STH_ATLAS_TLSR_out.rds`. Each is a list of `<spp>_TL_Modeled_tab` and `<spp>_TL_ModeledCum_tab` (estimates, standard errors and `se_method`).
-- **Not the same as**: the paired-release replicate-level and pooled estimates in `analysis/{CHN,STH}_ATLAS_out.rds` (`*_Pair_CJS_tab`), which are the paired-release models from `analysis/Grant_ATLAS_analysis_PROTOCOL.md`.
+- **Outputs**: `results/CHN_ATLAS_TLSR_out.rds` and `results/STH_ATLAS_TLSR_out.rds`. Each is a list of `<spp>_TL_Modeled_tab` and `<spp>_TL_ModeledCum_tab` (estimates, standard errors and `se_method`).
+- **Not the same as**: the paired-release replicate-level and pooled estimates in `results/{CHN,STH}_ATLAS_out.rds` (`*_Pair_CJS_tab`), which are the paired-release models from `analysis/Grant_ATLAS_analysis_PROTOCOL.md`.
+
+### TLSR Chinook recomputed (November 17, 2026)
+
+"RAB" had me recompute the TLSR **Chinook salmon** estimates because the product of the reach probabilities did not match the total survival estimates. Only the Rock Island Chinook model was rerun. While preparing it, two censored tags (`G72790346` and `G72B4A509`) were examined. I considered undoing the censoring for both, and RAB decided not to undo it on one of them (`G72790346`); the censoring was undone for `G72B4A509` by removing its 3 flagged Sunland events from the TagPro input.
+
+- **Instructions and screenshots** for the TagPro and ATLAS steps: [`fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md`](fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md).
+- **Script**: `analysis/RI_reach_spec_data_comp.R` (workbook `media/xlsx/censored_tags_detections.xlsx`, revised `events.csv`).
+- **Revised TagPro inputs**: `data/reach_spec_censor_fix/` (see its README); ATLAS input `data/clean/post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`.
+- **New reports**: `results/ATLAS/Single Release Pooled TL/CHN/RI/` (originals in its `old/` folder; see its README for before-and-after estimates) and a dated copy in `results/ATLAS/RI_CHN_censor_fix_11_17/`.
+- **Not yet refreshed**: the extracted `.rds` files in `results/` predate the rerun. Run `analysis/01_extracting_ATLAS_rtfs_COMB.R` to update them.
 
 ## Pipeline diagram
 
@@ -169,18 +179,24 @@ grant_2026/
 │   │   └── README.md
 │   └── length_weight_condition/    # condition-factor figures
 │
-├── analysis/               # mixing plots, taglife, pooled/replicate-level ATLAS parsing
+├── analysis/               # mixing plots, taglife, ATLAS parsing, censoring fix
 │   ├── mixing plots/
 │   ├── taglife/
-│   ├── pooled/, replicate_level/   # saved ATLAS reports (HTML saved as .rtf)
-│   │   └── pooled/Single Release Pooled TL/   # TLSR reports (*_Modeled.rtf, *_ModeledCum.rtf)
-│   ├── extractinng_ATLAS_rtfs_{CHN,STH}.R     # -> *_ATLAS_out.rds and *_ATLAS_TLSR_out.rds
+│   ├── 01_extracting_ATLAS_rtfs_COMB.R        # -> results/*_ATLAS_out.rds and *_ATLAS_TLSR_out.rds
+│   ├── 02_, 03_ scripts, plotting_*.R
+│   ├── RI_reach_spec_data_comp.R              # censoring check, revised TagPro inputs
 │   ├── Grant_ATLAS_analysis_PROTOCOL.md
 │   ├── ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md   # TLSR ATLAS runs
 │   └── README.md
 │
+├── results/                # extracted tables (.rds) and saved ATLAS reports
+│   └── ATLAS/              # replicate_level/, pooled/, Single Release Pooled TL/, RI_CHN_censor_fix_11_17/ (README)
+│
+├── fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md   # instructions and screenshots for the censoring fix
+│
 ├── R/                      # Shared functions (e.g. extract_atlas_rtf_tables.R, extract_atlas_modeled_tl_tables.R, scrape_atlas_results.R, create_repo_diagram.R)
 ├── data/                   # Round 2 raw CSVs, Nov_run ATLAS inputs, clean/ (processed data)
+│   └── reach_spec_censor_fix/   # revised TagPro inputs for the Chinook rerun (README)
 ├── media/                  # Outputs (docx, xlsx, png); git-ignored
 ├── old/                    # Archive
 └── README.md              ← You are here
@@ -190,7 +206,7 @@ grant_2026/
 
 ## Documentation Last Updated
 
-November 9, 2026
+November 17, 2026
 
 ---
 
@@ -203,6 +219,12 @@ Fixed 2026-11-04: rel_tot_DF_CHN/STH now read from DH_long_DF (they used tmpDF, 
 ## Log: 2026-11-04 - run_pipeline.R
 New master script: runs the sourceable scripts in stage order, logs ok/warning/error/skipped, and skips scripts whose manual inputs are missing.
 Removed setwd/absolute paths from the scripts; fixed stale tagger_effects paths and ATLAS extraction (repID_code attrib, pooled IDs); PR_BRZsel_ATLAS.csv filtered to Priest Rapids rows.
+
+## Log: 2026-11-17 - TLSR Chinook rerun after the censoring check
+RAB had me recompute the tag-life adjusted single release Chinook estimates because the product of the reach probabilities did not match the total survival estimates.
+Two censored tags (G72790346, G72B4A509) were examined (analysis/RI_reach_spec_data_comp.R); the censoring was undone for G72B4A509 (3 Sunland events removed), and RAB decided not to undo it for G72790346.
+nodes.csv and tags.csv moved from data/clean/pre_tagpro/ to data/reach_spec_censor_fix/ with a revised events.csv. New ATLAS reports are in results/ATLAS/Single Release Pooled TL/CHN/RI/ (originals in old/).
+Instructions and screenshots: fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md. The results/*.rds extracts have not been refreshed yet.
 
 ## Log: 2026-11-09 - analysis/extractinng_ATLAS_rtfs_{CHN,STH}.R (TLSR)
 Added extraction of the tag-life adjusted single-release (TLSR) ATLAS reports (`*_Modeled.rtf`, `*_ModeledCum.rtf`) from analysis/pooled/Single Release Pooled TL/ via R/extract_atlas_modeled_tl_tables.R.

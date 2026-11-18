@@ -14,10 +14,100 @@ cens_tags <- c("G72B4A509","G72B4A509")
 
 # G72790346
 
+RI_BRZsel_tagpro_out <- read.csv("C:/repos/grant_2026/data/clean/post_tagpro/RI_BRZsel_ATLAS.csv",header = F)
+RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72790346","G72B4A509"))
+
+RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72790346")) 
+RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72B4A509")) 
 
 
-events |> filter(tag_code=="G72B4A509")
-events |> filter(tag_code=="G72790346") |> left_join(nodes, by = "node_code") |> left_join(tags, by = "tag_code") |> arrange(river_km)
+event_tag46 <- events |> filter(tag_code=="G72790346") |> left_join(nodes, by = "node_code") |> left_join(tags, by = "tag_code") |> arrange(-river_km,first_datetime) |> mutate(first_datetime=as.POSIXct(first_datetime),last_datetime=as.POSIXct(last_datetime),interv_time=difftime(last_datetime,first_datetime,units = "secs"))
+
+str(event_tag46)
+
+
+
+
+RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72B4A509")) 
+event_tag09 <- events |> filter(tag_code=="G72B4A509") |> left_join(nodes, by = "node_code") |> left_join(tags, by = "tag_code") |> arrange(-river_km,first_datetime) |> mutate(first_datetime=as.POSIXct(first_datetime),last_datetime=as.POSIXct(last_datetime),interv_time=difftime(last_datetime,first_datetime,units = "secs"))
+
+
+event_tag46
+event_tag46 |> select(tag_code,release_location,release_date,location,river_km,first_datetime,last_datetime,interv_time)
+event_tag09 |> select(tag_code,release_location,release_date,location,river_km,first_datetime,last_datetime,interv_time)
+
+# ============================================================================
+# Export both tags to xlsx, one sheet per tag (sheet name = tag code). Each sheet has the ATLAS
+# record on top and the preATLAS events below it; in the events table the two rows with the
+# longest interv_time are highlighted
+# ============================================================================
+library(openxlsx)
+
+tag_sheets <- list(
+  "G72B4A509" = event_tag09,
+  "G72790346" = event_tag46) |>
+  lapply(function(d) {
+    d |>
+      select(tag_code,release_location,release_date,location,river_km,first_datetime,last_datetime,interv_time) |>
+      # difftime is written to xlsx as plain seconds. Datetimes are written as text: a highlight
+      # style applied over a date cell replaces its date number format, which garbles the display.
+      mutate(interv_time = as.numeric(interv_time, units = "secs"),
+             across(c(first_datetime, last_datetime), ~ format(.x, "%Y-%m-%d %H:%M:%S")))
+  })
+
+# ATLAS (post-TagPro) rows for each tag; the ATLAS csv has no header, so use the column names
+# assigned to this same file further down in this script
+atlas_names <- c("release_spp", "num1", "tag_code", "release_time", "detection_time",
+                 "site_name", "num2", "lst_dt")
+atlas_sheets <- list(
+  "G72B4A509" = RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72B4A509")),
+  "G72790346" = RI_BRZsel_tagpro_out |> filter(V3 %in% c("G72790346"))) |>
+  lapply(function(d) setNames(d, atlas_names))
+
+wb_cens <- createWorkbook()
+highlight_style <- createStyle(fgFill = "yellow")
+heading_style <- createStyle(fontSize = 12, textDecoration = "bold")
+for (tag in names(tag_sheets)) {
+  atlas_tb <- atlas_sheets[[tag]]
+  events_tb <- tag_sheets[[tag]]
+  addWorksheet(wb_cens, tag)
+
+  # top table: ATLAS record (heading in row 1, column names in row 2)
+  writeData(wb_cens, tag, "ATLAS record", startRow = 1)
+  addStyle(wb_cens, tag, heading_style, rows = 1, cols = 1)
+  writeData(wb_cens, tag, atlas_tb, startRow = 2)
+
+  # bottom table: events preATLAS, after one blank row
+  events_heading_row <- 2 + nrow(atlas_tb) + 2
+  events_header_row <- events_heading_row + 1   # column names
+  writeData(wb_cens, tag, "events preATLAS", startRow = events_heading_row)
+  addStyle(wb_cens, tag, heading_style, rows = events_heading_row, cols = 1)
+  writeData(wb_cens, tag, events_tb, startRow = events_header_row)
+
+  # highlight events rows (data starts below the column names): all Sunland rows for G72B4A509
+  # (its two longest interv_time rows are Sunland rows, plus one shorter Sunland row), otherwise
+  # the two rows with the longest interv_time
+  highlight_pos <- if (tag == "G72B4A509") {
+    which(events_tb$location == "Sunland")
+  } else {
+    order(events_tb$interv_time, decreasing = TRUE)[1:2]
+  }
+  highlight_rows <- events_header_row + highlight_pos
+  addStyle(wb_cens, tag, highlight_style, rows = highlight_rows, cols = seq_len(ncol(events_tb)), gridExpand = TRUE)
+
+  # widths from the table contents only, so the long headings can overflow instead of widening column A
+  n_col <- max(ncol(atlas_tb), ncol(events_tb))
+  chars <- sapply(seq_len(n_col), function(j) {
+    max(nchar(c(names(atlas_tb)[j], as.character(atlas_tb[[j]]),
+                names(events_tb)[j], as.character(events_tb[[j]]))), na.rm = TRUE)
+  })
+  setColWidths(wb_cens, tag, cols = seq_len(n_col), widths = pmin(chars + 2, 45))
+}
+saveWorkbook(wb_cens, "media/xlsx/censored_tags_detections.xlsx", overwrite = TRUE)
+
+
+
+
 events |> filter(tag_code=="G72B4A509") |> left_join(nodes, by = "node_code") |> left_join(tags, by = "tag_code") |> arrange(river_km)
 
 

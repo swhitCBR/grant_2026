@@ -67,28 +67,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Test of Tagger Effects_exerpt"
+              "title": "README"
             }
           },
           {
-            "id": "45dac7039f2a3984",
+            "id": "ccf0fe84f7a48bbd",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.15.0"
+                "file": "analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.15.0"
+              "icon": "lucide-file",
+              "title": "ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL"
+            }
+          },
+          {
+            "id": "6798390eb2d92c04",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "fixing_censoring_TagPro_and_ATLAS_PROTOCOL"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -122,7 +138,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "_PROTOCOL",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -255,29 +271,40 @@
       "bases:Create new base": false
     }
   },
-  "active": "45dac7039f2a3984",
+  "active": "6798390eb2d92c04",
   "lastOpenFiles": [
-    "plotting/plotting_replicate_level_vs. pooled_COMB..R",
-    "plotting/plotting_pooled_cumul_surv.R",
-    "plotting",
-    "New folder",
-    "results/cum_surv_RI.rds",
-    "results/river_km_tab.rds",
-    "analysis/cum_surv_RI.rds",
-    "analysis/river_km_tab.rds",
-    "results/COMB_spp_ATLAS_ests_wDates.rds",
-    "analysis/COMB_spp_ATLAS_ests_wDates.rds",
-    "results/rep_level_ests_Ftests_tb_ls.rds",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_TagLifeByRel_Pooled_taglife_Rock Island Tailrace STH.png",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_TagLifeByRel_Pooled_taglife_Priest Rapids Tailrace STH.png",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_TagLifeByRel_Pooled_taglife_Rock Island Tailrace CHN.png",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_TagLifeByRel_Pooled_taglife_Priest Rapids Tailrace CHN.png",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_Mixing_Lower Ringold.png",
-    "analysis/old/pooled/STH_report/STH_report_old_bins_broken_out/COMB_REL_lrg_hanf_pooled_ATLAS_Mixing_Hanford.png",
-    "analysis/old/pooled/CHN_report/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_TagLifeByRel_Pooled_taglife_Priest Rapids Tailrace STH.png",
-    "analysis/old/pooled/CHN_report/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_TagLifeByRel_Pooled_taglife_Priest Rapids Tailrace CHN.png",
-    "analysis/old/pooled/CHN_report/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_TagLifeByRel_Pooled_taglife_Rock Island Tailrace STH.png",
-    "analysis/old/pooled/CHN_report/COMB_REL_lrg_hanf_pooled_ATLAS_nobins_TagLifeByRel_Pooled_taglife_Rock Island Tailrace CHN.png",
+    "results/ATLAS/RI_CHN_censor_fix_11_17/README.md",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/README.md",
+    "results/ATLAS/README.md",
+    "data/reach_spec_censor_fix/README.md",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162418.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release",
+    "fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md",
+    "analysis/extracting_ATLAS_rtfs_STH.R",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_TagLife.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_ModeledCum.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_Modeled.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_CjsCum.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_Cjs.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/RI_rerun_after_G72790346_fix_ATLAS_CaptHist.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/old/RI_BRZsel_ATLAS_CaptHist.rtf",
+    "results/ATLAS/Single Release Pooled TL/CHN/RI/old/RI_BRZsel_ATLAS_TagLife.rtf",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163451.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163159.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117163111.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162943.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162914.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162755.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162725.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162712.png",
+    "media/png/censoring_fix_for_CHN_RI_single_release/Pasted image 20261117162604.png",
+    "analysis/mixing plots/Creation of mixing plots_PROTOCOL.md",
+    "analysis/Grant_ATLAS_analysis_PROTOCOL.md",
+    "analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md",
+    "assumption_checking/tagger_effects/README.md",
+    "README.md",
+    "analysis/ATLAS_calc_CHN_9 & STH_4_PROTOCOL.md",
+    "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
     "analysis/old/pooled/CHN_report/CHN_Tag Correction Report.md",
     "analysis/old/pooled/CHN_report/CHN_Cormack-Jolly-Seber Report.md",
     "analysis/old/pooled/CHN_report/CHN_Modeled Parameter Report.md",
@@ -290,18 +317,7 @@
     "results/ATLAS/CHN_report/CHN_Tag Correction Report.md",
     "results/ATLAS/CHN_report/CHN_Modeled Parameter Report.md",
     "results/ATLAS/CHN_report/CHN_Cormack-Jolly-Seber Report.md",
-    "analysis/ATLAS_calc_pooled_TL_corr_reach_ests_PROTOCOL.md",
     "analysis/README.md",
-    "analysis/ATLAS_calc_CHN_9 & STH_4_PROTOCOL.md",
-    "analysis/ATLAS_calc_pooled_TL_corr_reach_ests.md",
-    "analysis/ATLAS_calc_CHN_9 & STH_4_PROTOCOL - Copy.md",
-    "Untitled.md",
-    "assumption_checking/tagger_effects/Test of Tagger Effects_exerpt.md",
-    "assumption_checking/tagger_effects/TagPro settings (all_sites and BRZsel).md",
-    "analysis/mixing plots/Creation of mixing plots_PROTOCOL.md",
-    "QAQC/SW_QAQC_tabs_2_2.knit.md",
-    "QAQC/SW_QAQC_tabs_1_2.knit.md",
-    "analysis/Grant_ATLAS_analysis_PROTOCOL.md",
-    "assumption_checking/tagger_effects/all_sites_run/TAGGER C/RI_STH/Capture History Report .md"
+    "analysis/ATLAS_calc_pooled_TL_corr_reach_ests.md"
   ]
 }

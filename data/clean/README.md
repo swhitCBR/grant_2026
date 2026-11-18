@@ -102,3 +102,12 @@ source("data_cleaning/01_create_tag_subsets.R")  # Create tag subsets and save
 - Species codes: 11 = Chinook (CHN), 01 = Steelhead (STH)
 - Release locations are standardized to "Rock Island Tailrace" or "Priest Rapids Tailrace"
 - The script includes data validation steps with `table()` and `sapply()` calls to check subset creation
+
+## pre_tagpro/ and post_tagpro/ (changed November 17, 2026)
+
+These hold the files going into and coming out of TagPro.
+
+- **`pre_tagpro/`**: now contains only the original `events.csv`. `nodes.csv` and `tags.csv` were moved to `data/reach_spec_censor_fix/`, together with a revised `events.csv` (3 events removed for tag `G72B4A509`).
+- **`post_tagpro/RI_rerun_after_G72790346_fix_ATLAS.csv`**: new. The ATLAS input for the rerun of the Rock Island Chinook tag-life adjusted single release (TLSR) model, made by TagPro from the revised files.
+
+"RAB" had me recompute the TLSR Chinook estimates because the product of the reach probabilities did not match the total survival estimates. Two censored tags (`G72790346`, `G72B4A509`) were examined; RAB decided not to undo the censoring on one of them. See `data/reach_spec_censor_fix/README.md` and `fixing_censoring_TagPro_and_ATLAS_PROTOCOL.md` (repo root, with instructions and screenshots).
